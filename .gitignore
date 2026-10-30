@@ -1,0 +1,8 @@
+node_modules
+out
+src/rounds.json
+scripts/.image-progress.json
+.DS_Store
+.remotion
+dist
+*.log

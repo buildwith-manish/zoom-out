@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "question": ["What", "animal", "is", "this?"],
+    "highlight": 1,
+    "answer": "Elephant",
+    "image": "elephant.svg",
+    "art": "elephant",
+    "pic": "#cfe9ff",
+    "fx": "39%",
+    "fy": "44%",
+    "z0": 12,
+    "hint": "8 LETTERS · STARTS WITH E"
+  },
+  {
+    "id": 2,
+    "question": ["What", "animal", "is", "this?"],
+    "highlight": 1,
+    "answer": "Zebra",
+    "image": "zebra.svg",
+    "art": "zebra",
+    "pic": "#ffe7b8",
+    "fx": "50%",
+    "fy": "38%",
+    "z0": 12,
+    "hint": "5 LETTERS · STARTS WITH Z"
+  },
+  {
+    "id": 3,
+    "question": ["What", "insect", "is", "this?"],
+    "highlight": 1,
+    "answer": "Ladybug",
+    "image": "ladybug.svg",
+    "art": "ladybug",
+    "pic": "#d8f5c8",
+    "fx": "34%",
+    "fy": "46%",
+    "z0": 12,
+    "hint": "7 LETTERS · STARTS WITH L"
+  },
+  {
+    "id": 4,
+    "question": ["What", "fruit", "is", "this?"],
+    "highlight": 1,
+    "answer": "Pineapple",
+    "image": "pineapple.svg",
+    "art": "pineapple",
+    "pic": "#d6f1ff",
+    "fx": "50%",
+    "fy": "64%",
+    "z0": 12,
+    "hint": "9 LETTERS · STARTS WITH P"
+  }
+]

@@ -1,0 +1,5 @@
+id,question,highlight,answer,image,art,pic,fx,fy,z0,hint
+1,What animal is this?,1,Elephant,elephant.svg,elephant,#cfe9ff,39%,44%,12,8 LETTERS · STARTS WITH E
+2,What animal is this?,1,Zebra,zebra.svg,zebra,#ffe7b8,50%,38%,12,5 LETTERS · STARTS WITH Z
+3,What insect is this?,1,Ladybug,ladybug.svg,ladybug,#d8f5c8,34%,46%,12,7 LETTERS · STARTS WITH L
+4,What fruit is this?,1,Pineapple,pineapple.svg,pineapple,#d6f1ff,50%,64%,12,9 LETTERS · STARTS WITH P

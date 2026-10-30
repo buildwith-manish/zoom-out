@@ -1,0 +1,28 @@
+{
+  "name": "zoom-out",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zoom Out Quiz — Remotion 1920×1080 port (GSAP Pattern 1)",
+  "scripts": {
+    "start": "remotion studio --port 3000 --no-open",
+    "dev": "remotion studio --port 3000 --no-open",
+    "build": "remotion bundle",
+    "render": "remotion render ZoomOut out/zoom-out.mp4",
+    "still": "remotion still ZoomOut out/preview.jpg --frame=90",
+    "csv-to-json": "node scripts/csv-to-json.js",
+    "fetch-images": "node scripts/fetch-images.js",
+    "resize-images": "node scripts/resize-images.js",
+    "refetch-broken": "node scripts/refetch-broken.js",
+    "render-batches": "node scripts/render-batches.js"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}

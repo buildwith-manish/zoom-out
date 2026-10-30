@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules", "out"]
+}
