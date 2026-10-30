@@ -12,6 +12,7 @@ import {backOut, expoOut, elasticOut, power3Out, gsapTween, clamp01} from './gsa
 import {COLORS, FONTS, cq, seriesColors} from './style';
 import {buildScenes, sceneAt} from './timing';
 import {clamp, lerp, zoomScale, zoomBlur, easeInOut, rasterImage} from './util';
+import {QuizAudio} from './audio';
 
 function Fonts() {
   const [handle] = useState(() => delayRender('fonts'));
@@ -1101,6 +1102,7 @@ export const Round = ({questions, settings}) => {
   return (
     <AbsoluteFill>
       <Fonts />
+      <QuizAudio />
       <Stage t={t} series={settings.series}>
         {scene}
         <Watermark t={t} settings={settings} />

@@ -13,7 +13,8 @@
     "fetch-images": "node scripts/fetch-images.js",
     "resize-images": "node scripts/resize-images.js",
     "refetch-broken": "node scripts/refetch-broken.js",
-    "render-batches": "node scripts/render-batches.js"
+    "render-batches": "node scripts/render-batches.js",
+    "synth-audio": "node scripts/synth-audio.js"
   },
   "dependencies": {
     "@remotion/cli": "4.0.539",

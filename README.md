@@ -72,6 +72,18 @@ npm run dev
 
 Opens Remotion Studio. Composition id: `ZoomOut`.
 
+## Sound
+
+The HTML synthesises every cue with the Web Audio API (swish, shutter, zoom riser, ticks, hint sparkle, reveal hit, chime, plus the ducked music bed). `scripts/synth-audio.js` renders that same graph offline:
+
+```bash
+npm run synth-audio
+# → public/sounds/*.wav  (individual cues)
+# → public/sounds/soundtrack.wav  (full mix, used by the composition)
+```
+
+Re-run after changing `settings.json` timing so the bed and cues stay locked to the picture.
+
 ## Photos (optional)
 
 The HTML drawings ship in `public/images/*.svg` so a render matches the original without a network.
