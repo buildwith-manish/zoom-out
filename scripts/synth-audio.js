@@ -456,6 +456,83 @@ function renderMusic(seconds, scenes) {
   return out;
 }
 
+function readWav(file) {
+  const buf = fs.readFileSync(file);
+  let off = 12;
+  let ch = 1;
+  let sr = SR;
+  let bits = 16;
+  let data = null;
+  while (off + 8 <= buf.length) {
+    const id = buf.toString('ascii', off, off + 4);
+    const size = buf.readUInt32LE(off + 4);
+    off += 8;
+    if (id === 'fmt ') {
+      ch = buf.readUInt16LE(off + 2);
+      sr = buf.readUInt32LE(off + 4);
+      bits = buf.readUInt16LE(off + 14);
+    } else if (id === 'data') {
+      data = buf.slice(off, off + size);
+      break;
+    }
+    off += size + (size % 2);
+  }
+  if (!data) throw new Error('no data chunk in ' + file);
+  const n = Math.floor(data.length / (ch * (bits / 8)));
+  const L = new Float64Array(n);
+  const R = new Float64Array(n);
+  if (bits !== 16) throw new Error('need 16-bit pcm');
+  for (let i = 0; i < n; i++) {
+    const l = data.readInt16LE(i * ch * 2) / 32768;
+    const r = ch > 1 ? data.readInt16LE(i * ch * 2 + 2) / 32768 : l;
+    L[i] = l;
+    R[i] = r;
+  }
+  return {L, R, sr, n};
+}
+
+function writeStereoWav(file, L, R) {
+  const n = Math.min(L.length, R.length);
+  const buf = Buffer.alloc(44 + n * 4);
+  buf.write('RIFF', 0);
+  buf.writeUInt32LE(36 + n * 4, 4);
+  buf.write('WAVE', 8);
+  buf.write('fmt ', 12);
+  buf.writeUInt32LE(16, 16);
+  buf.writeUInt16LE(1, 20);
+  buf.writeUInt16LE(2, 22);
+  buf.writeUInt32LE(SR, 24);
+  buf.writeUInt32LE(SR * 4, 28);
+  buf.writeUInt16LE(4, 32);
+  buf.writeUInt16LE(16, 34);
+  buf.write('data', 36);
+  buf.writeUInt32LE(n * 4, 40);
+  for (let i = 0; i < n; i++) {
+    const clip = (x) => {
+      if (x > 0.95) x = 0.95 + 0.05 * Math.tanh((x - 0.95) / 0.05);
+      else if (x < -0.95) x = -0.95 - 0.05 * Math.tanh((-x - 0.95) / 0.05);
+      x = clamp(x, -1, 1);
+      return x < 0 ? Math.round(x * 32768) : Math.round(x * 32767);
+    };
+    buf.writeInt16LE(clip(L[i]), 44 + i * 4);
+    buf.writeInt16LE(clip(R[i]), 44 + i * 4 + 2);
+  }
+  fs.writeFileSync(file, buf);
+}
+
+function writeStereoMix(file, bgPath, sfxMono) {
+  const bg = readWav(bgPath);
+  const n = Math.max(bg.n, sfxMono.length);
+  const L = new Float64Array(n);
+  const R = new Float64Array(n);
+  for (let i = 0; i < n; i++) {
+    const s = i < sfxMono.length ? sfxMono[i] : 0;
+    L[i] = (i < bg.n ? bg.L[i] : 0) + s;
+    R[i] = (i < bg.n ? bg.R[i] : 0) + s;
+  }
+  writeStereoWav(file, L, R);
+}
+
 function writeWav(file, samples) {
   const n = samples.length;
   const buf = Buffer.alloc(44 + n * 2);
@@ -510,23 +587,28 @@ function main() {
     console.log('  ', file);
   }
 
-  console.log('music bed…');
-  const music = renderMusic(total + 0.2, scenes);
-  writeWav(path.join(OUT, 'music.wav'), music);
-
-  console.log('soundtrack mix…');
+  console.log('sfx mix…');
   const mix = new Mix(total + 0.3);
   for (const [t, name] of EV) SFX[name](mix, t);
   const sfx = scale(trimMix(mix, total + 0.05), MASTER);
-  const n = Math.min(sfx.length, music.length);
-  const score = new Float64Array(Math.ceil((total + 0.05) * SR));
-  for (let i = 0; i < score.length; i++) {
-    const a = i < n ? sfx[i] : 0;
-    const b = i < music.length ? music[i] : 0;
-    score[i] = a + b;
+  writeWav(path.join(OUT, 'sfx.wav'), sfx);
+
+  const bgPath = path.join(OUT, 'background.wav');
+  if (fs.existsSync(bgPath)) {
+    console.log('soundtrack = background.wav + sfx…');
+    writeStereoMix(path.join(OUT, 'soundtrack.wav'), bgPath, sfx);
+  } else {
+    console.log('music bed (no background.wav)…');
+    const music = renderMusic(total + 0.2, scenes);
+    writeWav(path.join(OUT, 'music.wav'), music);
+    const n = Math.min(sfx.length, music.length);
+    const score = new Float64Array(Math.ceil((total + 0.05) * SR));
+    for (let i = 0; i < score.length; i++) {
+      score[i] = (i < n ? sfx[i] : 0) + (i < music.length ? music[i] : 0);
+    }
+    writeWav(path.join(OUT, 'soundtrack.wav'), score);
   }
-  writeWav(path.join(OUT, 'soundtrack.wav'), score);
-  console.log('wrote public/sounds/soundtrack.wav');
+  console.log('wrote public/sounds/sfx.wav and soundtrack.wav');
 }
 
 main();

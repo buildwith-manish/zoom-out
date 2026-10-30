@@ -28,7 +28,9 @@ zoom-out/
 │   ├── fetch-images.js    # z-ai image-search, skips shutterstock.com
 │   ├── resize-images.js   # ffmpeg → 1280×720
 │   ├── refetch-broken.js
-│   └── render-batches.js  # resume-safe, --size N
+│   ├── render-batches.js  # resume-safe, --size N
+│   ├── synth-audio.js     # HTML SFX
+│   └── zoomout_music.py   # playful background bed
 └── src/
     ├── index.js
     ├── Root.jsx
@@ -74,15 +76,14 @@ Opens Remotion Studio. Composition id: `ZoomOut`.
 
 ## Sound
 
-The HTML synthesises every cue with the Web Audio API (swish, shutter, zoom riser, ticks, hint sparkle, reveal hit, chime, plus the ducked music bed). `scripts/synth-audio.js` renders that same graph offline:
+Background bed is the playful marimba/bass track from `scripts/zoomout_music.py`. Quiz cues (swish, shutter, zoom riser, ticks, hint sparkle, reveal hit, chime) are the HTML Web Audio graph, rendered offline.
 
 ```bash
-npm run synth-audio
-# → public/sounds/*.wav  (individual cues)
-# → public/sounds/soundtrack.wav  (full mix, used by the composition)
+npm run music          # public/sounds/background.wav  (needs numpy + scipy)
+npm run synth-audio    # public/sounds/sfx.wav + individual cues
 ```
 
-Re-run after changing `settings.json` timing so the bed and cues stay locked to the picture.
+The composition plays `background.wav` under `sfx.wav`. Re-run both after changing round count or zoom length so the bed stays bar-aligned with the picture.
 
 ## Photos (optional)
 

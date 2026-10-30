@@ -55,11 +55,15 @@ export function buildSoundEvents(settings, questions) {
 }
 
 /**
- * HTML soundtrack: music bed (ducked at each reveal) + every SFX event.
- * Mixed offline by scripts/synth-audio.js so render matches the HTML mix.
+ * Playful background bed (scripts/zoomout_music.py) + HTML SFX mix.
  */
 export function QuizAudio() {
-  return <Audio src={staticFile('sounds/soundtrack.wav')} />;
+  return (
+    <>
+      <Audio src={staticFile('sounds/background.wav')} />
+      <Audio src={staticFile('sounds/sfx.wav')} />
+    </>
+  );
 }
 
 /** Layered alternative — same cue list as the HTML `EV` array. */
@@ -68,7 +72,7 @@ export function QuizAudioLayered({settings, questions}) {
   const events = buildSoundEvents(settings, questions);
   return (
     <>
-      <Audio src={staticFile('sounds/music.wav')} />
+      <Audio src={staticFile('sounds/background.wav')} />
       {events.map((e, i) => {
         const from = Math.max(0, Math.round(e.t * fps));
         const src = FILE[e.name];
