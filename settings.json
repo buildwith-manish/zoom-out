@@ -2,16 +2,16 @@
   "fps": 30,
   "width": 1920,
   "height": 1080,
-  "series": "main",
+  "series": "animals",
   "watermark": "QUIZ MATRIX",
   "watermarkPosition": "tr",
   "watermarkOpacity": 0.7,
   "brandLeft": "Zoom",
   "brandRight": "Out",
-  "zoomStart": 1.5,
-  "zoomDuration": 12,
-  "hold": 0.5,
-  "revealDuration": 4,
+  "zoomStart": 1,
+  "zoomDuration": 8,
+  "hold": 2,
+  "revealDuration": 3,
   "introDuration": 5.5,
   "outroDuration": 4,
   "stingDuration": 1.3,
@@ -24,11 +24,23 @@
   "introFx": "35%",
   "introFy": "46%",
   "introZ0": 12,
-  "introHeadline": ["Name", "it", "before", "it's", "clear."],
+  "introHeadline": [
+    "Name",
+    "it",
+    "before",
+    "it's",
+    "clear."
+  ],
   "introAmberFrom": 3,
   "outroEyebrow": "Round over",
-  "outroTitle": ["Your", "score?"],
+  "outroTitle": [
+    "Your",
+    "score?"
+  ],
   "outroSub": "How many did you get? Comment below",
-  "stingWords": ["QUIZ", "MATRIX"],
+  "stingWords": [
+    "QUIZ",
+    "MATRIX"
+  ],
   "correctEyebrow": "Correct answer"
 }

@@ -25,9 +25,9 @@ function keyframeLerp(values, t) {
   return values[i] + (values[i + 1] - values[i]) * f;
 }
 
-/** HTML @keyframes zoom — exponential-looking linear keyframes, scaled by z0/12. */
+/** HTML @keyframes zoom — exponential-looking linear keyframes, remapped so any z0 still ends at exactly 1x. */
 export function zoomScale(progress, z0 = 12) {
-  return keyframeLerp(ZOOM_SCALES, progress) * (z0 / 12);
+  return 1 + (keyframeLerp(ZOOM_SCALES, progress) - 1) * ((z0 - 1) / 11);
 }
 
 /** Blur in px, matching 1.2cqmin → 0 over the first 70% of the zoom. */

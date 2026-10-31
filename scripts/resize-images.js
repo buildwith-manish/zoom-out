@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * Normalize raster quiz photos to 1280×720 with ffmpeg
+ * Normalize raster quiz photos to 1920×1080 with ffmpeg
  * (cover-crop, yuv420p jpeg/png). SVG drawings are left alone.
  */
 
@@ -11,8 +11,8 @@ const fs = require('fs');
 const path = require('path');
 
 const DIR = path.join(__dirname, '..', 'public', 'images');
-const W = 1280;
-const H = 720;
+const W = 1920;
+const H = 1080;
 
 function ffmpeg(args) {
   const r = spawnSync('ffmpeg', args, {encoding: 'utf8'});

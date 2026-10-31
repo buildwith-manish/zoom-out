@@ -26,7 +26,7 @@ zoom-out/
 ├── scripts/
 │   ├── csv-to-json.js
 │   ├── fetch-images.js    # z-ai image-search, skips shutterstock.com
-│   ├── resize-images.js   # ffmpeg → 1280×720
+│   ├── resize-images.js   # ffmpeg → 1920×1080
 │   ├── refetch-broken.js
 │   ├── render-batches.js  # resume-safe, --size N
 │   ├── synth-audio.js     # HTML SFX
@@ -50,7 +50,7 @@ zoom-out/
 | Each answer | 4s |
 | Score | 4s |
 | Sting | 1.3s |
-| **Total (4 rounds)** | **82.8s · 2484 frames @ 30fps** |
+| **Total (4 rounds)** | **see settings.json** |
 
 Edit `settings.json` for timing / watermark / series colour (`main` · `animals` · `food` · `science`). Edit `rounds.csv` or `questions.json` for the prompts.
 
@@ -93,7 +93,7 @@ To swap in real photos:
 
 ```bash
 npm run fetch-images     # uses `z-ai image-search`, excludes shutterstock.com
-npm run resize-images    # ffmpeg cover-crop to 1280×720
+npm run resize-images    # ffmpeg cover-crop to 1920×1080
 npm run refetch-broken   # drop tiny/corrupt files and retry
 ```
 

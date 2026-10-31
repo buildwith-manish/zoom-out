@@ -60,8 +60,8 @@ export function buildSoundEvents(settings, questions) {
 export function QuizAudio() {
   return (
     <>
-      <Audio src={staticFile('sounds/background.wav')} />
-      <Audio src={staticFile('sounds/sfx.wav')} />
+      <Audio src={staticFile('sounds/background.mp3')} />
+      <Audio src={staticFile('sounds/sfx.mp3')} />
     </>
   );
 }
@@ -72,7 +72,7 @@ export function QuizAudioLayered({settings, questions}) {
   const events = buildSoundEvents(settings, questions);
   return (
     <>
-      <Audio src={staticFile('sounds/background.wav')} />
+      <Audio src={staticFile('sounds/background.mp3')} />
       {events.map((e, i) => {
         const from = Math.max(0, Math.round(e.t * fps));
         const src = FILE[e.name];

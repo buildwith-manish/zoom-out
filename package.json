@@ -15,7 +15,7 @@
     "refetch-broken": "node scripts/refetch-broken.js",
     "render-batches": "node scripts/render-batches.js",
     "synth-audio": "node scripts/synth-audio.js",
-    "music": "python3 scripts/zoomout_music.py --rounds 4 --zoom 12 --lead 1.5 --hold 0.5 --answer 4 --intro 5.5 --outro 4 --sting 1.3 --out public/sounds/background"
+    "music": "python3 scripts/zoomout_music.py --rounds 50 --zoom 8 --lead 1 --hold 2 --answer 3 --intro 5.5 --outro 4 --sting 1.3 --out public/sounds/background"
   },
   "dependencies": {
     "@remotion/cli": "4.0.539",
