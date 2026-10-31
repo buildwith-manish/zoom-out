@@ -1,51 +1,51 @@
 id,question,highlight,answer,image,art,pic,fx,fy,z0,hint
-1,What animal is this?,1,Lion,easy_01_lion.jpg,lion,#0b0b2a,47%,50%,7,4 LETTERS · STARTS WITH L
-2,What animal is this?,1,Elephant,easy_02_elephant.jpg,elephant,#0b0b2a,52%,60%,7,8 LETTERS · STARTS WITH E
-3,What animal is this?,1,Giraffe,easy_03_giraffe.jpg,giraffe,#0b0b2a,72%,62%,7,7 LETTERS · STARTS WITH G
-4,What animal is this?,1,Zebra,easy_04_zebra.jpg,zebra,#0b0b2a,52%,62%,7,5 LETTERS · STARTS WITH Z
-5,What animal is this?,1,Tiger,easy_05_tiger.jpg,tiger,#0b0b2a,45%,30%,7,5 LETTERS · STARTS WITH T
-6,What animal is this?,1,Panda,easy_06_panda.jpg,panda,#0b0b2a,52%,26%,7,5 LETTERS · STARTS WITH P
-7,What animal is this?,1,Penguin,easy_07_penguin.jpg,penguin,#0b0b2a,69%,36%,7,7 LETTERS · STARTS WITH P
-8,What animal is this?,1,Monkey,easy_08_monkey.jpg,monkey,#0b0b2a,41%,50%,7,6 LETTERS · STARTS WITH M
-9,What animal is this?,1,Cow,easy_09_cow.jpg,cow,#0b0b2a,42%,36%,7,3 LETTERS · STARTS WITH C
-10,What animal is this?,1,Dog,easy_10_dog.jpg,dog,#0b0b2a,20%,49%,7,3 LETTERS · STARTS WITH D
-11,What animal is this?,1,Cat,easy_11_cat.jpg,cat,#0b0b2a,42%,69%,8,3 LETTERS · STARTS WITH C
-12,What animal is this?,1,Horse,easy_12_horse.jpg,horse,#0b0b2a,72%,13%,7,5 LETTERS · STARTS WITH H
-13,What animal is this?,1,Pig,easy_13_pig.jpg,pig,#0b0b2a,55%,57%,9,3 LETTERS · STARTS WITH P
-14,What animal is this?,1,Rabbit,easy_14_rabbit.jpg,rabbit,#0b0b2a,47%,20%,8,6 LETTERS · STARTS WITH R
-15,What animal is this?,1,Kangaroo,easy_15_kangaroo.jpg,kangaroo,#0b0b2a,66%,38%,8,8 LETTERS · STARTS WITH K
-16,What animal is this?,1,Dolphin,easy_16_dolphin.jpg,dolphin,#0b0b2a,47%,36%,7,7 LETTERS · STARTS WITH D
-17,What animal is this?,1,Polar Bear,easy_17_polar-bear.jpg,polar-bear,#0b0b2a,66%,55%,7,2 WORDS · 9 LETTERS · STARTS WITH P
-18,What animal is this?,1,Flamingo,easy_18_flamingo.jpg,flamingo,#0b0b2a,30%,40%,9,8 LETTERS · STARTS WITH F
-19,What animal is this?,1,Owl,easy_19_owl.jpg,owl,#0b0b2a,53%,42%,7,3 LETTERS · STARTS WITH O
-20,What animal is this?,1,Bald Eagle,easy_20_bald-eagle.jpg,bald-eagle,#0b0b2a,33%,24%,6,2 WORDS · 9 LETTERS · STARTS WITH B
-21,What animal is this?,1,Koala,medium_01_koala.jpg,koala,#0b0b2a,22%,50%,6,5 LETTERS · STARTS WITH K
-22,What animal is this?,1,Hippopotamus,medium_02_hippopotamus.jpg,hippopotamus,#0b0b2a,70%,50%,7,12 LETTERS · STARTS WITH H
-23,What animal is this?,1,Rhinoceros,medium_03_rhinoceros.jpg,rhinoceros,#0b0b2a,19%,53%,7,10 LETTERS · STARTS WITH R
-24,What animal is this?,1,Camel,medium_04_camel.jpg,camel,#0b0b2a,45%,32%,7,5 LETTERS · STARTS WITH C
-25,What animal is this?,1,Cheetah,medium_05_cheetah.jpg,cheetah,#0b0b2a,56%,46%,8,7 LETTERS · STARTS WITH C
-26,What animal is this?,1,Crocodile,medium_06_crocodile.jpg,crocodile,#0b0b2a,22%,40%,7,9 LETTERS · STARTS WITH C
-27,What animal is this?,1,Octopus,medium_07_octopus.jpg,octopus,#0b0b2a,34%,52%,7,7 LETTERS · STARTS WITH O
-28,What animal is this?,1,Sloth,medium_08_sloth.jpg,sloth,#0b0b2a,64%,66%,12,5 LETTERS · STARTS WITH S
-29,What animal is this?,1,Toucan,medium_09_toucan.jpg,toucan,#0b0b2a,70%,35%,7,6 LETTERS · STARTS WITH T
-30,What animal is this?,1,Walrus,medium_10_walrus.jpg,walrus,#0b0b2a,41%,47%,7,6 LETTERS · STARTS WITH W
-31,What animal is this?,1,Raccoon,medium_11_raccoon.jpg,raccoon,#0b0b2a,40%,45%,6,7 LETTERS · STARTS WITH R
-32,What animal is this?,1,Bison,medium_12_bison.jpg,bison,#0b0b2a,70%,30%,7,5 LETTERS · STARTS WITH B
-33,What animal is this?,1,Moose,medium_13_moose.jpg,moose,#0b0b2a,33%,38%,7,5 LETTERS · STARTS WITH M
-34,What animal is this?,1,Skunk,medium_14_skunk.jpg,skunk,#0b0b2a,52%,68%,8,5 LETTERS · STARTS WITH S
-35,What animal is this?,1,Armadillo,medium_15_armadillo.jpg,armadillo,#0b0b2a,76%,54%,12,9 LETTERS · STARTS WITH A
-36,What animal is this?,1,Chameleon,hard_01_chameleon.jpg,chameleon,#0b0b2a,24%,32%,8,9 LETTERS · STARTS WITH C
-37,What animal is this?,1,Hedgehog,hard_02_hedgehog.jpg,hedgehog,#0b0b2a,52%,28%,6,8 LETTERS · STARTS WITH H
-38,What animal is this?,1,Seahorse,hard_03_seahorse.jpg,seahorse,#0b0b2a,55%,47%,7,8 LETTERS · STARTS WITH S
-39,What animal is this?,1,Leopard,hard_04_leopard.jpg,leopard,#0b0b2a,72%,40%,5,7 LETTERS · STARTS WITH L
-40,What animal is this?,1,Platypus,hard_05_platypus.jpg,platypus,#0b0b2a,19%,88%,6,8 LETTERS · STARTS WITH P
-41,What animal is this?,1,Narwhal,hard_06_narwhal.jpg,narwhal,#0b0b2a,25%,42%,9,7 LETTERS · STARTS WITH N
-42,What animal is this?,1,Sea Otter,hard_07_sea-otter.jpg,sea-otter,#0b0b2a,70%,17%,7,2 WORDS · 8 LETTERS · STARTS WITH S
-43,What animal is this?,1,Meerkat,hard_08_meerkat.jpg,meerkat,#0b0b2a,40%,13%,8,7 LETTERS · STARTS WITH M
-44,What animal is this?,1,Lemur,hard_09_lemur.jpg,lemur,#0b0b2a,72%,52%,8,5 LETTERS · STARTS WITH L
-45,What animal is this?,1,Red Panda,hard_10_red-panda.jpg,red-panda,#0b0b2a,41%,40%,9,2 WORDS · 8 LETTERS · STARTS WITH R
-46,What animal is this?,1,Manatee,hard_11_manatee.jpg,manatee,#0b0b2a,22%,26%,7,7 LETTERS · STARTS WITH M
-47,What animal is this?,1,Axolotl,hard_12_axolotl.jpg,axolotl,#0b0b2a,65%,57%,6,7 LETTERS · STARTS WITH A
-48,What animal is this?,1,Porcupine,hard_13_porcupine.jpg,porcupine,#0b0b2a,42%,22%,7,9 LETTERS · STARTS WITH P
-49,What animal is this?,1,Anteater,hard_14_anteater.jpg,anteater,#0b0b2a,84%,60%,7,8 LETTERS · STARTS WITH A
-50,What animal is this?,1,Puffin,hard_15_puffin.jpg,puffin,#0b0b2a,52%,22%,7,6 LETTERS · STARTS WITH P
+1,What mammal is this?,1,Lion,easy_01_lion.jpg,lion,#0b0b2a,47%,50%,7,4 LETTERS · STARTS WITH L
+2,What mammal is this?,1,Elephant,easy_02_elephant.jpg,elephant,#0b0b2a,52%,60%,7,8 LETTERS · STARTS WITH E
+3,What mammal is this?,1,Giraffe,easy_03_giraffe.jpg,giraffe,#0b0b2a,72%,62%,7,7 LETTERS · STARTS WITH G
+4,What mammal is this?,1,Zebra,easy_04_zebra.jpg,zebra,#0b0b2a,52%,62%,7,5 LETTERS · STARTS WITH Z
+5,What mammal is this?,1,Tiger,easy_05_tiger.jpg,tiger,#0b0b2a,45%,30%,7,5 LETTERS · STARTS WITH T
+6,What mammal is this?,1,Panda,easy_06_panda.jpg,panda,#0b0b2a,52%,26%,7,5 LETTERS · STARTS WITH P
+7,What bird is this?,1,Penguin,easy_07_penguin.jpg,penguin,#0b0b2a,69%,36%,7,7 LETTERS · STARTS WITH P
+8,What mammal is this?,1,Monkey,easy_08_monkey.jpg,monkey,#0b0b2a,41%,50%,7,6 LETTERS · STARTS WITH M
+9,What mammal is this?,1,Cow,easy_09_cow.jpg,cow,#0b0b2a,42%,36%,7,3 LETTERS · STARTS WITH C
+10,What mammal is this?,1,Dog,easy_10_dog.jpg,dog,#0b0b2a,20%,49%,7,3 LETTERS · STARTS WITH D
+11,What mammal is this?,1,Cat,easy_11_cat.jpg,cat,#0b0b2a,42%,69%,8,3 LETTERS · STARTS WITH C
+12,What mammal is this?,1,Horse,easy_12_horse.jpg,horse,#0b0b2a,72%,13%,7,5 LETTERS · STARTS WITH H
+13,What mammal is this?,1,Pig,easy_13_pig.jpg,pig,#0b0b2a,55%,57%,9,3 LETTERS · STARTS WITH P
+14,What mammal is this?,1,Rabbit,easy_14_rabbit.jpg,rabbit,#0b0b2a,47%,20%,8,6 LETTERS · STARTS WITH R
+15,What mammal is this?,1,Kangaroo,easy_15_kangaroo.jpg,kangaroo,#0b0b2a,66%,38%,8,8 LETTERS · STARTS WITH K
+16,What fish is this?,1,Dolphin,easy_16_dolphin.jpg,dolphin,#0b0b2a,10%,50%,7,7 LETTERS · STARTS WITH D
+17,What mammal is this?,1,Polar Bear,easy_17_polar-bear.jpg,polar-bear,#0b0b2a,66%,55%,7,2 WORDS · 9 LETTERS · STARTS WITH P
+18,What bird is this?,1,Flamingo,easy_18_flamingo.jpg,flamingo,#0b0b2a,30%,40%,9,8 LETTERS · STARTS WITH F
+19,What bird is this?,1,Owl,easy_19_owl.jpg,owl,#0b0b2a,53%,42%,7,3 LETTERS · STARTS WITH O
+20,What bird is this?,1,Bald Eagle,easy_20_bald-eagle.jpg,bald-eagle,#0b0b2a,33%,24%,6,2 WORDS · 9 LETTERS · STARTS WITH B
+21,What mammal is this?,1,Koala,medium_01_koala.jpg,koala,#0b0b2a,22%,50%,6,5 LETTERS · STARTS WITH K
+22,What mammal is this?,1,Hippopotamus,medium_02_hippopotamus.jpg,hippopotamus,#0b0b2a,70%,50%,7,12 LETTERS · STARTS WITH H
+23,What mammal is this?,1,Rhinoceros,medium_03_rhinoceros.jpg,rhinoceros,#0b0b2a,19%,53%,7,10 LETTERS · STARTS WITH R
+24,What mammal is this?,1,Camel,medium_04_camel.jpg,camel,#0b0b2a,45%,32%,7,5 LETTERS · STARTS WITH C
+25,What mammal is this?,1,Cheetah,medium_05_cheetah.jpg,cheetah,#0b0b2a,56%,46%,8,7 LETTERS · STARTS WITH C
+26,What reptile is this?,1,Crocodile,medium_06_crocodile.jpg,crocodile,#0b0b2a,22%,40%,7,9 LETTERS · STARTS WITH C
+27,What mollusk is this?,1,Octopus,medium_07_octopus.jpg,octopus,#0b0b2a,34%,52%,7,7 LETTERS · STARTS WITH O
+28,What mammal is this?,1,Sloth,medium_08_sloth.jpg,sloth,#0b0b2a,64%,66%,12,5 LETTERS · STARTS WITH S
+29,What bird is this?,1,Toucan,medium_09_toucan.jpg,toucan,#0b0b2a,70%,35%,7,6 LETTERS · STARTS WITH T
+30,What mammal is this?,1,Walrus,medium_10_walrus.jpg,walrus,#0b0b2a,41%,47%,7,6 LETTERS · STARTS WITH W
+31,What mammal is this?,1,Raccoon,medium_11_raccoon.jpg,raccoon,#0b0b2a,40%,45%,6,7 LETTERS · STARTS WITH R
+32,What mammal is this?,1,Bison,medium_12_bison.jpg,bison,#0b0b2a,70%,30%,7,5 LETTERS · STARTS WITH B
+33,What mammal is this?,1,Moose,medium_13_moose.jpg,moose,#0b0b2a,33%,38%,7,5 LETTERS · STARTS WITH M
+34,What mammal is this?,1,Skunk,medium_14_skunk.jpg,skunk,#0b0b2a,52%,68%,8,5 LETTERS · STARTS WITH S
+35,What mammal is this?,1,Armadillo,medium_15_armadillo.jpg,armadillo,#0b0b2a,76%,54%,12,9 LETTERS · STARTS WITH A
+36,What reptile is this?,1,Chameleon,hard_01_chameleon.jpg,chameleon,#0b0b2a,24%,32%,8,9 LETTERS · STARTS WITH C
+37,What mammal is this?,1,Hedgehog,hard_02_hedgehog.jpg,hedgehog,#0b0b2a,52%,28%,6,8 LETTERS · STARTS WITH H
+38,What fish is this?,1,Seahorse,hard_03_seahorse.jpg,seahorse,#0b0b2a,55%,47%,7,8 LETTERS · STARTS WITH S
+39,What mammal is this?,1,Leopard,hard_04_leopard.jpg,leopard,#0b0b2a,72%,40%,5,7 LETTERS · STARTS WITH L
+40,What mammal is this?,1,Platypus,hard_05_platypus.jpg,platypus,#0b0b2a,19%,88%,6,8 LETTERS · STARTS WITH P
+41,What mammal is this?,1,Narwhal,hard_06_narwhal.jpg,narwhal,#0b0b2a,25%,42%,9,7 LETTERS · STARTS WITH N
+42,What mammal is this?,1,Sea Otter,hard_07_sea-otter.jpg,sea-otter,#0b0b2a,70%,17%,7,2 WORDS · 8 LETTERS · STARTS WITH S
+43,What mammal is this?,1,Meerkat,hard_08_meerkat.jpg,meerkat,#0b0b2a,40%,13%,8,7 LETTERS · STARTS WITH M
+44,What mammal is this?,1,Lemur,hard_09_lemur.jpg,lemur,#0b0b2a,72%,52%,8,5 LETTERS · STARTS WITH L
+45,What mammal is this?,1,Red Panda,hard_10_red-panda.jpg,red-panda,#0b0b2a,41%,40%,9,2 WORDS · 8 LETTERS · STARTS WITH R
+46,What mammal is this?,1,Manatee,hard_11_manatee.jpg,manatee,#0b0b2a,22%,26%,7,7 LETTERS · STARTS WITH M
+47,What amphibian is this?,1,Axolotl,hard_12_axolotl.jpg,axolotl,#0b0b2a,65%,57%,6,7 LETTERS · STARTS WITH A
+48,What mammal is this?,1,Porcupine,hard_13_porcupine.jpg,porcupine,#0b0b2a,42%,22%,7,9 LETTERS · STARTS WITH P
+49,What mammal is this?,1,Anteater,hard_14_anteater.jpg,anteater,#0b0b2a,84%,60%,7,8 LETTERS · STARTS WITH A
+50,What bird is this?,1,Puffin,hard_15_puffin.jpg,puffin,#0b0b2a,52%,22%,7,6 LETTERS · STARTS WITH P
