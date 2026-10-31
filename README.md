@@ -80,6 +80,7 @@ Background bed is the playful marimba/bass track from `scripts/zoomout_music.py`
 
 ```bash
 npm run music          # public/sounds/background.wav  (needs numpy + scipy)
+npm run audio          # music + sound effects + music ducking under the cues → background.mp3, sfx.mp3 (use this one)
 npm run synth-audio    # public/sounds/sfx.wav + individual cues
 ```
 
@@ -129,3 +130,7 @@ npx remotion still ZoomOut out/preview.jpg --frame=200
 ## Level title cards
 
 `rounds.csv` has a `level` column (`easy`, `medium`, `hard`). When the level changes, a short title card is inserted (`levelDuration` seconds in `settings.json`; set `levelCards` to `false` to turn it off) and a coloured level badge appears in the top bar of every question. After changing levels or durations, re-run `npm run csv-to-json`, `npm run music`, `npm run synth-audio`, and convert `sfx.wav` to `sfx.mp3`.
+
+## Music ducking
+
+`npm run audio` rebuilds everything in order: continuous music → sound effects → `scripts/duck_music.py`, which dips the music (up to about 8 dB) for a moment under each short cue (ticks, hits, whooshes) and swells it back, then matches the overall loudness so the music is not quieter on average. The composition plays the results, `public/sounds/background.mp3` and `sfx.mp3`.
