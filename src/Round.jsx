@@ -921,7 +921,21 @@ function Intro({local, duration, settings}) {
       }}
     >
       <div style={{marginTop: cq(1), textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <Words words={settings.introHeadline} local={local} size={cq(10.5)} amberFrom={settings.introAmberFrom} />
+        <Words words={settings.introHeadline} local={local} size={cq(10.5)} amberFrom={settings.introAmberFrom} slam />
+        {settings.introSub ? (
+          <div
+            style={{
+              marginTop: cq(0.6),
+              font: `700 ${cq(2.5)}px/1 ${FONTS.mono}`,
+              letterSpacing: '0.28em',
+              color: '#fff',
+              opacity: gsapTween(local, 0.9, 0.5, power3Out) * 0.9,
+              transform: `translateY(${(1 - gsapTween(local, 0.9, 0.5, power3Out)) * cq(1.5)}px)`,
+            }}
+          >
+            {settings.introSub}
+          </div>
+        ) : null}
       </div>
       <PhotoCard
         item={item}

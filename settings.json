@@ -25,13 +25,16 @@
   "introFy": "47%",
   "introZ0": 8,
   "introHeadline": [
-    "Name",
-    "it",
-    "before",
-    "it's",
-    "clear."
+    "Only",
+    "1",
+    "in",
+    "20",
+    "can",
+    "name",
+    "all",
+    "50"
   ],
-  "introAmberFrom": 3,
+  "introAmberFrom": 5,
   "outroEyebrow": "Round over",
   "outroTitle": [
     "Your",
@@ -44,5 +47,6 @@
   ],
   "correctEyebrow": "Correct answer",
   "levelCards": true,
-  "levelDuration": 2.5
+  "levelDuration": 2.5,
+  "introSub": "50 ANIMALS · 3 LEVELS · ZOOM OUT AND NAME THEM"
 }
