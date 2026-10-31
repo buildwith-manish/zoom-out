@@ -83,7 +83,7 @@ npm run music          # public/sounds/background.wav  (needs numpy + scipy)
 npm run synth-audio    # public/sounds/sfx.wav + individual cues
 ```
 
-The composition plays `background.wav` under `sfx.wav`. Re-run both after changing round count or zoom length so the bed stays bar-aligned with the picture.
+The composition plays `background.wav` under `sfx.wav`. Re-run both after changing round count or zoom length so the bed stays continuous with the picture.
 
 ## Photos (optional)
 
