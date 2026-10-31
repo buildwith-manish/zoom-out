@@ -74,6 +74,7 @@ const questions = rows.slice(1).map((cols) => {
     fx: o.fx,
     fy: o.fy,
     z0: Number(o.z0) || 12,
+    level: (o.level || '').toLowerCase(),
     hint,
   };
 });

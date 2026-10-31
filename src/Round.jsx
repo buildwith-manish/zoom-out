@@ -9,8 +9,8 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {backOut, expoOut, elasticOut, power3Out, gsapTween, clamp01} from './gsap-helpers';
-import {COLORS, FONTS, cq, seriesColors} from './style';
-import {buildScenes, sceneAt} from './timing';
+import {COLORS, FONTS, LEVELS, cq, seriesColors} from './style';
+import {buildScenes, sceneAt, levelInfo} from './timing';
 import {clamp, lerp, zoomScale, zoomBlur, easeInOut, rasterImage} from './util';
 import {QuizAudio} from './audio';
 
@@ -142,7 +142,119 @@ function LetterSlam({text, local, size}) {
   );
 }
 
-function TopBar({index, total, local}) {
+function LevelBadge({level}) {
+  const L = LEVELS[level];
+  if (!L) return <div />;
+  return (
+    <div
+      style={{
+        justifySelf: 'end',
+        display: 'flex',
+        alignItems: 'center',
+        gap: cq(1.2),
+        background: COLORS.glass,
+        border: `${cq(0.2)}px solid ${L.color}`,
+        borderRadius: cq(2),
+        padding: `${cq(1.1)}px ${cq(2.4)}px`,
+        backdropFilter: 'blur(2px)',
+      }}
+    >
+      <i style={{width: cq(1.7), height: cq(1.7), borderRadius: '50%', background: L.color, boxShadow: `0 0 ${cq(1.4)}px ${L.color}`}} />
+      <b style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, letterSpacing: '0.18em', color: L.color}}>{L.label}</b>
+    </div>
+  );
+}
+
+function LevelCard({local, duration, questions, level}) {
+  const ir = iris(local, 'intro', duration);
+  const L = LEVELS[level] || LEVELS.easy;
+  const info = levelInfo(questions, level);
+  const fade = gsapTween(local, 0.05, 0.4, power3Out);
+  const sub = gsapTween(local, 0.55, 0.5, expoOut);
+  const chip = gsapTween(local, 0.75, 0.5, backOut);
+  const glow = gsapTween(local, 0, 0.9, expoOut);
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: cq(2.6),
+        color: '#fff',
+        clipPath: ir.clipPath,
+        transform: ir.transform,
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          width: cq(95),
+          height: cq(95),
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${L.color}55 0%, ${L.color}00 62%)`,
+          transform: `scale(${lerp(0.4, 1, glow)})`,
+          opacity: glow,
+        }}
+      />
+      <div style={{font: `700 ${cq(2.8)}px/1 ${FONTS.mono}`, letterSpacing: '0.45em', opacity: fade * 0.9, zIndex: 1}}>
+        LEVEL {info.ord} OF {info.total}
+      </div>
+      <div style={{zIndex: 1, textShadow: `0 0 ${cq(5)}px ${L.color}88`}}>
+        <Words words={[L.label]} local={local} size={cq(30)} color={L.color} slam />
+      </div>
+      <div
+        style={{
+          zIndex: 1,
+          font: `700 ${cq(3.4)}px/1 ${FONTS.mono}`,
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          opacity: sub,
+          transform: `translateY(${(1 - sub) * cq(2)}px)`,
+        }}
+      >
+        {L.sub}
+      </div>
+      <div
+        style={{
+          zIndex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          gap: cq(2.4),
+          background: COLORS.glass,
+          border: `${cq(0.2)}px solid ${COLORS.glassline}`,
+          borderRadius: cq(3),
+          padding: `${cq(1.4)}px ${cq(3.2)}px`,
+          opacity: chip,
+          transform: `scale(${lerp(0.8, 1, chip)})`,
+        }}
+      >
+        <span style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, letterSpacing: '0.12em'}}>
+          {info.count} ANIMALS · Q{info.first}–{info.last}
+        </span>
+        <span style={{display: 'flex', gap: cq(1)}}>
+          {info.order.map((lv, k) => (
+            <i
+              key={lv}
+              style={{
+                width: cq(2.2),
+                height: cq(2.2),
+                borderRadius: '50%',
+                border: `${cq(0.3)}px solid ${LEVELS[lv] ? LEVELS[lv].color : '#fff'}`,
+                background: k + 1 <= info.ord ? (LEVELS[lv] ? LEVELS[lv].color : '#fff') : 'transparent',
+              }}
+            />
+          ))}
+        </span>
+      </div>
+      <CloseRing local={local} duration={duration} />
+    </div>
+  );
+}
+
+function TopBar({index, total, local, level}) {
   const fade = gsapTween(local, 0, 0.5, power3Out);
   return (
     <div
@@ -188,7 +300,7 @@ function TopBar({index, total, local}) {
       >
         Zoom <i style={{fontStyle: 'normal', color: COLORS.amber}}>Out</i>
       </div>
-      <div />
+      <LevelBadge level={level} />
     </div>
   );
 }
@@ -843,7 +955,7 @@ function Question({local, q, index, total, settings}) {
         transform: ir.transform,
       }}
     >
-      <TopBar index={index} total={total} local={local} />
+      <TopBar index={index} total={total} local={local} level={q.level} />
       <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: cq(0.8)}}>
         <Words words={q.question} local={local} size={cq(7.4)} amberAt={q.highlight} />
       </div>
@@ -880,7 +992,7 @@ function Reveal({local, q, index, total, settings, duration}) {
         transform: ir.transform,
       }}
     >
-      <TopBar index={index} total={total} local={local} />
+      <TopBar index={index} total={total} local={local} level={q.level} />
       <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0}}>
         <div
           style={{
@@ -1094,6 +1206,7 @@ export const Round = ({questions, settings}) => {
 
   let scene = null;
   if (s.type === 'intro') scene = <Intro local={local} duration={s.d} settings={settings} />;
+  else if (s.type === 'level') scene = <LevelCard local={local} duration={s.d} questions={questions} level={s.level} />;
   else if (s.type === 'q') scene = <Question local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} />;
   else if (s.type === 'r') scene = <Reveal local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} duration={s.d} />;
   else if (s.type === 'outro') scene = <Outro local={local} duration={s.d} settings={settings} total={n} />;

@@ -34,3 +34,9 @@ export const FONTS = {
 export function seriesColors(name) {
   return SERIES[name] || SERIES.main;
 }
+
+export const LEVELS = {
+  easy: {label: 'EASY', color: '#3ddc84', sub: 'Warm-up round'},
+  medium: {label: 'MEDIUM', color: '#ffc13a', sub: 'Now it gets tricky'},
+  hard: {label: 'HARD', color: '#ff5d5d', sub: 'Sharp eyes only'},
+};

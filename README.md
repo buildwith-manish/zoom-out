@@ -125,3 +125,7 @@ npx remotion still ZoomOut out/preview.jpg --frame=200
 - `fx` / `fy` is the zoom origin, `z0` is start magnification (12×).
 - Hint fires at `hintAt` (0.4 = 40% through the zoom).
 - `.gitignore` ignores `node_modules`, `out`, `src/rounds.json`, `scripts/.image-progress.json`.
+
+## Level title cards
+
+`rounds.csv` has a `level` column (`easy`, `medium`, `hard`). When the level changes, a short title card is inserted (`levelDuration` seconds in `settings.json`; set `levelCards` to `false` to turn it off) and a coloured level badge appears in the top bar of every question. After changing levels or durations, re-run `npm run csv-to-json`, `npm run music`, `npm run synth-audio`, and convert `sfx.wav` to `sfx.mp3`.

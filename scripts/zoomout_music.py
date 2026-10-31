@@ -24,6 +24,8 @@ ap.add_argument('--answer', type=float, default=4.0)
 ap.add_argument('--intro', type=float, default=5.5)
 ap.add_argument('--outro', type=float, default=4.0)
 ap.add_argument('--sting', type=float, default=1.3)
+ap.add_argument('--cards', type=int, default=0, help='number of level title cards')
+ap.add_argument('--card', type=float, default=2.5, help='length of each level card')
 ap.add_argument('--level', type=float, default=-22.0, help='average loudness in dBFS RMS (quiet bed under the SFX)')
 ap.add_argument('--bpm', type=float, default=120.0)
 ap.add_argument('--out', default='zoomout_music')
@@ -31,7 +33,7 @@ a = ap.parse_args()
 
 SR = 44100
 QLEN = a.lead + a.zoom + a.hold
-TOTAL = a.intro + max(1, a.rounds) * (QLEN + a.answer) + a.outro + a.sting
+TOTAL = a.intro + a.cards * a.card + max(1, a.rounds) * (QLEN + a.answer) + a.outro + a.sting
 BAR = 4 * 60.0 / a.bpm
 BARS = 16
 NL = int(round(BARS * BAR * SR))

@@ -32,7 +32,12 @@ function qDur() {
 
 function buildScenes() {
   const scenes = [{type: 'intro', d: settings.introDuration}];
-  questions.forEach(() => {
+  let prevLevel = null;
+  questions.forEach((q) => {
+    if (settings.levelCards !== false && settings.levelDuration > 0 && q.level && q.level !== prevLevel) {
+      scenes.push({type: 'level', d: settings.levelDuration});
+      prevLevel = q.level;
+    }
     scenes.push({type: 'q', d: qDur()});
     scenes.push({type: 'r', d: settings.revealDuration});
   });
@@ -57,7 +62,7 @@ function buildEvents(scenes) {
   const EV = [];
   scenes.forEach((s) => {
     if (s.type !== 'r') EV.push([s.start + 0.02, 'swish']);
-    if (s.type === 'intro' || s.type === 'r' || s.type === 'outro') EV.push([s.start + s.d - 0.6, 'swishIn']);
+    if (s.type === 'intro' || s.type === 'r' || s.type === 'outro' || s.type === 'level') EV.push([s.start + s.d - 0.6, 'swishIn']);
     if (s.type === 'intro') {
       EV.push([s.start + 0.12, 'words'], [s.start + 0.9, 'shutter'], [s.start + 0.9, 'zoomIntro']);
     }
@@ -67,6 +72,7 @@ function buildEvents(scenes) {
       EV.push([s.start + ZS + ZD * HINT_AT, 'sparkle'], [s.start + ZS + ZD, 'focus']);
     }
     if (s.type === 'r') EV.push([s.start + 0.05, 'expand'], [s.start + 0.1, 'hit'], [s.start + 0.45, 'sparkle']);
+    if (s.type === 'level') EV.push([s.start + 0.12, 'words'], [s.start + 0.4, 'hit'], [s.start + 0.8, 'sparkle']);
     if (s.type === 'sting') EV.push([s.start + 0.15, 'chime']);
   });
   return EV;

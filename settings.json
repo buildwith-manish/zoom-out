@@ -42,5 +42,7 @@
     "QUIZ",
     "MATRIX"
   ],
-  "correctEyebrow": "Correct answer"
+  "correctEyebrow": "Correct answer",
+  "levelCards": true,
+  "levelDuration": 2.5
 }

@@ -15,6 +15,7 @@
     "fx": "47%",
     "fy": "50%",
     "z0": 7,
+    "level": "easy",
     "hint": "4 LETTERS · STARTS WITH L"
   },
   {
@@ -33,6 +34,7 @@
     "fx": "52%",
     "fy": "60%",
     "z0": 7,
+    "level": "easy",
     "hint": "8 LETTERS · STARTS WITH E"
   },
   {
@@ -51,6 +53,7 @@
     "fx": "72%",
     "fy": "62%",
     "z0": 7,
+    "level": "easy",
     "hint": "7 LETTERS · STARTS WITH G"
   },
   {
@@ -69,6 +72,7 @@
     "fx": "52%",
     "fy": "62%",
     "z0": 7,
+    "level": "easy",
     "hint": "5 LETTERS · STARTS WITH Z"
   },
   {
@@ -87,6 +91,7 @@
     "fx": "45%",
     "fy": "30%",
     "z0": 7,
+    "level": "easy",
     "hint": "5 LETTERS · STARTS WITH T"
   },
   {
@@ -105,6 +110,7 @@
     "fx": "52%",
     "fy": "26%",
     "z0": 7,
+    "level": "easy",
     "hint": "5 LETTERS · STARTS WITH P"
   },
   {
@@ -123,6 +129,7 @@
     "fx": "69%",
     "fy": "36%",
     "z0": 7,
+    "level": "easy",
     "hint": "7 LETTERS · STARTS WITH P"
   },
   {
@@ -141,6 +148,7 @@
     "fx": "49%",
     "fy": "58%",
     "z0": 7,
+    "level": "easy",
     "hint": "6 LETTERS · STARTS WITH M"
   },
   {
@@ -159,6 +167,7 @@
     "fx": "32%",
     "fy": "57%",
     "z0": 7,
+    "level": "easy",
     "hint": "3 LETTERS · STARTS WITH C"
   },
   {
@@ -177,6 +186,7 @@
     "fx": "20%",
     "fy": "49%",
     "z0": 7,
+    "level": "easy",
     "hint": "3 LETTERS · STARTS WITH D"
   },
   {
@@ -195,6 +205,7 @@
     "fx": "42%",
     "fy": "69%",
     "z0": 8,
+    "level": "easy",
     "hint": "3 LETTERS · STARTS WITH C"
   },
   {
@@ -213,6 +224,7 @@
     "fx": "72%",
     "fy": "13%",
     "z0": 7,
+    "level": "easy",
     "hint": "5 LETTERS · STARTS WITH H"
   },
   {
@@ -231,6 +243,7 @@
     "fx": "55%",
     "fy": "57%",
     "z0": 9,
+    "level": "easy",
     "hint": "3 LETTERS · STARTS WITH P"
   },
   {
@@ -249,6 +262,7 @@
     "fx": "63%",
     "fy": "30%",
     "z0": 8,
+    "level": "easy",
     "hint": "6 LETTERS · STARTS WITH R"
   },
   {
@@ -267,6 +281,7 @@
     "fx": "66%",
     "fy": "38%",
     "z0": 8,
+    "level": "easy",
     "hint": "8 LETTERS · STARTS WITH K"
   },
   {
@@ -285,6 +300,7 @@
     "fx": "10%",
     "fy": "50%",
     "z0": 7,
+    "level": "easy",
     "hint": "7 LETTERS · STARTS WITH D"
   },
   {
@@ -303,6 +319,7 @@
     "fx": "49%",
     "fy": "18%",
     "z0": 7,
+    "level": "easy",
     "hint": "2 WORDS · 9 LETTERS · STARTS WITH P"
   },
   {
@@ -321,6 +338,7 @@
     "fx": "30%",
     "fy": "40%",
     "z0": 9,
+    "level": "easy",
     "hint": "8 LETTERS · STARTS WITH F"
   },
   {
@@ -339,6 +357,7 @@
     "fx": "29%",
     "fy": "62%",
     "z0": 7,
+    "level": "easy",
     "hint": "3 LETTERS · STARTS WITH O"
   },
   {
@@ -357,6 +376,7 @@
     "fx": "55%",
     "fy": "32%",
     "z0": 6,
+    "level": "easy",
     "hint": "2 WORDS · 9 LETTERS · STARTS WITH B"
   },
   {
@@ -375,6 +395,7 @@
     "fx": "22%",
     "fy": "50%",
     "z0": 6,
+    "level": "medium",
     "hint": "5 LETTERS · STARTS WITH K"
   },
   {
@@ -393,6 +414,7 @@
     "fx": "70%",
     "fy": "50%",
     "z0": 7,
+    "level": "medium",
     "hint": "12 LETTERS · STARTS WITH H"
   },
   {
@@ -411,6 +433,7 @@
     "fx": "19%",
     "fy": "53%",
     "z0": 7,
+    "level": "medium",
     "hint": "10 LETTERS · STARTS WITH R"
   },
   {
@@ -429,6 +452,7 @@
     "fx": "45%",
     "fy": "32%",
     "z0": 7,
+    "level": "medium",
     "hint": "5 LETTERS · STARTS WITH C"
   },
   {
@@ -447,6 +471,7 @@
     "fx": "56%",
     "fy": "46%",
     "z0": 8,
+    "level": "medium",
     "hint": "7 LETTERS · STARTS WITH C"
   },
   {
@@ -465,6 +490,7 @@
     "fx": "22%",
     "fy": "40%",
     "z0": 7,
+    "level": "medium",
     "hint": "9 LETTERS · STARTS WITH C"
   },
   {
@@ -483,6 +509,7 @@
     "fx": "34%",
     "fy": "52%",
     "z0": 7,
+    "level": "medium",
     "hint": "7 LETTERS · STARTS WITH O"
   },
   {
@@ -501,6 +528,7 @@
     "fx": "64%",
     "fy": "66%",
     "z0": 12,
+    "level": "medium",
     "hint": "5 LETTERS · STARTS WITH S"
   },
   {
@@ -519,6 +547,7 @@
     "fx": "70%",
     "fy": "35%",
     "z0": 7,
+    "level": "medium",
     "hint": "6 LETTERS · STARTS WITH T"
   },
   {
@@ -537,6 +566,7 @@
     "fx": "41%",
     "fy": "47%",
     "z0": 7,
+    "level": "medium",
     "hint": "6 LETTERS · STARTS WITH W"
   },
   {
@@ -555,6 +585,7 @@
     "fx": "40%",
     "fy": "45%",
     "z0": 6,
+    "level": "medium",
     "hint": "7 LETTERS · STARTS WITH R"
   },
   {
@@ -573,6 +604,7 @@
     "fx": "70%",
     "fy": "30%",
     "z0": 7,
+    "level": "medium",
     "hint": "5 LETTERS · STARTS WITH B"
   },
   {
@@ -591,6 +623,7 @@
     "fx": "33%",
     "fy": "38%",
     "z0": 7,
+    "level": "medium",
     "hint": "5 LETTERS · STARTS WITH M"
   },
   {
@@ -609,6 +642,7 @@
     "fx": "52%",
     "fy": "68%",
     "z0": 8,
+    "level": "medium",
     "hint": "5 LETTERS · STARTS WITH S"
   },
   {
@@ -627,6 +661,7 @@
     "fx": "76%",
     "fy": "54%",
     "z0": 12,
+    "level": "medium",
     "hint": "9 LETTERS · STARTS WITH A"
   },
   {
@@ -645,6 +680,7 @@
     "fx": "24%",
     "fy": "32%",
     "z0": 8,
+    "level": "hard",
     "hint": "9 LETTERS · STARTS WITH C"
   },
   {
@@ -663,6 +699,7 @@
     "fx": "52%",
     "fy": "28%",
     "z0": 6,
+    "level": "hard",
     "hint": "8 LETTERS · STARTS WITH H"
   },
   {
@@ -681,6 +718,7 @@
     "fx": "55%",
     "fy": "47%",
     "z0": 7,
+    "level": "hard",
     "hint": "8 LETTERS · STARTS WITH S"
   },
   {
@@ -699,6 +737,7 @@
     "fx": "72%",
     "fy": "40%",
     "z0": 5,
+    "level": "hard",
     "hint": "7 LETTERS · STARTS WITH L"
   },
   {
@@ -717,6 +756,7 @@
     "fx": "19%",
     "fy": "88%",
     "z0": 6,
+    "level": "hard",
     "hint": "8 LETTERS · STARTS WITH P"
   },
   {
@@ -735,6 +775,7 @@
     "fx": "25%",
     "fy": "42%",
     "z0": 9,
+    "level": "hard",
     "hint": "7 LETTERS · STARTS WITH N"
   },
   {
@@ -753,6 +794,7 @@
     "fx": "70%",
     "fy": "17%",
     "z0": 7,
+    "level": "hard",
     "hint": "2 WORDS · 8 LETTERS · STARTS WITH S"
   },
   {
@@ -771,6 +813,7 @@
     "fx": "40%",
     "fy": "13%",
     "z0": 8,
+    "level": "hard",
     "hint": "7 LETTERS · STARTS WITH M"
   },
   {
@@ -789,6 +832,7 @@
     "fx": "72%",
     "fy": "52%",
     "z0": 8,
+    "level": "hard",
     "hint": "5 LETTERS · STARTS WITH L"
   },
   {
@@ -807,6 +851,7 @@
     "fx": "41%",
     "fy": "40%",
     "z0": 9,
+    "level": "hard",
     "hint": "2 WORDS · 8 LETTERS · STARTS WITH R"
   },
   {
@@ -825,6 +870,7 @@
     "fx": "22%",
     "fy": "26%",
     "z0": 7,
+    "level": "hard",
     "hint": "7 LETTERS · STARTS WITH M"
   },
   {
@@ -843,6 +889,7 @@
     "fx": "65%",
     "fy": "57%",
     "z0": 6,
+    "level": "hard",
     "hint": "7 LETTERS · STARTS WITH A"
   },
   {
@@ -861,6 +908,7 @@
     "fx": "42%",
     "fy": "22%",
     "z0": 7,
+    "level": "hard",
     "hint": "9 LETTERS · STARTS WITH P"
   },
   {
@@ -879,6 +927,7 @@
     "fx": "84%",
     "fy": "60%",
     "z0": 7,
+    "level": "hard",
     "hint": "8 LETTERS · STARTS WITH A"
   },
   {
@@ -897,6 +946,7 @@
     "fx": "52%",
     "fy": "22%",
     "z0": 7,
+    "level": "hard",
     "hint": "6 LETTERS · STARTS WITH P"
   }
 ]

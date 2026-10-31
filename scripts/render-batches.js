@@ -33,9 +33,19 @@ function qDur() {
   return settings.zoomStart + settings.zoomDuration + settings.hold;
 }
 
+function levelCardCount() {
+  if (settings.levelCards === false || !(settings.levelDuration > 0)) return 0;
+  let prev = null, n = 0;
+  questions.forEach((q) => {
+    if (q.level && q.level !== prev) { n++; prev = q.level; }
+  });
+  return n;
+}
+
 function totalFrames() {
   const total =
     settings.introDuration +
+    levelCardCount() * (settings.levelDuration || 0) +
     questions.length * (qDur() + settings.revealDuration) +
     settings.outroDuration +
     settings.stingDuration;

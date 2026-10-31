@@ -5,7 +5,12 @@ export function questionDuration(settings) {
 export function buildScenes(settings, questions) {
   const qDur = questionDuration(settings);
   const scenes = [{type: 'intro', i: -1, d: settings.introDuration, label: 'Intro'}];
-  questions.forEach((_, i) => {
+  let prevLevel = null;
+  questions.forEach((q, i) => {
+    if (settings.levelCards !== false && settings.levelDuration > 0 && q.level && q.level !== prevLevel) {
+      scenes.push({type: 'level', i, level: q.level, d: settings.levelDuration, label: 'Level ' + q.level});
+      prevLevel = q.level;
+    }
     scenes.push({type: 'q', i, d: qDur, label: 'Q' + (i + 1)});
     scenes.push({type: 'r', i, d: settings.revealDuration, label: 'A' + (i + 1)});
   });
@@ -33,4 +38,20 @@ export function getTotalSeconds(settings, questions) {
 export function getTotalFrames(settings, questions) {
   const total = getTotalSeconds(settings, questions);
   return Math.round(total * settings.fps);
+}
+
+export function levelInfo(questions, level) {
+  const order = [];
+  questions.forEach((q) => {
+    if (q.level && !order.includes(q.level)) order.push(q.level);
+  });
+  const idx = questions.map((q, i) => (q.level === level ? i : -1)).filter((i) => i >= 0);
+  return {
+    ord: order.indexOf(level) + 1,
+    total: order.length,
+    count: idx.length,
+    first: idx[0] + 1,
+    last: idx[idx.length - 1] + 1,
+    order,
+  };
 }
