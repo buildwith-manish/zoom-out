@@ -65,7 +65,7 @@ function CornerBrackets() {
   );
 }
 
-function Words({words, local, delay = 0.1, dur = 0.55, stagger = 0.09, size, amberAt, amberFrom, color, slam}) {
+function Words({words, local, delay = 0.1, dur = 0.55, stagger = 0.09, size, amberAt, amberFrom, color, slam, slamDelay = 0.15}) {
   return (
     <h2
       style={{
@@ -81,7 +81,7 @@ function Words({words, local, delay = 0.1, dur = 0.55, stagger = 0.09, size, amb
     >
       {words.map((w, i) => {
         const p = slam
-          ? gsapTween(local, i * 0.45 * 0.09 + 0.15, 0.6, backOut)
+          ? gsapTween(local, i * 0.45 * 0.09 + slamDelay, 0.6, backOut)
           : gsapTween(local, i * stagger + delay, dur, backOut);
         const isAmber =
           (typeof amberAt === 'number' && i === amberAt) ||
@@ -899,6 +899,34 @@ function Stage({t, series, children}) {
   );
 }
 
+function Wordmark({local, settings}) {
+  const inP = gsapTween(local, 0.15, 0.45, backOut);
+  const move = easeInOut(clamp01((local - 1.0) / 0.55));
+  const dim = 1 - clamp01((local - 0.95) / 0.5);
+  const y = -(settings.height / 2 - cq(5.6)) * move;
+  const s = lerp(1, 0.2, move);
+  return (
+    <div style={{position: 'absolute', inset: 0, zIndex: 9, pointerEvents: 'none'}}>
+      <div style={{position: 'absolute', inset: 0, background: 'rgba(6,4,44,.72)', opacity: dim}} />
+      <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div
+          style={{
+            font: `400 ${cq(26)}px/1 ${FONTS.display}`,
+            letterSpacing: '0.02em',
+            color: '#fff',
+            whiteSpace: 'nowrap',
+            textShadow: `0 ${cq(0.8)}px 0 rgba(20,8,90,.9), 0 0 ${cq(5)}px rgba(255,193,58,.4)`,
+            opacity: inP,
+            transform: `translateY(${y}px) scale(${lerp(0.6, 1, inP) * s})`,
+          }}
+        >
+          {String(settings.brandLeft).toUpperCase()} <span style={{color: COLORS.amber}}>{String(settings.brandRight).toUpperCase()}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Intro({local, duration, settings}) {
   const ir = iris(local, 'intro', duration);
   const item = {
@@ -917,14 +945,14 @@ function Intro({local, duration, settings}) {
         display: 'flex',
         flexDirection: 'column',
         gap: cq(2.2),
-        padding: `${cq(3.4)}px ${cq(5)}px ${cq(4.6)}px`,
+        padding: `${cq(8.4)}px ${cq(5)}px ${cq(4.6)}px`,
         color: '#fff',
         clipPath: ir.clipPath,
         transform: ir.transform,
       }}
     >
       <div style={{marginTop: cq(1), textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <Words words={settings.introHeadline} local={local} size={cq(10.5)} amberFrom={settings.introAmberFrom} slam />
+        <Words words={settings.introHeadline} local={local} size={cq(10.5)} amberFrom={settings.introAmberFrom} slam slamDelay={settings.introHookDelay ?? 0.15} />
         {settings.introSub ? (
           <div
             style={{
@@ -945,12 +973,13 @@ function Intro({local, duration, settings}) {
         local={local}
         zoomDelay={settings.introZoomDelay}
         zoomDur={settings.introZoomDuration}
-        cardDelay={0.9}
-        flashDelay={0.9}
+        cardDelay={settings.introZoomDelay}
+        flashDelay={settings.introZoomDelay}
         showLens={false}
       />
       <IrisRing local={local} />
       <CloseRing local={local} duration={duration} />
+      <Wordmark local={local} settings={settings} />
     </div>
   );
 }

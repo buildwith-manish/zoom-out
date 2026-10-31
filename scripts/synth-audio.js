@@ -64,7 +64,7 @@ function buildEvents(scenes) {
     if (s.type !== 'r') EV.push([s.start + 0.02, 'swish']);
     if (s.type === 'intro' || s.type === 'r' || s.type === 'outro' || s.type === 'level') EV.push([s.start + s.d - 0.6, 'swishIn']);
     if (s.type === 'intro') {
-      EV.push([s.start + 0.12, 'words'], [s.start + 0.9, 'shutter'], [s.start + 0.9, 'zoomIntro']);
+      EV.push([s.start + (settings.introHookDelay ?? 0.12), 'words'], [s.start + (settings.introZoomDelay ?? 0.9), 'shutter'], [s.start + (settings.introZoomDelay ?? 0.9), 'zoomIntro']);
     }
     if (s.type === 'q') {
       EV.push([s.start + 0.12, 'words'], [s.start + 0.35, 'shutter'], [s.start + ZS, 'zoomOut']);

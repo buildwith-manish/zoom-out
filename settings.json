@@ -12,12 +12,12 @@
   "zoomDuration": 8,
   "hold": 2,
   "revealDuration": 3,
-  "introDuration": 5.5,
+  "introDuration": 6.5,
   "outroDuration": 4,
   "stingDuration": 1.3,
   "hintAt": 0.4,
   "introZoomDuration": 4.2,
-  "introZoomDelay": 0.9,
+  "introZoomDelay": 1.4,
   "introArt": "tiger",
   "introImage": "easy_05_tiger.jpg",
   "introPic": "#0b0b2a",
@@ -48,5 +48,6 @@
   "correctEyebrow": "Correct answer",
   "levelCards": true,
   "levelDuration": 2.5,
-  "introSub": "50 ANIMALS · 3 LEVELS · ZOOM OUT AND NAME THEM"
+  "introSub": "50 ANIMALS · 3 LEVELS · ZOOM OUT AND NAME THEM",
+  "introHookDelay": 1.15
 }
