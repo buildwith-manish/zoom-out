@@ -6,19 +6,19 @@ id,question,highlight,answer,image,art,pic,fx,fy,z0,hint
 5,What mammal is this?,1,Tiger,easy_05_tiger.jpg,tiger,#0b0b2a,45%,30%,7,5 LETTERS · STARTS WITH T
 6,What mammal is this?,1,Panda,easy_06_panda.jpg,panda,#0b0b2a,52%,26%,7,5 LETTERS · STARTS WITH P
 7,What bird is this?,1,Penguin,easy_07_penguin.jpg,penguin,#0b0b2a,69%,36%,7,7 LETTERS · STARTS WITH P
-8,What mammal is this?,1,Monkey,easy_08_monkey.jpg,monkey,#0b0b2a,41%,50%,7,6 LETTERS · STARTS WITH M
-9,What mammal is this?,1,Cow,easy_09_cow.jpg,cow,#0b0b2a,42%,36%,7,3 LETTERS · STARTS WITH C
+8,What mammal is this?,1,Monkey,easy_08_monkey.jpg,monkey,#0b0b2a,49%,58%,7,6 LETTERS · STARTS WITH M
+9,What mammal is this?,1,Cow,easy_09_cow.jpg,cow,#0b0b2a,32%,57%,7,3 LETTERS · STARTS WITH C
 10,What mammal is this?,1,Dog,easy_10_dog.jpg,dog,#0b0b2a,20%,49%,7,3 LETTERS · STARTS WITH D
 11,What mammal is this?,1,Cat,easy_11_cat.jpg,cat,#0b0b2a,42%,69%,8,3 LETTERS · STARTS WITH C
 12,What mammal is this?,1,Horse,easy_12_horse.jpg,horse,#0b0b2a,72%,13%,7,5 LETTERS · STARTS WITH H
 13,What mammal is this?,1,Pig,easy_13_pig.jpg,pig,#0b0b2a,55%,57%,9,3 LETTERS · STARTS WITH P
-14,What mammal is this?,1,Rabbit,easy_14_rabbit.jpg,rabbit,#0b0b2a,47%,20%,8,6 LETTERS · STARTS WITH R
+14,What mammal is this?,1,Rabbit,easy_14_rabbit.jpg,rabbit,#0b0b2a,63%,30%,8,6 LETTERS · STARTS WITH R
 15,What mammal is this?,1,Kangaroo,easy_15_kangaroo.jpg,kangaroo,#0b0b2a,66%,38%,8,8 LETTERS · STARTS WITH K
 16,What fish is this?,1,Dolphin,easy_16_dolphin.jpg,dolphin,#0b0b2a,10%,50%,7,7 LETTERS · STARTS WITH D
-17,What mammal is this?,1,Polar Bear,easy_17_polar-bear.jpg,polar-bear,#0b0b2a,66%,55%,7,2 WORDS · 9 LETTERS · STARTS WITH P
+17,What mammal is this?,1,Polar Bear,easy_17_polar-bear.jpg,polar-bear,#0b0b2a,49%,18%,7,2 WORDS · 9 LETTERS · STARTS WITH P
 18,What bird is this?,1,Flamingo,easy_18_flamingo.jpg,flamingo,#0b0b2a,30%,40%,9,8 LETTERS · STARTS WITH F
-19,What bird is this?,1,Owl,easy_19_owl.jpg,owl,#0b0b2a,53%,42%,7,3 LETTERS · STARTS WITH O
-20,What bird is this?,1,Bald Eagle,easy_20_bald-eagle.jpg,bald-eagle,#0b0b2a,33%,24%,6,2 WORDS · 9 LETTERS · STARTS WITH B
+19,What bird is this?,1,Owl,easy_19_owl.jpg,owl,#0b0b2a,29%,62%,7,3 LETTERS · STARTS WITH O
+20,What bird is this?,1,Bald Eagle,easy_20_bald-eagle.jpg,bald-eagle,#0b0b2a,55%,32%,6,2 WORDS · 9 LETTERS · STARTS WITH B
 21,What mammal is this?,1,Koala,medium_01_koala.jpg,koala,#0b0b2a,22%,50%,6,5 LETTERS · STARTS WITH K
 22,What mammal is this?,1,Hippopotamus,medium_02_hippopotamus.jpg,hippopotamus,#0b0b2a,70%,50%,7,12 LETTERS · STARTS WITH H
 23,What mammal is this?,1,Rhinoceros,medium_03_rhinoceros.jpg,rhinoceros,#0b0b2a,19%,53%,7,10 LETTERS · STARTS WITH R
