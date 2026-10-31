@@ -254,6 +254,16 @@ function LevelCard({local, duration, questions, level}) {
   );
 }
 
+function LensMark({size}) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" style={{display: 'block', flex: 'none', filter: 'drop-shadow(0 0 6px rgba(255,193,58,.55))'}}>
+      <line x1="66" y1="66" x2="91" y2="91" stroke={COLORS.amber2} strokeWidth="13" strokeLinecap="round" />
+      <circle cx="41" cy="41" r="31" fill="rgba(255,255,255,.10)" stroke={COLORS.amber} strokeWidth="10" />
+      <line x1="27" y1="41" x2="55" y2="41" stroke="#fff" strokeWidth="9" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function TopBar({index, total, local, level}) {
   const fade = gsapTween(local, 0, 0.5, power3Out);
   return (
@@ -299,9 +309,15 @@ function TopBar({index, total, local, level}) {
           letterSpacing: '0.26em',
           textTransform: 'uppercase',
           whiteSpace: 'nowrap',
+          display: 'flex',
+          alignItems: 'center',
+          gap: cq(1.4),
         }}
       >
-        Zoom <i style={{fontStyle: 'normal', color: COLORS.amber}}>Out</i>
+        <LensMark size={cq(4.8)} />
+        <span>
+          Zoom <i style={{fontStyle: 'normal', color: COLORS.amber}}>Out</i>
+        </span>
       </div>
       <div />
     </div>
@@ -915,12 +931,18 @@ function Wordmark({local, settings}) {
             letterSpacing: '0.02em',
             color: '#fff',
             whiteSpace: 'nowrap',
+            display: 'flex',
+            alignItems: 'center',
+            gap: cq(3),
             textShadow: `0 ${cq(0.8)}px 0 rgba(20,8,90,.9), 0 0 ${cq(5)}px rgba(255,193,58,.4)`,
             opacity: inP,
             transform: `translateY(${y}px) scale(${lerp(0.6, 1, inP) * s})`,
           }}
         >
-          {String(settings.brandLeft).toUpperCase()} <span style={{color: COLORS.amber}}>{String(settings.brandRight).toUpperCase()}</span>
+          <LensMark size={cq(22)} />
+          <span>
+            {String(settings.brandLeft).toUpperCase()} <span style={{color: COLORS.amber}}>{String(settings.brandRight).toUpperCase()}</span>
+          </span>
         </div>
       </div>
     </div>
@@ -1147,6 +1169,22 @@ function Outro({local, duration, settings, total}) {
           }}
         >
           {settings.outroSub}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: cq(2),
+            marginTop: cq(1.5),
+            opacity: sub,
+            font: `400 ${cq(7)}px/1 ${FONTS.display}`,
+            letterSpacing: '0.02em',
+          }}
+        >
+          <LensMark size={cq(7.5)} />
+          <span>
+            {String(settings.brandLeft).toUpperCase()} <span style={{color: COLORS.amber}}>{String(settings.brandRight).toUpperCase()}</span>
+          </span>
         </div>
       </div>
       <IrisRing local={local} />
