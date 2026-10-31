@@ -1,6 +1,6 @@
 # Zoom Out Quiz
 
-Remotion port of the Zoom Out Quiz HTML. A close-up drawing slowly zooms out over 12 seconds — name it before the full picture appears. Hint at 40%. Landscape **1920×1080**.
+Remotion port of the Zoom Out Quiz HTML. A close-up photo slowly zooms out over 8 seconds — name it before the full picture appears. Hint at 40%. Landscape **1920×1080**.
 
 Motion uses **GSAP Pattern 1**: GSAP easing is implemented as pure functions (`backOut`, `expoOut`, `elasticOut`, `power3Out`). Remotion owns every frame. There are **no GSAP timelines** and no ticker.
 
@@ -22,7 +22,7 @@ zoom-out/
 ├── public/
 │   ├── fonts/             # Anton, JetBrains Mono
 │   ├── sounds/
-│   └── images/            # SVG drawings (or fetched photos)
+│   └── images/            # 50 animal photos (1920×1080) + logo.svg
 ├── scripts/
 │   ├── csv-to-json.js
 │   ├── fetch-images.js    # z-ai image-search, skips shutterstock.com
@@ -87,7 +87,7 @@ The composition plays `background.wav` under `sfx.wav`. Re-run both after changi
 
 ## Photos (optional)
 
-The HTML drawings ship in `public/images/*.svg` so a render matches the original without a network.
+The 50 animal photos ship in `public/images/` (1920×1080).
 
 To swap in real photos:
 
@@ -122,6 +122,6 @@ npx remotion still ZoomOut out/preview.jpg --frame=200
 
 ## Notes
 
-- Drawings stand in for photos; `fx` / `fy` is the zoom origin, `z0` is start magnification (12×).
+- `fx` / `fy` is the zoom origin, `z0` is start magnification (12×).
 - Hint fires at `hintAt` (0.4 = 40% through the zoom).
 - `.gitignore` ignores `node_modules`, `out`, `src/rounds.json`, `scripts/.image-progress.json`.
