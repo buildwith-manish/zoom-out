@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Zoom Out Quiz — continuous background music.
+Zoom Out — continuous background music.
 
 One groove runs under the WHOLE video (it does not restart or rebuild for each round).
 A seamless 16-bar loop is rendered in four mixes (base / +melody / full / breather) and

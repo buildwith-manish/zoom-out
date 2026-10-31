@@ -272,6 +272,7 @@ function TopBar({index, total, local, level}) {
         pointerEvents: 'none',
       }}
     >
+      <div style={{justifySelf: 'start', display: 'flex', alignItems: 'center', gap: cq(1.6)}}>
       <div
         style={{
           justifySelf: 'start',
@@ -289,18 +290,20 @@ function TopBar({index, total, local, level}) {
         <b style={{font: `400 ${cq(5.2)}px/1 ${FONTS.display}`}}>{index + 1}</b>
         <span style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, opacity: 0.8}}>/{total}</span>
       </div>
+        <LevelBadge level={level} />
+      </div>
       <div
         style={{
           gridColumn: 2,
-          font: `700 ${cq(2.5)}px/1 ${FONTS.mono}`,
-          letterSpacing: '0.3em',
+          font: `700 ${cq(3.9)}px/1 ${FONTS.mono}`,
+          letterSpacing: '0.26em',
           textTransform: 'uppercase',
           whiteSpace: 'nowrap',
         }}
       >
         Zoom <i style={{fontStyle: 'normal', color: COLORS.amber}}>Out</i>
       </div>
-      <LevelBadge level={level} />
+      <div />
     </div>
   );
 }

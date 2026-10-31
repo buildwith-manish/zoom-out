@@ -1,6 +1,6 @@
-# Zoom Out Quiz
+# Zoom Out
 
-Remotion port of the Zoom Out Quiz HTML. A close-up photo slowly zooms out over 8 seconds — name it before the full picture appears. Hint at 40%. Landscape **1920×1080**.
+Remotion video format "Zoom Out" by Quiz Matrix. A close-up photo slowly zooms out over 8 seconds — name it before the full picture appears. Hint at 40%. Landscape **1920×1080**.
 
 Motion uses **GSAP Pattern 1**: GSAP easing is implemented as pure functions (`backOut`, `expoOut`, `elasticOut`, `power3Out`). Remotion owns every frame. There are **no GSAP timelines** and no ticker.
 
@@ -76,7 +76,7 @@ Opens Remotion Studio. Composition id: `ZoomOut`.
 
 ## Sound
 
-Background bed is the playful marimba/bass track from `scripts/zoomout_music.py`. Quiz cues (swish, shutter, zoom riser, ticks, hint sparkle, reveal hit, chime) are the HTML Web Audio graph, rendered offline.
+Background bed is the playful marimba/bass track from `scripts/zoomout_music.py`. Sound cues (swish, shutter, zoom riser, ticks, hint sparkle, reveal hit, chime) are the HTML Web Audio graph, rendered offline.
 
 ```bash
 npm run music          # public/sounds/background.wav  (needs numpy + scipy)
