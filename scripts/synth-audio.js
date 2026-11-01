@@ -73,7 +73,8 @@ function buildEvents(scenes) {
     }
     if (s.type === 'r') EV.push([s.start + 0.05, 'expand'], [s.start + 0.1, 'hit'], [s.start + 0.45, 'sparkle']);
     if (s.type === 'level') EV.push([s.start + 0.12, 'words'], [s.start + 0.4, 'hit'], [s.start + 0.8, 'sparkle']);
-    if (s.type === 'sting') EV.push([s.start + 0.15, 'chime']);
+    if (s.type === 'intro') EV.push([s.start + 0.05, 'jingle']);
+    if (s.type === 'sting') EV.push([s.start + 0.1, 'jingleEnd']);
   });
   return EV;
 }
@@ -342,6 +343,28 @@ const SFX = {
   sparkle(mix, n) {
     [1320, 1760, 2200, 2640].forEach((f, k) => mix.addTone(f, n + k * 0.07, 0.4, 0.07, 'sine'));
   },
+  // Signature jingle (start): rising G-C-E-G, then a bright held C6. Same notes every video.
+  jingle(mix, n) {
+    mix.addNoise(n, 0.5, 0.1, 400, 6000, 0.9);
+    [[392, 0], [523, 0.12], [659, 0.24], [784, 0.36]].forEach((f) => {
+      mix.addTone(f[0], n + f[1], 0.5, 0.16, 'sine');
+      mix.addTone(f[0] * 2, n + f[1], 0.25, 0.05, 'triangle');
+    });
+    mix.addTone(1047, n + 0.5, 1.5, 0.17, 'sine');
+    mix.addTone(2093, n + 0.52, 1.0, 0.05, 'sine');
+    mix.addTone(262, n + 0.5, 1.5, 0.1, 'sine');
+  },
+  // Signature jingle (end): same melody falling back home, finishing on a full C major chord.
+  jingleEnd(mix, n) {
+    [[1047, 0], [784, 0.14], [659, 0.28], [523, 0.42]].forEach((f) => {
+      mix.addTone(f[0], n + f[1], 0.5, 0.15, 'sine');
+      mix.addTone(f[0] * 2, n + f[1], 0.25, 0.05, 'triangle');
+    });
+    [523, 659, 784, 1047].forEach((f) => mix.addTone(f, n + 0.6, 1.9, 0.12, 'sine'));
+    mix.addTone(262, n + 0.6, 1.9, 0.1, 'sine');
+    mix.addTone(2093, n + 0.62, 1.2, 0.04, 'sine');
+    mix.addNoise(n + 0.6, 0.5, 0.08, 800, 5000, 1);
+  },
   chime(mix, n) {
     [
       [660, 0],
@@ -368,6 +391,8 @@ const SFX_LEN = {
   expand: 0.7,
   sparkle: 0.75,
   chime: 1.3,
+  jingle: 2.2,
+  jingleEnd: 2.7,
 };
 
 function musicTargets(t, scenes) {
