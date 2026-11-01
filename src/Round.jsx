@@ -830,7 +830,7 @@ function Watermark({t, settings}) {
           alignItems: 'center',
           gap: cq(1.6),
           padding: `${cq(1)}px ${cq(2.4)}px ${cq(1)}px ${cq(1.4)}px`,
-          borderRadius: cq(4),
+          borderRadius: cq(3),
           background: 'rgba(14,8,60,.42)',
           border: `${cq(0.2)}px solid rgba(255,255,255,.4)`,
           backdropFilter: 'blur(3px)',
@@ -848,21 +848,16 @@ function Watermark({t, settings}) {
         <Img
           src={staticFile('images/logo.svg')}
           style={{
-            maxHeight: cq(5.4),
+            maxHeight: cq(6.4),
             maxWidth: cq(18),
             objectFit: 'contain',
             display: 'block',
             filter: `drop-shadow(0 0 ${lerp(cq(0.6), cq(1.7), breathe)}px rgba(255,200,60,${lerp(0.5, 1, breathe)}))`,
           }}
         />
-        <span>
+        <span style={{display: 'flex', flexDirection: 'column', lineHeight: 1.15}}>
           <b style={{fontWeight: 700, color: '#fff'}}>{first}</b>
-          {last && first !== last ? (
-            <>
-              {' '}
-              <i style={{fontStyle: 'normal', color: COLORS.amber}}>{last}</i>
-            </>
-          ) : null}
+          {last && first !== last ? <i style={{fontStyle: 'normal', color: COLORS.amber}}>{last}</i> : null}
         </span>
       </div>
     </div>
