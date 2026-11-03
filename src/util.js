@@ -44,23 +44,46 @@ export function focusFrac(v, fallback = 0.5) {
 }
 
 /**
- * Zoom camera. The focus point (fx, fy) is held in the middle of the frame while the
- * picture is zoomed in, and the camera is clamped so the frame never leaves the photo
- * (no empty edges). Near an edge the focus drifts toward it only as far as it must,
- * then eases to dead-centre as the scale reaches 1.
- * Returns the CSS transform (origin 0 0) and where the focus point sits on screen.
+ * Where a source image of aspect `ar` (w/h) sits inside the 16:9 frame under
+ * object-fit: cover. X0..X1 / Y0..Y1 are the photo's extents in frame-normalised
+ * [0,1] coords (they exceed [0,1] on the axis that gets cropped). For a 16:9 photo
+ * this is exactly {0,1,0,1}.
  */
-export function zoomCamera(scale, fx, fy) {
+function coverExtents(ar, frameAr = 16 / 9) {
+  if (ar >= frameAr) {
+    const w = ar / frameAr; // photo wider than frame -> cropped left/right
+    return {X0: 0.5 - w / 2, X1: 0.5 + w / 2, Y0: 0, Y1: 1};
+  }
+  const h = frameAr / ar; // photo taller than frame -> cropped top/bottom
+  return {X0: 0, X1: 1, Y0: 0.5 - h / 2, Y1: 0.5 + h / 2};
+}
+
+/**
+ * Zoom camera, image-aware. The focus point (fx, fy) is given in IMAGE space (a
+ * fraction across the source photo). It is mapped through the object-fit:cover
+ * geometry of the photo's real aspect ratio `ar` (w/h, default 16/9) into the 16:9
+ * frame, then held at the centre of the frame while zoomed in. The camera is clamped
+ * so the frame never leaves the photo (no empty edges) using the photo's true cover
+ * extents, so off-centre subjects stay centred and edge subjects drift only as far as
+ * they must, easing to dead-centre as the scale reaches 1. Returns the CSS transform
+ * (origin 0 0) and the on-screen position of the focus point (for the lens vignette).
+ *
+ * For 16:9 photos this is identical to the old fixed-16:9 camera; `ar` makes it match
+ * any image exactly.
+ */
+export function zoomCamera(scale, fx, fy, ar = 16 / 9, frameAr = 16 / 9) {
   const s = Math.max(1, scale);
-  const half = 0.5 / s;
-  const cx = clamp(fx, half, 1 - half);
-  const cy = clamp(fy, half, 1 - half);
-  const tx = 0.5 - s * cx;
-  const ty = 0.5 - s * cy;
+  const {X0, X1, Y0, Y1} = coverExtents(ar, frameAr);
+  // focus point in frame space
+  const Fx = X0 + fx * (X1 - X0);
+  const Fy = Y0 + fy * (Y1 - Y0);
+  // keep the frame inside the (scaled) photo on both axes: no empty edges
+  const tx = clamp(0.5 - s * Fx, 1 - s * X1, -s * X0);
+  const ty = clamp(0.5 - s * Fy, 1 - s * Y1, -s * Y0);
   return {
     transform: `translate(${tx * 100}%, ${ty * 100}%) scale(${s})`,
-    focusX: tx + s * fx,
-    focusY: ty + s * fy,
+    focusX: tx + s * Fx,
+    focusY: ty + s * Fy,
   };
 }
 

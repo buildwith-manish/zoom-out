@@ -74,6 +74,10 @@ const questions = rows.slice(1).map((cols) => {
     fx: o.fx,
     fy: o.fy,
     z0: Number(o.z0) || 12,
+    // Image aspect ratio (w/h). Drives the zoom camera so the focus point is mapped
+    // from image space into the 16:9 frame via the object-fit:cover geometry. Defaults
+    // to 16/9 when not set. All current photos are 1920x1080 (1.778).
+    ar: Number(o.ar) || 16 / 9,
     level: (o.level || '').toLowerCase(),
     hint,
   };

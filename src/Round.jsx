@@ -342,7 +342,7 @@ function PhotoCard({
   const zoomProg = zoomDur > 0 ? clamp01((local - zoomDelay) / zoomDur) : 1;
   const scale = forceScale != null ? forceScale : local >= 0 ? zoomScale(Math.max(0, zoomProg), item.z0 || 12) : item.z0 || 12;
   const blur = forceScale != null ? 0 : zoomBlur(Math.max(0, zoomProg));
-  const cam = zoomCamera(scale, focusFrac(item.fx), focusFrac(item.fy));
+  const cam = zoomCamera(scale, focusFrac(item.fx), focusFrac(item.fy), Number(item.ar) || 16 / 9);
   const lensFade = showLens ? 1 - gsapTween(local, zoomDelay, zoomDur || 0.01, (t) => t * t) : 0;
 
   let punchScale = 1;
