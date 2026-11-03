@@ -55,11 +55,14 @@ export function buildSoundEvents(settings, questions) {
 }
 
 /**
- * Playful background bed (scripts/zoomout_music.py) + HTML SFX mix.
+ * Playful background bed (scripts/zoomout_music.py) + HTML SFX mix, plus the
+ * synced voiceover (public/sounds/voiceover.wav). The voiceover plays from t=0,
+ * full length, on its own track so it can be mixed independently of the music/SFX.
  */
 export function QuizAudio() {
   return (
     <>
+      <Audio src={staticFile('sounds/voiceover.wav')} />
       <Audio src={staticFile('sounds/background.mp3')} />
       <Audio src={staticFile('sounds/sfx.mp3')} />
     </>
@@ -72,6 +75,7 @@ export function QuizAudioLayered({settings, questions}) {
   const events = buildSoundEvents(settings, questions);
   return (
     <>
+      <Audio src={staticFile('sounds/voiceover.wav')} />
       <Audio src={staticFile('sounds/background.mp3')} />
       {events.map((e, i) => {
         const from = Math.max(0, Math.round(e.t * fps));
