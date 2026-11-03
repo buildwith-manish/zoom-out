@@ -1,7 +1,7 @@
 {
-  "fps": 30,
-  "width": 1920,
-  "height": 1080,
+  "fps": 60,
+  "width": 2560,
+  "height": 1440,
   "series": "animals",
   "watermark": "QUIZ MATRIX",
   "watermarkPosition": "tr",
@@ -21,8 +21,8 @@
   "introArt": "tiger",
   "introImage": "easy_05_tiger.jpg",
   "introPic": "#0b0b2a",
-  "introFx": "62%",
-  "introFy": "22%",
+  "introFx": "65%",
+  "introFy": "45%",
   "introZ0": 8,
   "introHeadline": [
     "Only",
@@ -48,6 +48,6 @@
   "correctEyebrow": "Correct answer",
   "levelCards": true,
   "levelDuration": 2.5,
-  "introSub": "50 ANIMALS · 3 LEVELS · ZOOM OUT AND NAME THEM",
+  "introSub": "50 ANIMALS \u00b7 3 LEVELS \u00b7 ZOOM OUT AND NAME THEM",
   "introHookDelay": 1.15
 }

@@ -1,5 +1,5 @@
-export const W = 1920;
-export const H = 1080;
+export const W = 2560;
+export const H = 1440;
 export const CQ = Math.min(W, H) / 100;
 
 export const cq = (n) => n * CQ;

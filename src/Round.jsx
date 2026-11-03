@@ -11,7 +11,7 @@ import {
 import {backOut, expoOut, elasticOut, power3Out, gsapTween, clamp01} from './gsap-helpers';
 import {COLORS, FONTS, LEVELS, cq, seriesColors} from './style';
 import {buildScenes, sceneAt, levelInfo} from './timing';
-import {clamp, lerp, zoomScale, zoomBlur, easeInOut, rasterImage} from './util';
+import {clamp, lerp, zoomScale, zoomBlur, zoomCamera, focusFrac, easeInOut, rasterImage} from './util';
 import {QuizAudio} from './audio';
 
 function Fonts() {
@@ -342,6 +342,7 @@ function PhotoCard({
   const zoomProg = zoomDur > 0 ? clamp01((local - zoomDelay) / zoomDur) : 1;
   const scale = forceScale != null ? forceScale : local >= 0 ? zoomScale(Math.max(0, zoomProg), item.z0 || 12) : item.z0 || 12;
   const blur = forceScale != null ? 0 : zoomBlur(Math.max(0, zoomProg));
+  const cam = zoomCamera(scale, focusFrac(item.fx), focusFrac(item.fy), Number(item.ar) || 16 / 9);
   const lensFade = showLens ? 1 - gsapTween(local, zoomDelay, zoomDur || 0.01, (t) => t * t) : 0;
 
   let punchScale = 1;
@@ -378,8 +379,8 @@ function PhotoCard({
         style={{
           position: 'absolute',
           inset: 0,
-          transformOrigin: `${item.fx || '50%'} ${item.fy || '50%'}`,
-          transform: `scale(${scale})`,
+          transformOrigin: '0 0',
+          transform: cam.transform,
           filter: blur > 0.05 ? `blur(${blur}px)` : 'none',
         }}
       >
@@ -393,7 +394,7 @@ function PhotoCard({
             zIndex: 2,
             pointerEvents: 'none',
             opacity: lensFade,
-            background: `radial-gradient(circle at ${item.fx || '50%'} ${item.fy || '50%'}, transparent 18%, rgba(6,4,44,.62) 100%)`,
+            background: `radial-gradient(circle at ${(cam.focusX * 100).toFixed(2)}% ${(cam.focusY * 100).toFixed(2)}%, transparent 18%, rgba(6,4,44,.62) 100%)`,
           }}
         />
       ) : null}
