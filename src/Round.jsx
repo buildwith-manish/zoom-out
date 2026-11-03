@@ -826,7 +826,6 @@ function Watermark({t, settings}) {
       <div
         style={{
           position: 'relative',
-          overflow: 'hidden',
           display: 'flex',
           alignItems: 'center',
           gap: cq(1.6),
@@ -841,22 +840,30 @@ function Watermark({t, settings}) {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(105deg, transparent 38%, rgba(255,255,255,.6) 50%, transparent 62%)',
-            transform: `translateX(${lerp(-130, 130, glintP)}%)`,
+            overflow: 'hidden',
+            borderRadius: cq(3),
             pointerEvents: 'none',
           }}
-        />
+        >
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(105deg, transparent 38%, rgba(255,255,255,.6) 50%, transparent 62%)',
+              transform: `translateX(${lerp(-130, 130, glintP)}%)`,
+            }}
+          />
+        </div>
         <Img
           src={staticFile('images/logo.svg')}
           style={{
-            maxHeight: cq(6.4),
-            maxWidth: cq(18),
-            objectFit: 'contain',
+            height: cq(6.4),
+            width: 'auto',
             display: 'block',
             filter: `drop-shadow(0 0 ${lerp(cq(0.6), cq(1.7), breathe)}px rgba(255,200,60,${lerp(0.5, 1, breathe)}))`,
           }}
         />
-        <span style={{display: 'flex', flexDirection: 'column', lineHeight: 1.15}}>
+        <span style={{display: 'flex', flexDirection: 'column', lineHeight: 1.15, whiteSpace: 'nowrap'}}>
           <b style={{fontWeight: 700, color: '#fff'}}>{first}</b>
           {last && first !== last ? <i style={{fontStyle: 'normal', color: COLORS.amber}}>{last}</i> : null}
         </span>
