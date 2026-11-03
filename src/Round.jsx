@@ -961,6 +961,7 @@ function Intro({local, duration, settings}) {
     fx: settings.introFx,
     fy: settings.introFy,
     z0: settings.introZ0,
+    ar: Number(settings.introAr) || 16 / 9,
   };
   return (
     <div

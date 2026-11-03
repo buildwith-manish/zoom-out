@@ -67,11 +67,13 @@ function coverExtents(ar, frameAr = 16 / 9) {
  * Zoom camera, image-aware. The focus point (fx, fy) is given in IMAGE space (a
  * fraction across the source photo). It is mapped through the object-fit:cover
  * geometry of the photo's real aspect ratio `ar` (w/h, default 16/9) into the 16:9
- * frame, then held at the centre of the frame while zoomed in. The camera is clamped
- * so the frame never leaves the photo (no empty edges) using the photo's true cover
- * extents, so off-centre subjects stay centred and edge subjects drift only as far as
- * they must, easing to dead-centre as the scale reaches 1. Returns the CSS transform
- * (origin 0 0) and the on-screen position of the focus point (for the lens vignette).
+ * frame, then held at the centre of the frame while zoomed in. The wrapper div is
+ * frame-sized (inset:0) with the image using object-fit:cover, so at scale s it covers
+ * [tx, tx+s] x [ty, ty+s] in frame-normalised coords. The camera is clamped to
+ * [1-s, 0] on both axes so the wrapper always fully covers the frame — no empty edges,
+ * no black lines — while still centring the subject as soon as s > 1 allows. Returns
+ * the CSS transform (origin 0 0) and the on-screen position of the focus point (for
+ * the lens vignette).
  *
  * For 16:9 photos this is identical to the old fixed-16:9 camera; `ar` makes it match
  * any image exactly.
@@ -79,12 +81,15 @@ function coverExtents(ar, frameAr = 16 / 9) {
 export function zoomCamera(scale, fx, fy, ar = 16 / 9, frameAr = 16 / 9) {
   const s = Math.max(1, scale);
   const {X0, X1, Y0, Y1} = coverExtents(ar, frameAr);
-  // focus point in frame space
+  // focus point in frame space (maps image-space fx/fy through the cover geometry)
   const Fx = X0 + fx * (X1 - X0);
   const Fy = Y0 + fy * (Y1 - Y0);
-  // keep the frame inside the (scaled) photo on both axes: no empty edges
-  const tx = clamp(0.5 - s * Fx, 1 - s * X1, -s * X0);
-  const ty = clamp(0.5 - s * Fy, 1 - s * Y1, -s * Y0);
+  // The wrapper div is frame-sized (inset:0) with object-fit:cover, so at scale s it
+  // covers [tx, tx+s] x [ty, ty+s]. Clamp to [1-s, 0] so it always fully covers the
+  // frame — no empty edges, no black lines. (Using the cover extents here would allow
+  // the wrapper to shift beyond [1-s, 0] and reveal the card background as a gap.)
+  const tx = clamp(0.5 - s * Fx, 1 - s, 0);
+  const ty = clamp(0.5 - s * Fy, 1 - s, 0);
   return {
     transform: `translate(${tx * 100}%, ${ty * 100}%) scale(${s})`,
     focusX: tx + s * Fx,
