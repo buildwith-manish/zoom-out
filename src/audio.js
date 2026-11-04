@@ -21,7 +21,6 @@ const FILE = {
 export function buildSoundEvents(settings, questions) {
   const {scenes} = buildScenes(settings, questions);
   const ZS = settings.zoomStart;
-  const ZD = settings.zoomDuration;
   const HINT_AT = settings.hintAt;
   const EV = [];
   scenes.forEach((s) => {
@@ -35,6 +34,7 @@ export function buildSoundEvents(settings, questions) {
       EV.push({t: s.start + 0.9, name: 'zoomIntro'});
     }
     if (s.type === 'q') {
+      const ZD = s.zd;
       EV.push({t: s.start + 0.12, name: 'words'});
       EV.push({t: s.start + 0.35, name: 'shutter'});
       EV.push({t: s.start + ZS, name: 'zoomOut'});

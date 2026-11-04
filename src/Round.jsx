@@ -486,9 +486,9 @@ function PhotoCard({
   );
 }
 
-function Timeline({local, settings, hint}) {
+function Timeline({local, settings, hint, zd}) {
   const ZS = settings.zoomStart;
-  const ZD = settings.zoomDuration;
+  const ZD = zd != null ? zd : settings.zoomDuration;
   const enter = gsapTween(local, 0.9, 0.5, power3Out);
   const prog = clamp01((local - ZS) / ZD);
   const pct = prog * 100;
@@ -1060,9 +1060,10 @@ function Intro({local, duration, settings}) {
   );
 }
 
-function Question({local, q, index, total, settings}) {
+function Question({local, q, index, total, settings, zd}) {
   const ir = iris(local, 'q', 14);
-  const full = local >= settings.zoomStart + settings.zoomDuration - 0.02;
+  const ZD = zd != null ? zd : settings.zoomDuration;
+  const full = local >= settings.zoomStart + ZD - 0.02;
   return (
     <div
       style={{
@@ -1085,13 +1086,13 @@ function Question({local, q, index, total, settings}) {
         item={q}
         local={local}
         zoomDelay={settings.zoomStart}
-        zoomDur={settings.zoomDuration}
+        zoomDur={ZD}
         cardDelay={0.35}
         flashDelay={0.35}
         showLens
         locked={full}
       />
-      <Timeline local={local} settings={settings} hint={q.hint} />
+      <Timeline local={local} settings={settings} hint={q.hint} zd={ZD} />
       <IrisRing local={local} />
     </div>
   );
@@ -1345,7 +1346,7 @@ export const Round = ({questions, settings}) => {
   let scene = null;
   if (s.type === 'intro') scene = <Intro local={local} duration={s.d} settings={settings} />;
   else if (s.type === 'level') scene = <LevelCard local={local} duration={s.d} questions={questions} level={s.level} />;
-  else if (s.type === 'q') scene = <Question local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} />;
+  else if (s.type === 'q') scene = <Question local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} zd={s.zd} />;
   else if (s.type === 'r') scene = <Reveal local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} duration={s.d} />;
   else if (s.type === 'outro') scene = <Outro local={local} duration={s.d} settings={settings} total={n} />;
   else scene = <Sting local={local} settings={settings} />;

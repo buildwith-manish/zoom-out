@@ -49,8 +49,19 @@
   "correctEyebrow": "Correct answer",
   "levelCards": true,
   "levelDuration": 2.5,
-  "levelDurationOverrides": {"hard": 3.0},
-  "revealDurationOverrides": {"35": 2.5},
-  "introSub": "50 ANIMALS \u00b7 3 LEVELS \u00b7 ZOOM OUT AND NAME THEM",
-  "introHookDelay": 1.15
+  "levelDurationOverrides": {
+    "hard": 3.0
+  },
+  "revealDurationOverrides": {
+    "35": 2.5
+  },
+  "introSub": "50 ANIMALS · 3 LEVELS · ZOOM OUT AND NAME THEM",
+  "introHookDelay": 1.15,
+  "retention": {
+    "zoomByLevel": {
+      "easy": 6,
+      "medium": 7,
+      "hard": 8
+    }
+  }
 }

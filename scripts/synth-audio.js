@@ -26,29 +26,10 @@ function clamp(v, a, b) {
   return v < a ? a : v > b ? b : v;
 }
 
-function qDur() {
-  return settings.zoomStart + settings.zoomDuration + settings.hold;
-}
+const plan = require(path.join(ROOT, 'src', 'plan.cjs'));
 
 function buildScenes() {
-  const scenes = [{type: 'intro', d: settings.introDuration}];
-  let prevLevel = null;
-  questions.forEach((q) => {
-    if (settings.levelCards !== false && settings.levelDuration > 0 && q.level && q.level !== prevLevel) {
-      scenes.push({type: 'level', d: settings.levelDuration});
-      prevLevel = q.level;
-    }
-    scenes.push({type: 'q', d: qDur()});
-    scenes.push({type: 'r', d: settings.revealDuration});
-  });
-  scenes.push({type: 'outro', d: settings.outroDuration});
-  scenes.push({type: 'sting', d: settings.stingDuration});
-  let acc = 0;
-  scenes.forEach((s) => {
-    s.start = acc;
-    acc += s.d;
-  });
-  return {scenes, total: acc};
+  return plan.buildScenes(settings, questions);
 }
 
 function sceneAt(t, scenes) {
@@ -67,9 +48,10 @@ function buildEvents(scenes) {
       EV.push([s.start + (settings.introHookDelay ?? 0.12), 'words'], [s.start + (settings.introZoomDelay ?? 0.9), 'shutter'], [s.start + (settings.introZoomDelay ?? 0.9), 'zoomIntro']);
     }
     if (s.type === 'q') {
-      EV.push([s.start + 0.12, 'words'], [s.start + 0.35, 'shutter'], [s.start + ZS, 'zoomOut']);
-      for (let k = 1; k < ZD; k++) EV.push([s.start + ZS + k, k >= ZD - 3 ? 'tickHi' : 'tick']);
-      EV.push([s.start + ZS + ZD * HINT_AT, 'sparkle'], [s.start + ZS + ZD, 'focus']);
+      const zd = s.zd;
+      EV.push([s.start + 0.12, 'words'], [s.start + 0.35, 'shutter'], [s.start + ZS, 'zoomOut', zd]);
+      for (let k = 1; k < zd; k++) EV.push([s.start + ZS + k, k >= zd - 3 ? 'tickHi' : 'tick']);
+      EV.push([s.start + ZS + zd * HINT_AT, 'sparkle'], [s.start + ZS + zd, 'focus']);
     }
     if (s.type === 'r') EV.push([s.start + 0.05, 'expand'], [s.start + 0.1, 'hit'], [s.start + 0.45, 'sparkle']);
     if (s.type === 'level') EV.push([s.start + 0.12, 'words'], [s.start + 0.4, 'hit'], [s.start + 0.8, 'sparkle']);
@@ -307,8 +289,8 @@ const SFX = {
     mix.addNoise(n + 0.06, 0.07, 0.25, 2500, 900, 2);
     mix.addTone(110, n + 0.06, 0.12, 0.2, 'sine', 60);
   },
-  zoomOut(mix, n) {
-    addRiser(mix, n, ZD);
+  zoomOut(mix, n, zd) {
+    addRiser(mix, n, zd || ZD);
   },
   zoomIntro(mix, n) {
     mix.addNoise(n, 4.2, 0.2, 3200, 260, 1.1);
@@ -406,12 +388,13 @@ function musicTargets(t, scenes) {
     g = 0.07;
     cut = 650;
   } else if (s.type === 'q') {
-    const p = Math.max(0, Math.min(1, (l - ZS) / ZD));
+    const ZDs = s.zd || ZD;
+    const p = Math.max(0, Math.min(1, (l - ZS) / ZDs));
     g = 0.08 + 0.06 * p;
     cut = 420 + p * p * 2600;
     rate = 1.4 + p * 3.4;
     tv = 0.06 * p;
-    if (l >= ZS + ZD - 0.1) {
+    if (l >= ZS + ZDs - 0.1) {
       g = 0.012;
       cut = 300;
       tv = 0;
@@ -620,7 +603,7 @@ function main() {
 
   console.log('sfx mix…');
   const mix = new Mix(total + 0.3);
-  for (const [t, name] of EV) SFX[name](mix, t);
+  for (const [t, name, arg] of EV) SFX[name](mix, t, arg);
   const sfx = scale(trimMix(mix, total + 0.05), MASTER);
   writeWav(path.join(OUT, 'sfx.wav'), sfx);
 
