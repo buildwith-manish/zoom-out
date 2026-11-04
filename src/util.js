@@ -13,21 +13,54 @@ export function mix(a, b, t) {
   return lerp(a, b, t);
 }
 
-// Zoom curve. Magnification falls exponentially, scale = z0^(1 - g(p)), which is a
-// constant rate of change in log-scale: the eye reads that as a perfectly even zoom
-// speed. g(p) is a single smooth easeInOutSine curve with no piecewise boundary,
-// so there is no acceleration spike anywhere (the old piecewise linear+soft-landing
-// had a 3.8x acceleration jump at the 85% boundary that read as a visible jerk).
-// easeInOutSine: smooth start, smooth end, peak speed in the middle — feels like a
-// single fluid motion. Always ends at exactly 1x.
-function zoomProgressCurve(progress) {
+// Zoom curve — STEPPED reveal. The zoom-out happens in stages with holds (pauses)
+// between them, building suspense, then completes in the last 3 seconds:
+//
+//   Phase 1: quick zoom-out to a "near" position        (g: 0 → 0.35)
+//   Phase 2: HOLD — pause at the near position          (g: 0.35)
+//   Phase 3: little zoom — small nudge closer to reveal (g: 0.35 → 0.50)
+//   Phase 4: HOLD — pause again                         (g: 0.50)
+//   Phase 5: complete zoom-out to 1x in the last 3s     (g: 0.50 → 1.0)
+//
+// g(p) maps progress [0..1] to log-space position [0..1]; scale = z0^(1-g).
+// Each zoom phase uses easeInOutSine so velocity is 0 at every hold boundary —
+// no jerk at the transitions (the picture settles into each hold smoothly).
+// The last 3 seconds are reserved for the final reveal; phases 1-4 share the
+// first (zoomDur - 3) seconds, split into 4 equal quarters.
+
+const easeSine = (x) => -(Math.cos(Math.PI * clamp01(x)) - 1) / 2;
+
+function zoomProgressCurve(progress, zoomDur = 8) {
   const p = clamp01(progress);
-  return -(Math.cos(Math.PI * p) - 1) / 2; // easeInOutSine, 0->1
+  const t = p * zoomDur;               // time in seconds
+  const finalDur = 3;                  // last 3s = final zoom-out
+  const finalStart = Math.max(1, zoomDur - finalDur); // when the final phase begins
+  const firstDur = finalStart;         // phases 1-4 share this
+  const q = firstDur / 4;              // quarter duration
+
+  if (t >= finalStart) {
+    // Phase 5: complete zoom-out, g 0.50 → 1.0
+    return 0.50 + 0.50 * easeSine((t - finalStart) / finalDur);
+  }
+  if (t < q) {
+    // Phase 1: quick zoom-out, g 0 → 0.35
+    return 0.35 * easeSine(t / q);
+  }
+  if (t < 2 * q) {
+    // Phase 2: HOLD at 0.35
+    return 0.35;
+  }
+  if (t < 3 * q) {
+    // Phase 3: little zoom, g 0.35 → 0.50
+    return 0.35 + 0.15 * easeSine((t - 2 * q) / q);
+  }
+  // Phase 4: HOLD at 0.50
+  return 0.50;
 }
 
-/** Magnification at zoom progress 0..1: z0 -> 1, exponential, fully smooth. */
-export function zoomScale(progress, z0 = 12) {
-  return Math.pow(Math.max(1, z0), 1 - zoomProgressCurve(progress));
+/** Magnification at zoom progress 0..1: z0 -> 1, exponential, stepped with holds. */
+export function zoomScale(progress, z0 = 12, zoomDur = 8) {
+  return Math.pow(Math.max(1, z0), 1 - zoomProgressCurve(progress, zoomDur));
 }
 
 // Gaussian "defocus" (the difficulty mechanic, separate from motion blur). Smooth

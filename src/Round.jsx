@@ -386,7 +386,7 @@ function MotionBlurZoomLayer({item, local, zoomDelay, zoomDur, z0, blur, fps, sa
     const off = n === 1 ? 0 : ((i + 0.5) / n - 0.5) * shutterFrames;
     const l = local + off / fps;
     const zp = zoomDur > 0 ? clamp01((l - zoomDelay) / zoomDur) : 1;
-    const sc = l >= 0 ? zoomScale(zp, z0) : z0;
+    const sc = l >= 0 ? zoomScale(zp, z0, zoomDur) : z0;
     const c = zoomCamera(sc, focusFrac(item.fx), focusFrac(item.fy), ar);
     layers.push(
       <div
@@ -425,7 +425,7 @@ function PhotoCard({
   const enter = gsapTween(local, cardDelay, 0.5, backOut);
   const flashT = gsapTween(local, flashDelay, 0.35, power3Out);
   const zoomProg = zoomDur > 0 ? clamp01((local - zoomDelay) / zoomDur) : 1;
-  const scale = forceScale != null ? forceScale : local >= 0 ? zoomScale(Math.max(0, zoomProg), item.z0 || 12) : item.z0 || 12;
+  const scale = forceScale != null ? forceScale : local >= 0 ? zoomScale(Math.max(0, zoomProg), item.z0 || 12, zoomDur) : item.z0 || 12;
   const cam = zoomCamera(scale, focusFrac(item.fx), focusFrac(item.fy), Number(item.ar) || 16 / 9);
   const z0 = item.z0 || 12;
   const blur = forceScale != null ? 0 : zoomBlur(zoomProg);
