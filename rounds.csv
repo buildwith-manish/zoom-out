@@ -14,7 +14,7 @@ id,question,highlight,answer,image,art,pic,fx,fy,z0,hint,level,ar
 13,What mammal is this?,1,Pig,easy_13_pig.jpg,pig,#0b0b2a,49%,49%,9,3 LETTERS · STARTS WITH P,easy,1.75
 14,What mammal is this?,1,Rabbit,easy_14_rabbit.jpg,rabbit,#0b0b2a,50%,55%,8,6 LETTERS · STARTS WITH R,easy,1.75
 15,What mammal is this?,1,Kangaroo,easy_15_kangaroo.jpg,kangaroo,#0b0b2a,37%,44%,8,8 LETTERS · STARTS WITH K,easy,1.75
-16,What fish is this?,1,Dolphin,easy_16_dolphin.jpg,dolphin,#0b0b2a,86%,52%,7,7 LETTERS · STARTS WITH D,easy,1.75
+16,What mammal is this?,1,Dolphin,easy_16_dolphin.jpg,dolphin,#0b0b2a,86%,52%,7,7 LETTERS · STARTS WITH D,easy,1.75
 17,What mammal is this?,1,Polar Bear,easy_17_polar-bear.jpg,polar-bear,#0b0b2a,22%,48%,7,2 WORDS · 9 LETTERS · STARTS WITH P,easy,1.75
 18,What bird is this?,1,Flamingo,easy_18_flamingo.jpg,flamingo,#0b0b2a,30%,28%,9,8 LETTERS · STARTS WITH F,easy,1.75
 19,What bird is this?,1,Owl,easy_19_owl.jpg,owl,#0b0b2a,50%,27%,7,3 LETTERS · STARTS WITH O,easy,1.75
