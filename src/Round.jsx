@@ -350,7 +350,7 @@ function TopBar({index, total, local, level}) {
 // widest shutter, i.e. blur covers a full frame of motion; the zoom is slow, so streaks
 // are subtle by design and strongest on the edges early in the move. Set enabled:false
 // to use the plain DOM zoom.
-const MOTION_BLUR = {enabled: true, samples: 8, shutterAngle: 360};
+const MOTION_BLUR = {enabled: true, samples: 5, shutterAngle: 360};
 
 /** Plain DOM zoom (no motion blur). Fallback when WebGL2 or a raster photo isn't available.
  * filter + transform stay on the SAME element on purpose: the defocus radius is
@@ -371,6 +371,43 @@ function ZoomLayer({item, cam, blur}) {
   );
 }
 
+/**
+ * DOM-based motion-blur zoom. Renders N sub-frame layers at 1/N opacity each with
+ * 'plus-lighter' blend mode, approximating temporal motion blur without WebGL.
+ * The sub-frame camera positions are computed the same way as the WebGL path
+ * (shutterAngle spread, centred on the current frame). Works in any headless Chrome.
+ */
+function MotionBlurZoomLayer({item, local, zoomDelay, zoomDur, z0, blur, fps, samples, shutterAngle}) {
+  const n = samples;
+  const shutterFrames = shutterAngle / 360;
+  const ar = Number(item.ar) || 16 / 9;
+  const layers = [];
+  for (let i = 0; i < n; i++) {
+    const off = n === 1 ? 0 : ((i + 0.5) / n - 0.5) * shutterFrames;
+    const l = local + off / fps;
+    const zp = zoomDur > 0 ? clamp01((l - zoomDelay) / zoomDur) : 1;
+    const sc = l >= 0 ? zoomScale(zp, z0) : z0;
+    const c = zoomCamera(sc, focusFrac(item.fx), focusFrac(item.fy), ar);
+    layers.push(
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          transformOrigin: '0 0',
+          transform: c.transform,
+          filter: blur > 0.05 ? `blur(${blur}px)` : 'none',
+          opacity: 1 / n,
+          mixBlendMode: 'plus-lighter',
+        }}
+      >
+        <Pic item={item} style={{width: '100%', height: '100%', objectFit: 'cover', display: 'block'}} />
+      </div>
+    );
+  }
+  return <>{layers}</>;
+}
+
 function PhotoCard({
   item,
   local,
@@ -385,7 +422,6 @@ function PhotoCard({
   children,
 }) {
   const {fps} = useVideoConfig();
-  const [glFailed, setGlFailed] = useState(false);
   const enter = gsapTween(local, cardDelay, 0.5, backOut);
   const flashT = gsapTween(local, flashDelay, 0.35, power3Out);
   const zoomProg = zoomDur > 0 ? clamp01((local - zoomDelay) / zoomDur) : 1;
@@ -394,30 +430,25 @@ function PhotoCard({
   const z0 = item.z0 || 12;
   const blur = forceScale != null ? 0 : zoomBlur(zoomProg);
   const file = item.image || `${item.art}.svg`;
-  const useGl = MOTION_BLUR.enabled && !glFailed && rasterImage(file);
   // Only spend extra samples while the picture is actually zooming.
   const zooming = forceScale == null && zoomDur > 0 && local >= zoomDelay - 0.05 && local <= zoomDelay + zoomDur + 0.05;
+  const mbSamples = zooming ? MOTION_BLUR.samples : 1;
   let layer;
-  if (useGl) {
-    const n = zooming ? MOTION_BLUR.samples : 1;
-    const shutterFrames = MOTION_BLUR.shutterAngle / 360;
-    const cams = [];
-    for (let i = 0; i < n; i++) {
-      // sub-frame times centred on the current frame, spread across the shutter
-      const off = n === 1 ? 0 : ((i + 0.5) / n - 0.5) * shutterFrames;
-      const l = local + off / fps;
-      const zp = zoomDur > 0 ? clamp01((l - zoomDelay) / zoomDur) : 1;
-      const sc = forceScale != null ? forceScale : l >= 0 ? zoomScale(zp, z0) : z0;
-      const c = zoomCamera(sc, focusFrac(item.fx), focusFrac(item.fy), Number(item.ar) || 16 / 9);
-      cams.push(c.s, c.tx, c.ty);
-    }
+  if (mbSamples > 1) {
+    // DOM-based motion blur: N sub-frame layers at 1/N opacity (plus-lighter blend).
+    // Works in any headless Chrome without WebGL2 (the WebGL ZoomCanvas path silently
+    // fails in render and produces no motion blur, making the zoom look steppy).
     layer = (
-      <ZoomCanvas
-        src={staticFile(`images/${file}`)}
-        cams={cams}
-        ext={coverExtents(Number(item.ar) || 16 / 9)}
-        sigma={blur * scale}
-        onFail={() => setGlFailed(true)}
+      <MotionBlurZoomLayer
+        item={item}
+        local={local}
+        zoomDelay={zoomDelay}
+        zoomDur={zoomDur}
+        z0={z0}
+        blur={blur}
+        fps={fps}
+        samples={MOTION_BLUR.samples}
+        shutterAngle={MOTION_BLUR.shutterAngle}
       />
     );
   } else {
