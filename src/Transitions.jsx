@@ -1,5 +1,5 @@
 import React from 'react';
-import {COLORS, cq} from './style';
+import {COLORS, cq, seriesColors} from './style';
 import {clamp01, expoOut} from './gsap-helpers';
 
 /**
@@ -20,6 +20,33 @@ const hash = (n) => {
 const OPEN = {wipe: 0.75, blinds: 0.7};
 const CLOSE = {wipe: 0.6, blinds: 0.55};
 const STRIPE = () => cq(9);
+
+/**
+ * Opaque curtain matching the Stage background, so the wipe covers the scene
+ * content (and the Stage background shows through seamlessly at the curtain
+ * boundary). Without this, using clipPath alone leaves the Stage background
+ * and watermark visible through the clipped area, causing a flash.
+ */
+function Curtain({side, x}) {
+  // x = percentage (0-100) of the curtain boundary from the left edge
+  // side='right' -> curtain covers [x%, 100%] (open wipe: right side hidden)
+  // side='left'  -> curtain covers [0%, x%]  (close wipe: left side hidden)
+  const series = seriesColors('animals');
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: side === 'right' ? `${x}%` : 0,
+        right: side === 'right' ? 0 : `${100 - x}%`,
+        background: `radial-gradient(120% 90% at 8% 0%, ${series.b1} 0%, ${series.b2} 48%, ${series.b3} 100%)`,
+        zIndex: 6,
+        pointerEvents: 'none',
+      }}
+    />
+  );
+}
 
 function Edge({x, side}) {
   const w = cq(1.1);
@@ -76,9 +103,17 @@ export function openFx(kind, local) {
   const dur = OPEN[kind] || 0.75;
   const p = expoOut(clamp01(local / dur));
   if (kind === 'wipe') {
+    // Opaque curtain covers the right portion [p*100%, 100%] not yet revealed.
+    // No clipPath — the curtain visually masks the scene content from above,
+    // and matches the Stage background so the boundary is seamless.
     return {
-      style: {clipPath: `inset(0 ${(1 - p) * 100}% 0 0)`},
-      node: p < 1 ? <Edge x={p * 100} side="right" /> : null,
+      style: {},
+      node: p < 1 ? (
+        <>
+          <Curtain side="right" x={p * 100} />
+          <Edge x={p * 100} side="right" />
+        </>
+      ) : null,
     };
   }
   const flash = local < 0.14 ? 0.6 * (1 - local / 0.14) : 0;
@@ -93,11 +128,17 @@ export function closeFx(kind, local, duration) {
   const dur = CLOSE[kind] || 0.6;
   const start = duration - dur;
   const raw = clamp01((local - start) / dur);
-  const p = raw * raw * raw;
+  const p = raw >= 0.92 ? 1 : raw * raw;
   if (kind === 'wipe') {
+    // Opaque curtain covers the left portion [0%, p*100%] being closed.
     return {
-      style: {clipPath: `inset(0 0 0 ${p * 100}%)`},
-      node: raw > 0 ? <Edge x={p * 100} side="left" /> : null,
+      style: {},
+      node: raw > 0 ? (
+        <>
+          <Curtain side="left" x={p * 100} />
+          <Edge x={p * 100} side="left" />
+        </>
+      ) : null,
     };
   }
   return {
