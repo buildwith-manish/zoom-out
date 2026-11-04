@@ -48,9 +48,9 @@
   ],
   "correctEyebrow": "Correct answer",
   "levelCards": true,
-  "levelDuration": 2.5,
+  "levelDuration": 3.5,
   "levelDurationOverrides": {
-    "hard": 3.0
+    "hard": 4.0
   },
   "revealDurationOverrides": {
     "35": 2.5
