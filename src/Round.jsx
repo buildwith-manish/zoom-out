@@ -43,10 +43,14 @@ function Pic({item, style}) {
   return <Img src={src} style={style} />;
 }
 
-function CornerBrackets() {
+function CornerBrackets({locked}) {
   const s = cq(0.55);
   const size = cq(5);
   const off = cq(2);
+  // When fully zoomed out (locked), pulse amber glow to signal "time's up"
+  const glowAnim = locked
+    ? `0 0 ${cq(3)}px rgba(255,193,58,.8), 0 0 ${cq(6)}px rgba(255,193,58,.35)`
+    : 'none';
   const common = {
     position: 'absolute',
     width: size,
@@ -56,6 +60,8 @@ function CornerBrackets() {
     borderWidth: s,
     zIndex: 3,
     pointerEvents: 'none',
+    filter: locked ? `drop-shadow(0 0 ${cq(1.5)}px rgba(255,193,58,.9))` : 'none',
+    transition: 'filter 0.4s ease',
   };
   return (
     <>
@@ -171,10 +177,11 @@ function LevelCard({local, duration, questions, level}) {
   const ir = iris(local, 'intro', duration);
   const L = LEVELS[level] || LEVELS.easy;
   const info = levelInfo(questions, level);
-  const fade = gsapTween(local, 0.05, 0.4, power3Out);
-  const sub = gsapTween(local, 0.55, 0.5, expoOut);
-  const chip = gsapTween(local, 0.75, 0.5, backOut);
-  const glow = gsapTween(local, 0, 0.9, expoOut);
+  const fade = gsapTween(local, 0.05, 0.5, power3Out);
+  // Stagger sub and chip more generously — glow blooms first (1.4s), then text, then chip
+  const sub = gsapTween(local, 0.75, 0.55, expoOut);
+  const chip = gsapTween(local, 1.0, 0.5, backOut);
+  const glow = gsapTween(local, 0, 1.4, expoOut);
   return (
     <div
       style={{
@@ -449,7 +456,7 @@ function PhotoCard({
           }}
         />
       ) : null}
-      <CornerBrackets />
+      <CornerBrackets locked={locked} />
       <div
         style={{
           position: 'absolute',
@@ -500,6 +507,8 @@ function Timeline({local, settings, hint, zd}) {
   const tickScale = lerp(1.35, 1, elasticOut(tickP));
   const hon = local >= ZS + ZD * settings.hintAt;
   const hintOn = gsapTween(local, ZS + ZD * settings.hintAt, 0.3, backOut);
+  // Ripple that fires once at hint activation and fades out
+  const hintRipple = gsapTween(local, ZS + ZD * settings.hintAt, 0.75, expoOut);
 
   const ticks = [];
   const n = ZD * 4;
@@ -588,6 +597,24 @@ function Timeline({local, settings, hint, zd}) {
         >
           FULL VIEW
         </span>
+        {hintRipple > 0 && hintRipple < 1 && (
+          <div
+            style={{
+              position: 'absolute',
+              left: `${settings.hintAt * 100}%`,
+              top: cq(4.5),
+              width: cq(4.8),
+              height: cq(4.8),
+              borderRadius: '50%',
+              transform: `translate(-50%, -50%) scale(${lerp(1, 4.5, hintRipple)})`,
+              border: `${cq(0.4)}px solid ${COLORS.amber}`,
+              boxShadow: `0 0 ${cq(2.4)}px rgba(255,193,58,.7)`,
+              opacity: (1 - hintRipple) * 0.9,
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+          />
+        )}
         <div
           style={{
             position: 'absolute',
@@ -673,7 +700,7 @@ function Timeline({local, settings, hint, zd}) {
 
 function iris(local, kind, duration) {
   const openDur = 0.8;
-  const closeDur = 0.6;
+  const closeDur = 0.65;
   let radius = 80;
   let scale = 1;
   if (kind === 'intro' || kind === 'outro') {
@@ -687,9 +714,11 @@ function iris(local, kind, duration) {
       scale = 1;
     }
   } else if (kind === 'r') {
+    // Close starts at duration - 1.1s so it scales correctly with any revealDuration.
     radius = 80;
-    if (local >= 3.4) {
-      const p = clamp01((local - 3.4) / closeDur);
+    const closeStart = Math.max(duration - 1.1, duration * 0.72);
+    if (local >= closeStart) {
+      const p = clamp01((local - closeStart) / closeDur);
       radius = 80 * (1 - p * p * p);
     }
   } else {
@@ -759,10 +788,17 @@ function RevealFX({local}) {
   const pop = gsapTween(local, 0.45, 0.6, elasticOut);
   const draw = gsapTween(local, 0.8, 0.4, power3Out);
   const sparks = [];
-  for (let k = 0; k < 18; k++) {
-    const a = (k * 20 * Math.PI) / 180;
-    const d = cq(24 + ((k * 7) % 3) * 9);
-    const p = gsapTween(local, 0.05, 1.3, expoOut);
+  const SPARK_COUNT = 28;
+  for (let k = 0; k < SPARK_COUNT; k++) {
+    // Stagger launch: outer ring fires 0.08s after inner for a layered pop
+    const isOuter = k % 2 === 0;
+    const launchDelay = isOuter ? 0.05 : 0.13;
+    const travelDur = isOuter ? 1.4 : 1.1;
+    const a = (k * (360 / SPARK_COUNT) * Math.PI) / 180;
+    const d = cq(isOuter ? 30 + ((k * 5) % 4) * 8 : 18 + ((k * 7) % 3) * 7);
+    const sz = cq(isOuter ? 1.3 : 2.0);
+    const p = gsapTween(local, launchDelay, travelDur, expoOut);
+    const col = k % 3 === 0 ? '#fff' : k % 3 === 1 ? COLORS.amber : COLORS.amber2;
     sparks.push(
       <i
         key={k}
@@ -770,21 +806,24 @@ function RevealFX({local}) {
           position: 'absolute',
           left: '50%',
           top: '50%',
-          width: cq(1.6),
-          height: cq(1.6),
-          margin: `${-cq(0.8)}px 0 0 ${-cq(0.8)}px`,
+          width: sz,
+          height: sz,
+          margin: `${-sz / 2}px 0 0 ${-sz / 2}px`,
           borderRadius: '50%',
-          background: k % 3 ? COLORS.amber : '#fff',
-          boxShadow: `0 0 ${cq(1.6)}px ${k % 3 ? COLORS.amber : '#fff'}`,
+          background: col,
+          boxShadow: `0 0 ${cq(1.8)}px ${col}`,
           zIndex: 5,
-          transform: `translate(${Math.cos(a) * d * p}px, ${Math.sin(a) * d * p}px) scale(${lerp(1.4, 0.2, p)})`,
-          opacity: 1 - p,
+          transform: `translate(${Math.cos(a) * d * p}px, ${Math.sin(a) * d * p}px) scale(${lerp(1.6, 0.1, p)})`,
+          opacity: 1 - p * p,
         }}
       />,
     );
   }
-  const pulses = [0, 0.2].map((delay, i) => {
-    const p = gsapTween(local, delay, 0.9, expoOut);
+  const pulses = [0, 0.18, 0.38].map((delay, i) => {
+    const p = gsapTween(local, delay, 0.95, expoOut);
+    const maxScale = i === 2 ? 2.4 : 3.6;
+    const bw = i === 0 ? cq(0.8) : cq(0.4);
+    const col = i === 2 ? COLORS.amber2 : COLORS.amber;
     return (
       <div
         key={i}
@@ -796,12 +835,12 @@ function RevealFX({local}) {
           height: cq(30),
           margin: `${-cq(15)}px 0 0 ${-cq(15)}px`,
           borderRadius: '50%',
-          border: `${i ? cq(0.4) : cq(0.8)}px solid ${COLORS.amber}`,
-          boxShadow: `0 0 ${cq(4)}px rgba(255,193,58,.7)`,
+          border: `${bw}px solid ${col}`,
+          boxShadow: `0 0 ${cq(4)}px rgba(255,193,58,.65)`,
           zIndex: 7,
           pointerEvents: 'none',
-          transform: `scale(${lerp(0.2, 3.4, p)})`,
-          opacity: 1 - p,
+          transform: `scale(${lerp(0.2, maxScale, p)})`,
+          opacity: (1 - p) * (i === 2 ? 0.65 : 1),
         }}
       />
     );
@@ -848,8 +887,8 @@ function RevealFX({local}) {
 function Watermark({t, settings}) {
   const enter = gsapTween(t, 0.2, 0.7, backOut);
   const glintCycle = Math.max(0, t - 1.6);
-  const glintLocal = glintCycle % 6;
-  const glintP = easeInOut(clamp01(glintLocal / (6 * 0.2)));
+  const glintLocal = glintCycle % 8;
+  const glintP = easeInOut(clamp01(glintLocal / (8 * 0.15)));
   const breathe = 0.5 + 0.5 * Math.sin((t / 3.4) * Math.PI * 2);
   const parts = String(settings.watermark || 'QUIZ MATRIX').trim().split(/\s+/);
   const last = parts.length > 1 ? parts.pop() : '';
@@ -927,7 +966,7 @@ function Stage({t, series, children}) {
   const colors = seriesColors(series);
   const gridSize = cq(7);
   const gridShift = ((t % 14) / 14) * gridSize;
-  const sweepT = easeInOut((t % 7) / 7);
+  const sweepT = easeInOut((t % 11.3) / 11.3);
   const sweepX = -80 + sweepT * 300;
   return (
     <AbsoluteFill
