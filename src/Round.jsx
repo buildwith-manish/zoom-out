@@ -118,6 +118,10 @@ function Words({words, local, delay = 0.1, dur = 0.55, stagger = 0.09, size, amb
 
 function LetterSlam({text, local, size}) {
   const chars = text.toUpperCase().split('');
+  // Each letter slams in white, then colour-cascades to amber left-to-right.
+  // Slam lands at ~(i * 0.0405 + 0.15 + 0.6)s. Colour turn starts 0.3s after landing.
+  const CASCADE_DELAY = 0.06; // extra stagger between letters for the colour turn
+  const CASCADE_DUR = 0.22;
   return (
     <h2
       style={{
@@ -126,20 +130,28 @@ function LetterSlam({text, local, size}) {
         letterSpacing: '-0.005em',
         overflow: 'hidden',
         paddingBottom: cq(0.6),
-        color: COLORS.amber,
+        color: '#fff',
         textAlign: 'center',
         textShadow: `0 0 ${cq(4)}px rgba(255,193,58,.45)`,
       }}
     >
       {chars.map((c, i) => {
-        const p = gsapTween(local, i * 0.0405 + 0.15, 0.6, backOut);
+        const slamDelay = i * 0.0405 + 0.15;
+        const p = gsapTween(local, slamDelay, 0.6, backOut);
+        // Colour turn: starts 0.3s after each letter's own slam delay
+        const colourP = gsapTween(local, slamDelay + 0.6 + i * CASCADE_DELAY, CASCADE_DUR, power3Out);
+        const col = colourP < 1
+          ? `rgb(${Math.round(lerp(255, 255, colourP))}, ${Math.round(lerp(255, 193, colourP))}, ${Math.round(lerp(255, 58, colourP))})`
+          : COLORS.amber;
         return (
           <span
             key={i}
             style={{
               display: 'inline-block',
+              color: col,
               opacity: p,
               transform: `translateY(${(1 - p) * 100}%) scale(${lerp(1.25, 1, p)})`,
+              textShadow: colourP > 0.5 ? `0 0 ${cq(3) * colourP}px rgba(255,193,58,${0.6 * colourP})` : 'none',
             }}
           >
             {c === ' ' ? '\u00a0' : c}
