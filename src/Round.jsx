@@ -350,7 +350,7 @@ function TopBar({index, total, local, level}) {
 // widest shutter, i.e. blur covers a full frame of motion; the zoom is slow, so streaks
 // are subtle by design and strongest on the edges early in the move. Set enabled:false
 // to use the plain DOM zoom.
-const MOTION_BLUR = {enabled: true, samples: 5, shutterAngle: 360};
+const MOTION_BLUR = {enabled: true, samples: 3, shutterAngle: 360};
 
 /** Plain DOM zoom (no motion blur). Fallback when WebGL2 or a raster photo isn't available.
  * filter + transform stay on the SAME element on purpose: the defocus radius is
