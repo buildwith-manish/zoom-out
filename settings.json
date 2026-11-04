@@ -56,7 +56,7 @@
     "35": 2.5
   },
   "introSub": "50 ANIMALS · 3 LEVELS · ZOOM OUT AND NAME THEM",
-  "introHookDelay": 1.15,
+  "introHookDelay": 1.6,
   "retention": {
     "zoomByLevel": {
       "easy": 6,
