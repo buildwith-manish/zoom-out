@@ -13,22 +13,26 @@ export function mix(a, b, t) {
   return lerp(a, b, t);
 }
 
-// Zoom curve — STEPPED reveal. The zoom-out happens in stages with holds (pauses)
-// between them, building suspense, then completes in the last 3 seconds:
+// Zoom curve — STEPPED reveal. The zoom-out happens in stages with long holds
+// (pauses) between them, building suspense, then completes in the last 3 seconds:
 //
-//   Phase 1: quick zoom-out to a "near" position        (g: 0 → 0.35)
-//   Phase 2: HOLD — pause at the near position          (g: 0.35)
-//   Phase 3: little zoom — small nudge closer to reveal (g: 0.35 → 0.50)
-//   Phase 4: HOLD — pause again                         (g: 0.50)
+//   Phase 1: quick zoom-out to a "near" position        (g: 0 → 0.35)  ~15% of first
+//   Phase 2: HOLD — long pause at the near position     (g: 0.35)      ~35% of first
+//   Phase 3: little zoom — small nudge closer to reveal (g: 0.35 → 0.50) ~15% of first
+//   Phase 4: HOLD — long pause again                    (g: 0.50)      ~35% of first
 //   Phase 5: complete zoom-out to 1x in the last 3s     (g: 0.50 → 1.0)
 //
 // g(p) maps progress [0..1] to log-space position [0..1]; scale = z0^(1-g).
 // Each zoom phase uses easeInOutSine so velocity is 0 at every hold boundary —
 // no jerk at the transitions (the picture settles into each hold smoothly).
 // The last 3 seconds are reserved for the final reveal; phases 1-4 share the
-// first (zoomDur - 3) seconds, split into 4 equal quarters.
+// first (zoomDur - 3) seconds, with holds taking 70% of that time (35% each).
 
 const easeSine = (x) => -(Math.cos(Math.PI * clamp01(x)) - 1) / 2;
+
+// Fraction of the first part spent on each zoom vs hold.
+const ZOOM_FRAC = 0.15;   // 15% per zoom phase (2 zoom phases = 30%)
+const HOLD_FRAC = (1 - 2 * ZOOM_FRAC) / 2;  // 35% per hold (2 holds = 70%)
 
 function zoomProgressCurve(progress, zoomDur = 8) {
   const p = clamp01(progress);
@@ -36,23 +40,28 @@ function zoomProgressCurve(progress, zoomDur = 8) {
   const finalDur = 3;                  // last 3s = final zoom-out
   const finalStart = Math.max(1, zoomDur - finalDur); // when the final phase begins
   const firstDur = finalStart;         // phases 1-4 share this
-  const q = firstDur / 4;              // quarter duration
+
+  // Phase boundaries within the first part
+  const p1End = firstDur * ZOOM_FRAC;             // end of phase 1 (quick zoom)
+  const p2End = p1End + firstDur * HOLD_FRAC;     // end of phase 2 (hold)
+  const p3End = p2End + firstDur * ZOOM_FRAC;     // end of phase 3 (little zoom)
+  // phase 4 (hold) runs from p3End to finalStart
 
   if (t >= finalStart) {
     // Phase 5: complete zoom-out, g 0.50 → 1.0
     return 0.50 + 0.50 * easeSine((t - finalStart) / finalDur);
   }
-  if (t < q) {
+  if (t < p1End) {
     // Phase 1: quick zoom-out, g 0 → 0.35
-    return 0.35 * easeSine(t / q);
+    return 0.35 * easeSine(t / p1End);
   }
-  if (t < 2 * q) {
+  if (t < p2End) {
     // Phase 2: HOLD at 0.35
     return 0.35;
   }
-  if (t < 3 * q) {
+  if (t < p3End) {
     // Phase 3: little zoom, g 0.35 → 0.50
-    return 0.35 + 0.15 * easeSine((t - 2 * q) / q);
+    return 0.35 + 0.15 * easeSine((t - p2End) / (p3End - p2End));
   }
   // Phase 4: HOLD at 0.50
   return 0.50;
