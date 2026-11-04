@@ -15,23 +15,17 @@ export function mix(a, b, t) {
 
 // Zoom curve. Magnification falls exponentially, scale = z0^(1 - g(p)), which is a
 // constant rate of change in log-scale: the eye reads that as a perfectly even zoom
-// speed. (The previous 11-keyframe lookup interpolated linearly in scale between
-// keyframes, so the speed stepped at every keyframe.) It always ends at exactly 1x.
-//
-// g(p) is p with a soft landing: the last (1 - LAND) of the move eases out with a
-// continuous slope, so the picture settles instead of stopping dead. Normalised so
-// g(1) = 1.
-const LAND = 0.85;
-const G_SLOPE = 1 / (LAND + (1 - LAND) / 2);
-
+// speed. g(p) is a single smooth easeInOutSine curve with no piecewise boundary,
+// so there is no acceleration spike anywhere (the old piecewise linear+soft-landing
+// had a 3.8x acceleration jump at the 85% boundary that read as a visible jerk).
+// easeInOutSine: smooth start, smooth end, peak speed in the middle — feels like a
+// single fluid motion. Always ends at exactly 1x.
 function zoomProgressCurve(progress) {
   const p = clamp01(progress);
-  if (p <= LAND) return G_SLOPE * p;
-  const x = (p - LAND) / (1 - LAND);
-  return G_SLOPE * (LAND + (1 - LAND) * (x - (x * x) / 2));
+  return -(Math.cos(Math.PI * p) - 1) / 2; // easeInOutSine, 0->1
 }
 
-/** Magnification at zoom progress 0..1: z0 -> 1, exponential with a soft landing. */
+/** Magnification at zoom progress 0..1: z0 -> 1, exponential, fully smooth. */
 export function zoomScale(progress, z0 = 12) {
   return Math.pow(Math.max(1, z0), 1 - zoomProgressCurve(progress));
 }
