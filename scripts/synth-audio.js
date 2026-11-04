@@ -42,8 +42,14 @@ function sceneAt(t, scenes) {
 function buildEvents(scenes) {
   const EV = [];
   scenes.forEach((s) => {
-    if (s.type !== 'r') EV.push([s.start + 0.02, 'swish']);
-    if (s.type === 'intro' || s.type === 'r' || s.type === 'outro' || s.type === 'level') EV.push([s.start + s.d - 0.6, 'swishIn']);
+    const tcue = (lv, closing) => {
+      const k = ((settings.retention || {}).transitions || {})[lv] || 'iris';
+      return k === 'wipe' ? 'swishWipe' : k === 'blinds' ? 'swishGlitch' : closing ? 'swishIn' : 'swish';
+    };
+    if (s.type === 'q') EV.push([s.start + 0.02, tcue(s.level, false)]);
+    else if (s.type !== 'r') EV.push([s.start + 0.02, 'swish']);
+    if (s.type === 'r') EV.push([s.start + s.d - 0.6, tcue(s.level, true)]);
+    else if (s.type === 'intro' || s.type === 'outro' || s.type === 'level') EV.push([s.start + s.d - 0.6, 'swishIn']);
     if (s.type === 'intro') {
       EV.push([s.start + (settings.introHookDelay ?? 0.12), 'words'], [s.start + (settings.introZoomDelay ?? 0.9), 'shutter'], [s.start + (settings.introZoomDelay ?? 0.9), 'zoomIntro']);
     }
@@ -276,6 +282,15 @@ const SFX = {
     mix.addTone(260, n, 0.5, 0.16, 'sine', 900);
     mix.addTone(90, n, 0.3, 0.22, 'sine', 50);
   },
+  swishWipe(mix, n) {
+    mix.addNoise(n, 0.55, 0.34, 300, 3200, 0.9);
+    mix.addTone(220, n, 0.45, 0.1, 'sine', 700);
+  },
+  swishGlitch(mix, n) {
+    [0, 0.05, 0.11, 0.17].forEach((d, i) => mix.addNoise(n + d, 0.04, 0.34, 900 + i * 700, 5200 - i * 600, 2));
+    mix.addTone(110, n, 0.3, 0.22, 'sawtooth', 38);
+    mix.addTone(1900, n + 0.02, 0.05, 0.09, 'square', 400);
+  },
   swishIn(mix, n) {
     mix.addNoise(n, 0.5, 0.3, 4200, 300, 0.9);
     mix.addTone(700, n, 0.4, 0.1, 'sine', 200);
@@ -361,6 +376,8 @@ const SFX = {
 const SFX_LEN = {
   swish: 0.7,
   swishIn: 0.6,
+  swishWipe: 0.7,
+  swishGlitch: 0.4,
   words: 0.5,
   shutter: 0.3,
   zoomOut: ZD + 0.1,

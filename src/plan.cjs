@@ -29,9 +29,9 @@ function buildScenes(settings, questions) {
       prevLevel = q.level;
     }
     const zd = zoomFor(settings, q);
-    scenes.push({type: 'q', i, zd, d: questionDuration(settings, zd), label: 'Q' + (i + 1)});
+    scenes.push({type: 'q', i, level: q.level, zd, d: questionDuration(settings, zd), label: 'Q' + (i + 1)});
     const rd = revOver[String(i + 1)] != null ? revOver[String(i + 1)] : settings.revealDuration;
-    scenes.push({type: 'r', i, d: rd, label: 'A' + (i + 1)});
+    scenes.push({type: 'r', i, level: q.level, d: rd, label: 'A' + (i + 1)});
   });
   scenes.push({type: 'outro', i: -1, d: settings.outroDuration, label: 'Score'});
   scenes.push({type: 'sting', i: -1, d: settings.stingDuration, label: 'Sting'});

@@ -62,6 +62,11 @@
       "easy": 6,
       "medium": 7,
       "hard": 8
+    },
+    "transitions": {
+      "easy": "iris",
+      "medium": "wipe",
+      "hard": "blinds"
     }
   }
 }

@@ -14,6 +14,7 @@ import {buildScenes, sceneAt, levelInfo} from './timing';
 import {clamp, lerp, zoomScale, zoomBlur, zoomCamera, coverExtents, focusFrac, easeInOut, rasterImage} from './util';
 import {ZoomCanvas} from './ZoomCanvas';
 import {QuizAudio} from './audio';
+import {transFor, openFx, closeFx} from './Transitions';
 
 function Fonts() {
   const [handle] = useState(() => delayRender('fonts'));
@@ -1061,6 +1062,8 @@ function Intro({local, duration, settings}) {
 }
 
 function Question({local, q, index, total, settings, zd}) {
+  const kind = transFor(settings, q.level);
+  const fx = kind === 'iris' ? null : openFx(kind, local);
   const ir = iris(local, 'q', 14);
   const ZD = zd != null ? zd : settings.zoomDuration;
   const full = local >= settings.zoomStart + ZD - 0.02;
@@ -1074,8 +1077,7 @@ function Question({local, q, index, total, settings, zd}) {
         gap: cq(1.6),
         padding: `${cq(12.5)}px ${cq(5)}px ${cq(3.4)}px`,
         color: '#fff',
-        clipPath: ir.clipPath,
-        transform: ir.transform,
+        ...(fx ? fx.style : {clipPath: ir.clipPath, transform: ir.transform}),
       }}
     >
       <TopBar index={index} total={total} local={local} level={q.level} />
@@ -1093,12 +1095,14 @@ function Question({local, q, index, total, settings, zd}) {
         locked={full}
       />
       <Timeline local={local} settings={settings} hint={q.hint} zd={ZD} />
-      <IrisRing local={local} />
+      {fx ? fx.node : <IrisRing local={local} />}
     </div>
   );
 }
 
 function Reveal({local, q, index, total, settings, duration}) {
+  const kind = transFor(settings, q.level);
+  const fx = kind === 'iris' ? null : closeFx(kind, local, duration);
   const ir = iris(local, 'r', duration);
   const eye = gsapTween(local, 0.2, 0.4, expoOut);
   return (
@@ -1111,8 +1115,7 @@ function Reveal({local, q, index, total, settings, duration}) {
         gap: cq(1.6),
         padding: `${cq(12.5)}px ${cq(5)}px ${cq(3.4)}px`,
         color: '#fff',
-        clipPath: ir.clipPath,
-        transform: ir.transform,
+        ...(fx ? fx.style : {clipPath: ir.clipPath, transform: ir.transform}),
       }}
     >
       <TopBar index={index} total={total} local={local} level={q.level} />
@@ -1148,7 +1151,7 @@ function Reveal({local, q, index, total, settings, duration}) {
         <RevealFX local={local} />
       </PhotoCard>
       <div style={{flex: 'none', height: cq(12)}} />
-      <CloseRing local={local} duration={duration} />
+      {fx ? fx.node : <CloseRing local={local} duration={duration} />}
     </div>
   );
 }
