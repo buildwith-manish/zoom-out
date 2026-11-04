@@ -80,7 +80,8 @@ Background bed is the playful marimba/bass track from `scripts/zoomout_music.py`
 
 ```bash
 npm run music          # public/sounds/background.wav  (needs numpy + scipy)
-npm run audio          # music + sound effects + music ducking under the cues → background.mp3, sfx.mp3 (use this one)
+npm run audio          # music + sound effects + cue ducking + final master → background.mp3, sfx.mp3, master.mp3 (use this one)
+npm run master         # just the final mix: voiceover + music (ducked under the voice) + sfx → master.mp3, -14 LUFS
 npm run synth-audio    # public/sounds/sfx.wav + individual cues
 ```
 
@@ -134,3 +135,11 @@ npx remotion still ZoomOut out/preview.jpg --frame=200
 ## Music ducking
 
 `npm run audio` rebuilds everything in order: continuous music → sound effects → `scripts/duck_music.py`, which dips the music (up to about 8 dB) for a moment under each short cue (ticks, hits, whooshes) and swells it back, then matches the overall loudness so the music is not quieter on average. The composition plays the results, `public/sounds/background.mp3` and `sfx.mp3`.
+
+## Final audio master
+
+The composition plays one file, `public/sounds/master.mp3`, built by `scripts/master-audio.js` (`npm run master`, also the last step of `npm run audio`). It mixes `voiceover.wav` (high-pass, light compression, presence EQ), `background.mp3` (music, sidechain-ducked about 10 dB under the voice and back up in the gaps) and `sfx.mp3` (cues, ducked about 3 dB under the voice), then normalises to -14 LUFS integrated / -1.5 dBTP, the YouTube reference level. Ducking depth, release and loudness target are constants at the top of the script. The raw stems stay in `public/sounds/` and can be A/B'd with `QuizAudioStems` in `src/audio.js`. Re-run `npm run master` after changing any stem or the video length.
+
+## Zoom curve and motion blur
+
+The zoom is exponential, `scale = z0^(1 - g(p))`, a constant rate in log-scale (an even perceived speed) with a soft landing on the last 15% (`zoomScale` in `src/util.js`). Camera motion blur is done in a WebGL2 pass (`src/ZoomCanvas.jsx`): each pixel averages `samples` sub-frame renders across the shutter angle in 32-bit float and is dithered once at the end, so there is no banding (Remotion's `<CameraMotionBlur>` was tried first and bands visibly in this video's smooth gradients). Tune it with `MOTION_BLUR` in `src/Round.jsx`; set `enabled: false` to use the plain DOM zoom, which is also the automatic fallback if WebGL2 is unavailable. Note the photo's defocus blur is much wider than the per-frame motion at 60fps, so the physically accurate shutter (360°) is subtle by design.

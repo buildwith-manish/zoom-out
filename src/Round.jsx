@@ -11,7 +11,8 @@ import {
 import {backOut, expoOut, elasticOut, power3Out, gsapTween, clamp01} from './gsap-helpers';
 import {COLORS, FONTS, LEVELS, cq, seriesColors} from './style';
 import {buildScenes, sceneAt, levelInfo} from './timing';
-import {clamp, lerp, zoomScale, zoomBlur, zoomCamera, focusFrac, easeInOut, rasterImage} from './util';
+import {clamp, lerp, zoomScale, zoomBlur, zoomCamera, coverExtents, focusFrac, easeInOut, rasterImage} from './util';
+import {ZoomCanvas} from './ZoomCanvas';
 import {QuizAudio} from './audio';
 
 function Fonts() {
@@ -324,6 +325,32 @@ function TopBar({index, total, local, level}) {
   );
 }
 
+// Camera motion blur on the zoom (see ZoomCanvas.jsx): each pixel averages `samples`
+// sub-frame renders spread across the shutter, in float, then dithers. 360deg is the
+// widest shutter, i.e. blur covers a full frame of motion; the zoom is slow, so streaks
+// are subtle by design and strongest on the edges early in the move. Set enabled:false
+// to use the plain DOM zoom.
+const MOTION_BLUR = {enabled: true, samples: 8, shutterAngle: 360};
+
+/** Plain DOM zoom (no motion blur). Fallback when WebGL2 or a raster photo isn't available.
+ * filter + transform stay on the SAME element on purpose: the defocus radius is
+ * magnified by the zoom, which is the look the blur was tuned for. */
+function ZoomLayer({item, cam, blur}) {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        transformOrigin: '0 0',
+        transform: cam.transform,
+        filter: blur > 0.05 ? `blur(${blur}px)` : 'none',
+      }}
+    >
+      <Pic item={item} style={{width: '100%', height: '100%', objectFit: 'cover', display: 'block'}} />
+    </div>
+  );
+}
+
 function PhotoCard({
   item,
   local,
@@ -337,12 +364,45 @@ function PhotoCard({
   forceScale,
   children,
 }) {
+  const {fps} = useVideoConfig();
+  const [glFailed, setGlFailed] = useState(false);
   const enter = gsapTween(local, cardDelay, 0.5, backOut);
   const flashT = gsapTween(local, flashDelay, 0.35, power3Out);
   const zoomProg = zoomDur > 0 ? clamp01((local - zoomDelay) / zoomDur) : 1;
   const scale = forceScale != null ? forceScale : local >= 0 ? zoomScale(Math.max(0, zoomProg), item.z0 || 12) : item.z0 || 12;
-  const blur = forceScale != null ? 0 : zoomBlur(Math.max(0, zoomProg));
   const cam = zoomCamera(scale, focusFrac(item.fx), focusFrac(item.fy), Number(item.ar) || 16 / 9);
+  const z0 = item.z0 || 12;
+  const blur = forceScale != null ? 0 : zoomBlur(zoomProg);
+  const file = item.image || `${item.art}.svg`;
+  const useGl = MOTION_BLUR.enabled && !glFailed && rasterImage(file);
+  // Only spend extra samples while the picture is actually zooming.
+  const zooming = forceScale == null && zoomDur > 0 && local >= zoomDelay - 0.05 && local <= zoomDelay + zoomDur + 0.05;
+  let layer;
+  if (useGl) {
+    const n = zooming ? MOTION_BLUR.samples : 1;
+    const shutterFrames = MOTION_BLUR.shutterAngle / 360;
+    const cams = [];
+    for (let i = 0; i < n; i++) {
+      // sub-frame times centred on the current frame, spread across the shutter
+      const off = n === 1 ? 0 : ((i + 0.5) / n - 0.5) * shutterFrames;
+      const l = local + off / fps;
+      const zp = zoomDur > 0 ? clamp01((l - zoomDelay) / zoomDur) : 1;
+      const sc = forceScale != null ? forceScale : l >= 0 ? zoomScale(zp, z0) : z0;
+      const c = zoomCamera(sc, focusFrac(item.fx), focusFrac(item.fy), Number(item.ar) || 16 / 9);
+      cams.push(c.s, c.tx, c.ty);
+    }
+    layer = (
+      <ZoomCanvas
+        src={staticFile(`images/${file}`)}
+        cams={cams}
+        ext={coverExtents(Number(item.ar) || 16 / 9)}
+        sigma={blur * scale}
+        onFail={() => setGlFailed(true)}
+      />
+    );
+  } else {
+    layer = <ZoomLayer item={item} cam={cam} blur={blur} />;
+  }
   const lensFade = showLens ? 1 - gsapTween(local, zoomDelay, zoomDur || 0.01, (t) => t * t) : 0;
 
   let punchScale = 1;
@@ -375,17 +435,7 @@ function PhotoCard({
         transform: punch ? `scale(${punchScale})` : `scale(${lerp(0.94, 1, enter)})`,
       }}
     >
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          transformOrigin: '0 0',
-          transform: cam.transform,
-          filter: blur > 0.05 ? `blur(${blur}px)` : 'none',
-        }}
-      >
-        <Pic item={item} style={{width: '100%', height: '100%', objectFit: 'cover', display: 'block'}} />
-      </div>
+      {layer}
       {showLens ? (
         <div
           style={{

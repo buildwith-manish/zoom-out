@@ -55,11 +55,21 @@ export function buildSoundEvents(settings, questions) {
 }
 
 /**
- * Playful background bed (scripts/zoomout_music.py) + HTML SFX mix, plus the
- * synced voiceover (public/sounds/voiceover.wav). The voiceover plays from t=0,
- * full length, on its own track so it can be mixed independently of the music/SFX.
+ * Final mastered mix: public/sounds/master.mp3, built by `npm run master`
+ * (scripts/master-audio.js). It contains the voiceover (compressed + presence EQ),
+ * the music bed sidechain-ducked ~10 dB under the voice, the SFX cues lightly ducked,
+ * all normalised to -14 LUFS / -1.5 dBTP. One track, so there is no gain-staging
+ * or clipping risk inside Remotion's own mixer.
+ *
+ * The raw stems (voiceover.wav, background.mp3, sfx.mp3) stay in public/sounds as
+ * the source for re-mastering — see QuizAudioStems below.
  */
 export function QuizAudio() {
+  return <Audio src={staticFile('sounds/master.mp3')} />;
+}
+
+/** Unmastered stems, kept for A/B comparison. Not used by the composition. */
+export function QuizAudioStems() {
   return (
     <>
       <Audio src={staticFile('sounds/voiceover.wav')} />

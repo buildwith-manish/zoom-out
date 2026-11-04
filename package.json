@@ -2,7 +2,7 @@
   "name": "zoom-out",
   "version": "1.0.0",
   "private": true,
-  "description": "Zoom Out Quiz \u2014 Remotion 1920\u00d71080 port (GSAP Pattern 1)",
+  "description": "Zoom Out Quiz — Remotion 1920×1080 port (GSAP Pattern 1)",
   "scripts": {
     "start": "remotion studio --port 3000 --no-open",
     "dev": "remotion studio --port 3000 --no-open",
@@ -16,7 +16,8 @@
     "render-batches": "node scripts/render-batches.js",
     "synth-audio": "node scripts/synth-audio.js",
     "duck": "python3 scripts/duck_music.py",
-    "audio": "npm run music && npm run synth-audio && npm run duck",
+    "master": "node scripts/master-audio.js",
+    "audio": "npm run music && npm run synth-audio && npm run duck && npm run master",
     "music": "python3 scripts/zoomout_music.py --rounds 50 --zoom 8 --lead 1 --hold 2 --answer 3 --intro 6.5 --outro 4 --sting 2.8 --cards 3 --card 2.5 --out public/sounds/background",
     "render:yt": "remotion render ZoomOut out/zoom-out-1440p60.mp4"
   },
