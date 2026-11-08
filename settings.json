@@ -60,6 +60,76 @@
   "levelDurationOverrides": {
     "hard": 4.0
   },
+  "bonus": {
+    "after": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "preRoll": 1.6,
+    "clock": 8,
+    "revealHold": 3.4,
+    "commentChip": "DROP YOUR ANSWER BELOW",
+    "eraseChip": "NAIL IT? ERASE 1 WRONG",
+    "rounds": [
+      {
+        "kind": "colordna",
+        "name": "COLOR DNA",
+        "question": "WHICH FOOD HAS THESE COLORS?",
+        "image": "easy_07_watermelon.jpg",
+        "asset": "easy_07_watermelon",
+        "answer": "Watermelon"
+      },
+      {
+        "kind": "shadow",
+        "name": "SHADOW REVEAL",
+        "question": "NAME THE SHADOW",
+        "image": "easy_08_banana.jpg",
+        "asset": "easy_08_banana",
+        "answer": "Banana"
+      },
+      {
+        "kind": "texture",
+        "name": "MACRO TEXTURE",
+        "question": "WHAT SURFACE IS THIS?",
+        "image": "easy_06_strawberry.jpg",
+        "asset": "easy_06_strawberry",
+        "answer": "Strawberry"
+      },
+      {
+        "kind": "unpixel",
+        "name": "PIXEL FOCUS",
+        "question": "SHARPEN YOUR GUESS",
+        "image": "easy_01_pizza.jpg",
+        "asset": "easy_01_pizza",
+        "answer": "Pizza"
+      },
+      {
+        "kind": "recipe",
+        "name": "RECIPE REVERSE",
+        "question": "COOK THE COMBO",
+        "image": "easy_13_pancakes.jpg",
+        "asset": "easy_13_pancakes",
+        "answer": "Pancakes",
+        "ingredients": [
+          [
+            "🌾",
+            "FLOUR"
+          ],
+          [
+            "🥚",
+            "EGG"
+          ],
+          [
+            "🥛",
+            "MILK"
+          ]
+        ]
+      }
+    ]
+  },
   "introSub": "50 FOODS · 3 LEVELS · ZOOM OUT AND NAME THEM",
   "introHookDelay": 1.6,
   "retention": {

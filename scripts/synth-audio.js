@@ -49,7 +49,7 @@ function buildEvents(scenes) {
     if (s.type === 'q') EV.push([s.start + 0.02, tcue(s.level, false)]);
     else if (s.type !== 'r') EV.push([s.start + 0.02, 'swish']);
     if (s.type === 'r') EV.push([s.start + s.d - 0.6, tcue(s.level, true)]);
-    else if (s.type === 'intro' || s.type === 'outro' || s.type === 'level') EV.push([s.start + s.d - 0.6, 'swishIn']);
+    else if (s.type === 'intro' || s.type === 'outro' || s.type === 'level' || s.type === 'bonus') EV.push([s.start + s.d - 0.6, 'swishIn']);
     if (s.type === 'intro') {
       EV.push([s.start + (settings.introHookDelay ?? 0.12), 'words'], [s.start + (settings.introZoomDelay ?? 0.9), 'shutter'], [s.start + (settings.introZoomDelay ?? 0.9), 'zoomIntro']);
     }
@@ -60,6 +60,16 @@ function buildEvents(scenes) {
       EV.push([s.start + ZS + zd * HINT_AT, 'sparkle'], [s.start + ZS + zd, 'focus']);
     }
     if (s.type === 'r') EV.push([s.start + 0.05, 'expand'], [s.start + 0.1, 'hit'], [s.start + 0.45, 'sparkle']);
+    if (s.type === 'bonus') {
+      const BS = settings.bonus || {};
+      const bclock = BS.clock != null ? BS.clock : 8;
+      const cs = s.clockStart != null ? s.clockStart : 1.6;
+      const revealAt = s.start + cs + bclock;
+      EV.push([s.start + 0.12, 'words'], [s.start + 0.55, 'hit']);
+      EV.push([s.start + cs, 'focus']);
+      for (let k = 1; k < bclock; k++) EV.push([s.start + cs + k, k >= bclock - 3 ? 'tickHi' : 'tick']);
+      EV.push([revealAt + 0.05, 'expand'], [revealAt + 0.1, 'hit'], [revealAt + 0.45, 'sparkle']);
+    }
     if (s.type === 'level') EV.push([s.start + 0.12, 'words'], [s.start + 0.4, 'hit'], [s.start + 0.8, 'sparkle']);
     if (s.type === 'intro') EV.push([s.start + 0.05, 'jingle']);
     if (s.type === 'sting') EV.push([s.start + 0.1, 'jingleEnd']);
@@ -419,6 +429,24 @@ function musicTargets(t, scenes) {
   } else if (s.type === 'r') {
     cut = 900;
     if (l < 1.1) {
+      g = 0.012;
+      cut = 300;
+    }
+  } else if (s.type === 'bonus') {
+    // pre-roll: quiet suspense. puzzle: tension ramp. reveal: drop out.
+    const bclock = (settings.bonus && settings.bonus.clock != null) ? settings.bonus.clock : 8;
+    const cs = s.clockStart != null ? s.clockStart : 1.6;
+    const revealAt = cs + bclock;
+    if (l < cs) {
+      g = 0.05;
+      cut = 480;
+    } else if (l < revealAt) {
+      const p = clamp((l - cs) / (revealAt - cs), 0, 1);
+      g = 0.07 + 0.055 * p;
+      cut = 420 + p * p * 2400;
+      rate = 1.4 + p * 3.0;
+      tv = 0.05 * p;
+    } else {
       g = 0.012;
       cut = 300;
     }

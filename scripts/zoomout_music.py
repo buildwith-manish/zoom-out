@@ -26,6 +26,8 @@ ap.add_argument('--outro', type=float, default=4.0)
 ap.add_argument('--sting', type=float, default=1.3)
 ap.add_argument('--cards', type=int, default=0, help='number of level title cards')
 ap.add_argument('--card', type=float, default=2.5, help='length of each level card')
+ap.add_argument('--bonus', type=int, default=0, help='number of bonus rounds spliced in')
+ap.add_argument('--bonus-dur', type=float, default=13.0, help='length of each bonus round')
 ap.add_argument('--level', type=float, default=-22.0, help='average loudness in dBFS RMS (quiet bed under the SFX)')
 ap.add_argument('--bpm', type=float, default=120.0)
 ap.add_argument('--out', default='zoomout_music')
@@ -33,7 +35,36 @@ a = ap.parse_args()
 
 SR = 44100
 QLEN = a.lead + a.zoom + a.hold
-TOTAL = a.intro + a.cards * a.card + max(1, a.rounds) * (QLEN + a.answer) + a.outro + a.sting
+TOTAL = a.intro + a.cards * a.card + max(1, a.rounds) * (QLEN + a.answer) + a.bonus * a.bonus_dur + a.outro + a.sting
+
+
+def plan_total():
+    """Real video length from src/plan.cjs (source of truth). Falls back to None."""
+    import os
+    root = os.path.dirname(os.path.abspath(__file__)) + '/..'
+    try:
+        r = subprocess.run(
+            ['node', '--input-type=module', '-e',
+             "import {getTotalSeconds} from './src/timing.js'; import fs from 'fs'; "
+             "const q = JSON.parse(fs.readFileSync('questions.json')); "
+             "const s = JSON.parse(fs.readFileSync('settings.json')); "
+             "console.log(getTotalSeconds(s, q));"],
+            capture_output=True, text=True, cwd=root)
+        v = float(r.stdout.strip())
+        return v if v > 0 else None
+    except Exception:
+        return None
+
+
+# The timing flags above are only an approximation; when the scene plan is
+# available it always wins (needs +1s headroom for SFX tails).
+_real = plan_total()
+if _real:
+    TOTAL = max(TOTAL, _real + 1.0)
+    print(f'scene plan total {_real:.2f}s -> music length {TOTAL:.2f}s')
+else:
+    print(f'timing flags only -> music length {TOTAL:.2f}s')
+
 BAR = 4 * 60.0 / a.bpm
 BARS = 16
 NL = int(round(BARS * BAR * SR))

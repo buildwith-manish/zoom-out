@@ -25,7 +25,7 @@ export function buildSoundEvents(settings, questions) {
   const EV = [];
   scenes.forEach((s) => {
     if (s.type !== 'r') EV.push({t: s.start + 0.02, name: 'swish'});
-    if (s.type === 'intro' || s.type === 'r' || s.type === 'outro') {
+    if (s.type === 'intro' || s.type === 'r' || s.type === 'outro' || s.type === 'bonus') {
       EV.push({t: s.start + s.d - 0.6, name: 'swishIn'});
     }
     if (s.type === 'intro') {
@@ -50,6 +50,24 @@ export function buildSoundEvents(settings, questions) {
       EV.push({t: s.start + 0.05, name: 'expand'});
       EV.push({t: s.start + 0.1, name: 'hit'});
       EV.push({t: s.start + 0.45, name: 'sparkle'});
+    }
+    if (s.type === 'bonus') {
+      const B = settings.bonus || {};
+      const clock = B.clock != null ? B.clock : 8;
+      const cs = s.clockStart != null ? s.clockStart : 1.6;
+      const revealAt = s.start + cs + clock;
+      // pre-roll banner
+      EV.push({t: s.start + 0.12, name: 'words'});
+      EV.push({t: s.start + 0.55, name: 'hit'});
+      // clock start + per-second ticks (high ticks on the last 3)
+      EV.push({t: s.start + cs, name: 'focus'});
+      for (let k = 1; k < clock; k++) {
+        EV.push({t: s.start + cs + k, name: k >= clock - 3 ? 'tickHi' : 'tick'});
+      }
+      // reveal
+      EV.push({t: revealAt + 0.05, name: 'expand'});
+      EV.push({t: revealAt + 0.1, name: 'hit'});
+      EV.push({t: revealAt + 0.45, name: 'sparkle'});
     }
     if (s.type === 'sting') EV.push({t: s.start + 0.15, name: 'chime'});
   });
@@ -142,6 +160,18 @@ export function QuizVoiceover({settings, questions}) {
     if (s.type === 'r') {
       const q = voManifest.q && voManifest.q[String(s.i + 1)];
       if (q) clips.push({file: q.file, from: startFrame});
+    }
+    if (s.type === 'bonus') {
+      const n = String(s.bonusIndex + 1);
+      const bq = voManifest.bonusq && voManifest.bonusq[n];
+      if (bq) clips.push({file: bq.file, from: startFrame});
+      const ba = voManifest.bonus && voManifest.bonus[n];
+      if (ba) {
+        const B = settings.bonus || {};
+        const clock = B.clock != null ? B.clock : 8;
+        const cs = s.clockStart != null ? s.clockStart : 1.6;
+        clips.push({file: ba.file, from: startFrame + Math.round((cs + clock) * fps)});
+      }
     }
   });
 

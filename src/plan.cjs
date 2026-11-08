@@ -93,6 +93,19 @@ function buildScenes(settings, questions) {
     scenes.push({type: 'q', i, level: q.level, zd, d: qd, zoomStart: zStart, label: 'Q' + (i + 1)});
     const rd = revealDuration(settings, i, revOver);
     scenes.push({type: 'r', i, level: q.level, d: rd, label: 'A' + (i + 1)});
+    // Bonus round after the configured questions (default Q10/20/30/40/50)
+    const bonusIdx = bonusAfterList(settings).indexOf(i + 1);
+    if (bonusIdx >= 0 && settings.bonus && settings.bonus.rounds && settings.bonus.rounds[bonusIdx]) {
+      scenes.push({
+        type: 'bonus',
+        i: -1,
+        bonusIndex: bonusIdx,
+        round: settings.bonus.rounds[bonusIdx],
+        clockStart: bonusClockStart(settings, bonusIdx),
+        d: bonusDuration(settings, bonusIdx),
+        label: 'Bonus ' + (bonusIdx + 1),
+      });
+    }
   });
   scenes.push({type: 'outro', i: -1, d: outroDuration(settings), label: 'Score'});
   scenes.push({type: 'sting', i: -1, d: stingDuration(settings), label: 'Sting'});
@@ -136,6 +149,48 @@ function revealDuration(settings, questionIndex, revOver) {
   return Math.max(base, clipDur + VO.offset + VO.tail);
 }
 
+/**
+ * ─── Bonus rounds ───────────────────────────────────────────────────────────
+ * settings.bonus.rounds defines 5 rounds, played after the questions listed in
+ * settings.bonus.after (default Q10/20/30/40/50). Scene layout:
+ *
+ *   [pre-roll banner] → [puzzle + clock] → [reveal + answer + erase chip]
+ *
+ * Voiceover clips (optional, same naming as the questions):
+ *   bonusq01..05  the question prompt — plays over the puzzle; the pre-roll
+ *                 stretches so the clock only starts once the clip ends
+ *   bonus01..05   the answer line — plays at the reveal; the reveal hold
+ *                 stretches so the clip always finishes before the next scene
+ */
+function bonusAfterList(settings) {
+  return (settings.bonus && settings.bonus.after) || [];
+}
+
+/** The effective time (s) the bonus clock starts: pre-roll stretched for the bonusq clip. */
+function bonusClockStart(settings, bonusIndex) {
+  const B = settings.bonus || {};
+  const base = B.preRoll != null ? B.preRoll : 1.6;
+  const clipDur = voSeconds('bonusq', bonusIndex + 1);
+  if (clipDur <= 0) return base;
+  return Math.max(base, clipDur + VO.offset);
+}
+
+/** Frames the bonus answer stays up after the clock ends (stretched for the bonus clip). */
+function bonusRevealHold(settings, bonusIndex) {
+  const B = settings.bonus || {};
+  const base = B.revealHold != null ? B.revealHold : 3.4;
+  const clipDur = voSeconds('bonus', bonusIndex + 1);
+  if (clipDur <= 0) return base;
+  return Math.max(base, clipDur + VO.offset + VO.tail);
+}
+
+/** Total bonus scene duration. */
+function bonusDuration(settings, bonusIndex) {
+  const B = settings.bonus || {};
+  const clock = B.clock != null ? B.clock : 8;
+  return bonusClockStart(settings, bonusIndex) + clock + bonusRevealHold(settings, bonusIndex);
+}
+
 function sceneAt(t, scenes) {
   for (let k = scenes.length - 1; k >= 0; k--) {
     if (t >= scenes[k].start) return k;
@@ -176,6 +231,9 @@ module.exports = {
   introDuration,
   outroDuration,
   stingDuration,
+  bonusClockStart,
+  bonusRevealHold,
+  bonusDuration,
   buildScenes,
   sceneAt,
   getTotalSeconds,

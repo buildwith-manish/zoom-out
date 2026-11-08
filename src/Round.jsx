@@ -14,6 +14,7 @@ import settingsJson from '../settings.json';
 import {buildScenes, sceneAt, levelInfo} from './timing';
 import {clamp, lerp, zoomScale, zoomBlur, zoomCamera, coverExtents, focusFrac, easeInOut, rasterImage} from './util';
 import {ZoomCanvas} from './ZoomCanvas';
+import {BonusScene} from './Bonus';
 import {QuizAudio, QuizVoiceover} from './audio';
 import {transFor, openFx, closeFx} from './Transitions';
 
@@ -24,10 +25,13 @@ function Fonts() {
       new FontFace('Anton', `url(${staticFile('fonts/Anton-Regular.ttf')})`, {weight: '400'}),
       new FontFace('JetBrains Mono', `url(${staticFile('fonts/JetBrainsMono-Medium.ttf')})`, {weight: '500'}),
       new FontFace('JetBrains Mono', `url(${staticFile('fonts/JetBrainsMono-Bold.ttf')})`, {weight: '700'}),
+      new FontFace('Noto Color Emoji', `url(${staticFile('fonts/NotoColorEmoji.woff2')})`),
     ];
-    Promise.all(faces.map((f) => f.load()))
+    // Load each face independently: a missing font (e.g. the emoji face on an
+    // exotic system) must never take down the display/mono faces with it.
+    Promise.all(faces.map((f) => f.load().catch(() => null)))
       .then((loaded) => {
-        loaded.forEach((f) => document.fonts.add(f));
+        loaded.forEach((f) => f && document.fonts.add(f));
         continueRender(handle);
       })
       .catch(() => continueRender(handle));
@@ -1435,6 +1439,18 @@ export const Round = ({questions, settings}) => {
   else if (s.type === 'level') scene = <LevelCard local={local} duration={s.d} questions={questions} level={s.level} />;
   else if (s.type === 'q') scene = <Question local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} zd={s.zd} zoomStart={s.zoomStart} />;
   else if (s.type === 'r') scene = <Reveal local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} duration={s.d} />;
+  else if (s.type === 'bonus')
+    scene = (
+      <BonusScene
+        local={local}
+        duration={s.d}
+        round={s.round}
+        bonusIndex={s.bonusIndex}
+        settings={settings}
+        questions={questions}
+        clockStart={s.clockStart}
+      />
+    );
   else if (s.type === 'outro') scene = <Outro local={local} duration={s.d} settings={settings} total={n} />;
   else scene = <Sting local={local} settings={settings} />;
 

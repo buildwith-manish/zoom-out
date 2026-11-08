@@ -72,7 +72,7 @@ const seconds = (file) => {
 };
 
 const main = () => {
-  const manifest = { q: {}, qq: {}, intro: null, outro: null, sting: null };
+  const manifest = { q: {}, qq: {}, bonusq: {}, bonus: {}, intro: null, outro: null, sting: null };
   const problems = [];
   if (fs.existsSync(DIR)) {
     for (const name of fs.readdirSync(DIR).sort()) {
@@ -85,8 +85,8 @@ const main = () => {
       }
       const entry = { file: name, seconds: Math.round(s * 1000) / 1000 };
 
-      // Numbered clips: qq##, q##
-      const m = /^(qq|q)0*(\d+)\.[a-z0-9]+$/i.exec(name);
+      // Numbered clips: qq##, q##, bonusq##, bonus##
+      const m = /^(bonusq|qq|bonus|q)0*(\d+)\.[a-z0-9]+$/i.exec(name);
       if (m) {
         const kind = m[1].toLowerCase();
         const n = String(Number(m[2]));
@@ -114,9 +114,12 @@ const main = () => {
   const total = questions.length;
   const qn = Object.keys(manifest.q).length;
   const qqn = Object.keys(manifest.qq).length;
+  const bonusTotal = ((settings.bonus || {}).rounds || []).length;
+  const bqn = Object.keys(manifest.bonusq).length;
+  const ban = Object.keys(manifest.bonus).length;
 
-  console.log(`\n  voiceover: ${qn}/${total} reveal · ${qqn}/${total} question-phase · intro ${manifest.intro ? '✓' : '✗'} · outro ${manifest.outro ? '✓' : '✗'} · sting ${manifest.sting ? '✓' : '✗'}  (${path.relative(ROOT, DIR)})`);
-  if (qn + qqn === 0 && !manifest.intro && !manifest.outro && !manifest.sting) {
+  console.log(`\n  voiceover: ${qn}/${total} reveal · ${qqn}/${total} question-phase · bonus ${bqn}/${bonusTotal} prompt · ${ban}/${bonusTotal} answer · intro ${manifest.intro ? '✓' : '✗'} · outro ${manifest.outro ? '✓' : '✗'} · sting ${manifest.sting ? '✓' : '✗'}  (${path.relative(ROOT, DIR)})`);
+  if (qn + qqn + bqn + ban === 0 && !manifest.intro && !manifest.outro && !manifest.sting) {
     console.log('  no clips yet: the video renders exactly as before.');
   }
 
@@ -130,6 +133,12 @@ const main = () => {
     if (!manifest.qq[String(i)]) missingQq.push(`qq${i}`);
   }
   if (qqn && missingQq.length) console.log(`  missing question clips: ${missingQq.join(', ')}`);
+  const missingBq = [];
+  for (let i = 1; i <= bonusTotal; i++) {
+    if (!manifest.bonusq[String(i)]) missingBq.push(`bonusq${i}`);
+    if (!manifest.bonus[String(i)]) missingBq.push(`bonus${i}`);
+  }
+  if ((bqn || ban) && missingBq.length) console.log(`  missing bonus clips: ${missingBq.join(', ')}`);
   problems.forEach((p) => console.log(`  ! ${p}`));
   console.log('');
 };

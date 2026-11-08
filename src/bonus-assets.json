@@ -1,0 +1,139 @@
+{
+  "colors": {
+    "easy_07_watermelon": [
+      {
+        "hex": "#ee2b1c",
+        "weight": 0.3056
+      },
+      {
+        "hex": "#f86245",
+        "weight": 0.2663
+      },
+      {
+        "hex": "#ebe9dc",
+        "weight": 0.2403
+      },
+      {
+        "hex": "#f7b99b",
+        "weight": 0.1878
+      }
+    ],
+    "easy_08_banana": [
+      {
+        "hex": "#d29b20",
+        "weight": 0.7393
+      },
+      {
+        "hex": "#f6e7a9",
+        "weight": 0.2607
+      }
+    ],
+    "easy_15_broccoli": [
+      {
+        "hex": "#282016",
+        "weight": 0.2027
+      },
+      {
+        "hex": "#e0e2b7",
+        "weight": 0.1804
+      },
+      {
+        "hex": "#b4b777",
+        "weight": 0.1762
+      },
+      {
+        "hex": "#996a32",
+        "weight": 0.1614
+      },
+      {
+        "hex": "#4d502a",
+        "weight": 0.1538
+      },
+      {
+        "hex": "#81924e",
+        "weight": 0.1256
+      }
+    ],
+    "easy_06_strawberry": [
+      {
+        "hex": "#ed5858",
+        "weight": 0.3003
+      },
+      {
+        "hex": "#d1221e",
+        "weight": 0.2487
+      },
+      {
+        "hex": "#3e0f0d",
+        "weight": 0.1972
+      },
+      {
+        "hex": "#d4a390",
+        "weight": 0.1361
+      },
+      {
+        "hex": "#8d3830",
+        "weight": 0.1176
+      }
+    ],
+    "medium_11_cotton-candy": [
+      {
+        "hex": "#f9b6b0",
+        "weight": 0.5425
+      },
+      {
+        "hex": "#f37e6c",
+        "weight": 0.4575
+      }
+    ]
+  },
+  "shadow": {
+    "hard_03_star-fruit": "bonus/shadow/hard_03_star-fruit.png",
+    "easy_08_banana": "bonus/shadow/easy_08_banana.png",
+    "medium_05_cauliflower": "bonus/shadow/medium_05_cauliflower.png"
+  },
+  "texture": {
+    "medium_08_waffle": {
+      "file": "bonus/texture/medium_08_waffle.jpg",
+      "fx": 0.5,
+      "fy": 0.5,
+      "zoom": 6.25
+    },
+    "easy_06_strawberry": {
+      "file": "bonus/texture/easy_06_strawberry.jpg",
+      "fx": 0.5,
+      "fy": 0.45,
+      "zoom": 6.25
+    },
+    "easy_14_corn-on-the-cob": {
+      "file": "bonus/texture/easy_14_corn-on-the-cob.jpg",
+      "fx": 0.5,
+      "fy": 0.5,
+      "zoom": 6.25
+    },
+    "hard_06_romanesco": {
+      "file": "bonus/texture/hard_06_romanesco.jpg",
+      "fx": 0.5,
+      "fy": 0.5,
+      "zoom": 6.25
+    }
+  },
+  "unpixel": {
+    "easy_01_pizza": {
+      "levels": [
+        12,
+        24,
+        48,
+        96,
+        192
+      ],
+      "files": {
+        "12": "bonus/unpixel/easy_01_pizza_12.jpg",
+        "24": "bonus/unpixel/easy_01_pizza_24.jpg",
+        "48": "bonus/unpixel/easy_01_pizza_48.jpg",
+        "96": "bonus/unpixel/easy_01_pizza_96.jpg",
+        "192": "bonus/unpixel/easy_01_pizza_192.jpg"
+      }
+    }
+  }
+}
