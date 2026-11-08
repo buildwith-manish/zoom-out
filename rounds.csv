@@ -18,7 +18,7 @@ id,question,highlight,answer,image,art,pic,fx,fy,z0,hint,level,ar
 17,What fruit is this?,1,Apple,easy_17_apple.jpg,apple,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH A,easy,1.75
 18,What food is this?,1,Taco,easy_18_taco.jpg,taco,#0b0b2a,52%,57%,6,4 LETTERS · STARTS WITH T,easy,1.75
 19,What dessert is this?,1,Cupcake,easy_19_cupcake.jpg,cupcake,#0b0b2a,50%,50%,6,7 LETTERS · STARTS WITH C,easy,1.75
-20,What food is this?,1,Bacon,easy_20_bacon.jpg,bacon,#0b0b2a,46%,58%,6,5 LETTERS · STARTS WITH B,easy,1.75
+20,What food is this?,1,Bacon,easy_20_bacon.jpg,bacon,#0b0b2a,50%,48%,6,5 LETTERS · STARTS WITH B,easy,1.75
 21,What fruit is this?,1,Avocado,medium_01_avocado.jpg,avocado,#0b0b2a,50%,49%,7,7 LETTERS · STARTS WITH A,medium,1.75
 22,What fruit is this?,1,Kiwi,medium_02_kiwi.jpg,kiwi,#0b0b2a,50%,50%,7,4 LETTERS · STARTS WITH K,medium,1.75
 23,What fruit is this?,1,Pomegranate,medium_03_pomegranate.jpg,pomegranate,#0b0b2a,50%,49%,7,11 LETTERS · STARTS WITH P,medium,1.75
@@ -30,7 +30,7 @@ id,question,highlight,answer,image,art,pic,fx,fy,z0,hint,level,ar
 29,What snack is this?,1,Pretzel,medium_09_pretzel.jpg,pretzel,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH P,medium,1.75
 30,What food is this?,1,Sushi,medium_10_sushi.jpg,sushi,#0b0b2a,48%,60%,7,5 LETTERS · STARTS WITH S,medium,1.75
 31,What treat is this?,1,Cotton Candy,medium_11_cotton-candy.jpg,cotton-candy,#0b0b2a,49%,55%,7,2 WORDS · 11 LETTERS · STARTS WITH C,medium,1.75
-32,What snack is this?,1,Nachos,medium_12_nachos.jpg,nachos,#0b0b2a,47%,59%,7,6 LETTERS · STARTS WITH N,medium,1.75
+32,What snack is this?,1,Nachos,medium_12_nachos.jpg,nachos,#0b0b2a,51%,54%,7,6 LETTERS · STARTS WITH N,medium,1.75
 33,What pastry is this?,1,Croissant,medium_13_croissant.jpg,croissant,#0b0b2a,50%,50%,7,9 LETTERS · STARTS WITH C,medium,1.75
 34,What dessert is this?,1,Macaron,medium_14_macaron.jpg,macaron,#0b0b2a,50%,54%,7,7 LETTERS · STARTS WITH M,medium,1.75
 35,What food is this?,1,Lasagna,medium_15_lasagna.jpg,lasagna,#0b0b2a,49%,55%,7,7 LETTERS · STARTS WITH L,medium,1.75
@@ -39,7 +39,7 @@ id,question,highlight,answer,image,art,pic,fx,fy,z0,hint,level,ar
 38,What fruit is this?,1,Star Fruit,hard_03_star-fruit.jpg,star-fruit,#0b0b2a,50%,50%,8,2 WORDS · 9 LETTERS · STARTS WITH S,hard,1.75
 39,What fruit is this?,1,Passion Fruit,hard_04_passion-fruit.jpg,passion-fruit,#0b0b2a,50%,50%,8,2 WORDS · 12 LETTERS · STARTS WITH P,hard,1.75
 40,What fruit is this?,1,Fig,hard_05_fig.jpg,fig,#0b0b2a,50%,52%,8,3 LETTERS · STARTS WITH F,hard,1.75
-41,What vegetable is this?,1,Romanesco,hard_06_romanesco.jpg,romanesco,#0b0b2a,49%,50%,8,9 LETTERS · STARTS WITH R,hard,1.75
+41,What vegetable is this?,1,Romanesco,hard_06_romanesco.jpg,romanesco,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH R,hard,1.75
 42,What vegetable is this?,1,Okra,hard_07_okra.jpg,okra,#0b0b2a,50%,52%,8,4 LETTERS · STARTS WITH O,hard,1.75
 43,What food is this?,1,Honeycomb,hard_08_honeycomb.jpg,honeycomb,#0b0b2a,54%,50%,8,9 LETTERS · STARTS WITH H,hard,1.75
 44,What seafood is this?,1,Oyster,hard_09_oyster.jpg,oyster,#0b0b2a,51%,48%,8,6 LETTERS · STARTS WITH O,hard,1.75
