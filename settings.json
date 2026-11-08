@@ -18,8 +18,8 @@
   "brandRight": "Out",
   "zoomStart": 1,
   "zoomDuration": 8,
-  "hold": 2,
-  "revealDuration": 4.5,
+  "hold": 1.5,
+  "revealDuration": 3.5,
   "introDuration": 6.5,
   "outroDuration": 4,
   "stingDuration": 4.0,
@@ -134,8 +134,8 @@
   "introHookDelay": 1.6,
   "retention": {
     "zoomByLevel": {
-      "easy": 6,
-      "medium": 7,
+      "easy": 5,
+      "medium": 6,
       "hard": 8
     },
     "transitions": {
