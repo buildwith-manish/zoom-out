@@ -22,7 +22,7 @@ zoom-out/
 ├── public/
 │   ├── fonts/             # Anton, JetBrains Mono
 │   ├── sounds/
-│   └── images/            # 50 animal photos (1920×1080) + logo.svg
+│   └── images/            # 50 food photos (2688×1536) + logo.svg
 ├── scripts/
 │   ├── csv-to-json.js
 │   ├── fetch-images.js    # z-ai image-search, skips shutterstock.com
@@ -52,7 +52,7 @@ zoom-out/
 | Sting | 1.3s |
 | **Total (4 rounds)** | **see settings.json** |
 
-Edit `settings.json` for timing / watermark / series colour (`main` · `animals` · `food` · `science`). Edit `rounds.csv` or `questions.json` for the prompts.
+Edit `settings.json` for timing / watermark / series colour (`main` · `animals` · `food` · `science`; this project uses `food`). Edit `rounds.csv` or `questions.json` for the prompts.
 
 ## Install
 
@@ -89,7 +89,7 @@ The composition plays `background.wav` under `sfx.wav`. Re-run both after changi
 
 ## Photos (optional)
 
-The 50 animal photos ship in `public/images/` (1920×1080).
+The 50 food photos ship in `public/images/` (2688×1536, 16:7 → ar 1.75). Names match the `image` column in `rounds.csv`.
 
 To swap in real photos:
 

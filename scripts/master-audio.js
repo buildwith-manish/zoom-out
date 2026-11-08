@@ -75,8 +75,13 @@ const filter = [
 ].join(';');
 
 console.log('1/3 mixing + ducking ...');
+// No voiceover yet? Mix music + sfx against silence so the video still has a clean master.
+const voiceInput = fs.existsSync(snd('voiceover.wav'))
+  ? ['-i', snd('voiceover.wav')]
+  : ['-f', 'lavfi', '-t', String(dur), '-i', 'anullsrc=r=48000:cl=stereo'];
+if (voiceInput[0] !== '-i') console.log('   (no voiceover.wav found - mastering music + sfx only)');
 ffmpeg([
-  '-i', snd('voiceover.wav'), '-i', snd('background.mp3'), '-i', snd('sfx.mp3'),
+  ...voiceInput, '-i', snd('background.mp3'), '-i', snd('sfx.mp3'),
   '-filter_complex', filter, '-map', '[mix]', '-c:a', 'pcm_f32le', '-ar', '48000', pre,
 ]);
 
