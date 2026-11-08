@@ -29,8 +29,39 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate rounds.json
-        run: node scripts/csv-to-json.js
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install py7zr
+        run: pip install py7zr
+
+      - name: Extract voiceover clips
+        run: |
+          python3 -c "
+          import py7zr, os, shutil, re
+          if not os.path.exists('clips_wav.7z'):
+              print('no clips_wav.7z — rendering without voiceover')
+              raise SystemExit(0)
+          with py7zr.SevenZipFile('clips_wav.7z', 'r') as z:
+              z.extractall('/tmp/vo')
+          src = '/tmp/vo/clips_wav'
+          dst = 'public/voiceover'
+          os.makedirs(dst, exist_ok=True)
+          n = 0
+          for f in sorted(os.listdir(src)):
+              m = re.match(r'^\d+_(.+\.wav)$', f)
+              if m:
+                  shutil.copy2(os.path.join(src, f), os.path.join(dst, m.group(1)))
+                  n += 1
+          print(f'extracted {n} voiceover clips to {dst}/')
+          "
+
+      - name: Scan voiceover + generate rounds.json
+        run: |
+          npm run voiceover
+          node scripts/csv-to-json.js
 
       - name: Determine clips for this job
         id: clips
@@ -132,8 +163,36 @@ jobs:
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Generate rounds.json
-        run: node scripts/csv-to-json.js
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install py7zr
+        run: pip install py7zr
+
+      - name: Extract voiceover clips + scan + generate rounds.json
+        run: |
+          python3 -c "
+          import py7zr, os, shutil, re
+          if not os.path.exists('clips_wav.7z'):
+              print('no clips_wav.7z — rendering without voiceover')
+              raise SystemExit(0)
+          with py7zr.SevenZipFile('clips_wav.7z', 'r') as z:
+              z.extractall('/tmp/vo')
+          src = '/tmp/vo/clips_wav'
+          dst = 'public/voiceover'
+          os.makedirs(dst, exist_ok=True)
+          n = 0
+          for f in sorted(os.listdir(src)):
+              m = re.match(r'^\d+_(.+\.wav)$', f)
+              if m:
+                  shutil.copy2(os.path.join(src, f), os.path.join(dst, m.group(1)))
+                  n += 1
+          print(f'extracted {n} voiceover clips to {dst}/')
+          "
+          npm run voiceover
+          node scripts/csv-to-json.js
 
       - name: Download all clip artifacts
         uses: actions/download-artifact@v4
