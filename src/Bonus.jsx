@@ -1065,7 +1065,16 @@ function AnswerCard({rl, round, qItem, kind, children, theme}) {
   );
 }
 
-function EraseChip({rl, text}) {
+function EraseIcon({size, color}) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{display: 'block', flex: 'none'}}>
+      <path d="M20 20H7L3 16l11-11 6 6-3.5 3.5" />
+      <path d="M6.5 17.5l4-4" />
+    </svg>
+  );
+}
+
+function EraseChip({rl}) {
   const p = gsapTween(rl, 0.55, 0.5, backOut);
   if (p <= 0) return null;
   return (
@@ -1077,38 +1086,48 @@ function EraseChip({rl, text}) {
         gap: cq(1.3),
         height: cq(12),
         flexShrink: 0,
+        opacity: p,
+        transform: `scale(${lerp(0.8, 1, p)})`,
       }}
     >
+      {/* Left pill: action cue in amber */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: cq(1.2),
           background: COLORS.amber,
-          borderRadius: cq(3),
-          padding: `${cq(1.3)}px ${cq(2.8)}px`,
+          borderRadius: `${cq(3)}px 0 0 ${cq(3)}px`,
+          padding: `${cq(1.3)}px ${cq(2.4)}px`,
           font: `700 ${cq(2.7)}px/1 ${FONTS.mono}`,
           letterSpacing: '0.14em',
           color: '#111436',
           whiteSpace: 'nowrap',
-          opacity: p,
-          transform: `scale(${lerp(0.8, 1, p)})`,
           boxShadow: `0 0 ${cq(3)}px rgba(255,193,58,.55)`,
         }}
       >
-        {text}
-        <span
-          style={{
-            width: cq(3.4),
-            height: cq(3.4),
-            borderRadius: '50%',
-            background: '#111436',
-            display: 'grid',
-            placeItems: 'center',
-          }}
-        >
-          <CheckIcon size={cq(2.2)} color={COLORS.amber} />
-        </span>
+        <CheckIcon size={cq(2.6)} color="#111436" />
+        GET IT RIGHT
+      </div>
+      {/* Right pill: what happens, in dark */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: cq(1.2),
+          background: 'rgba(0,0,0,.55)',
+          border: `${cq(0.2)}px solid ${COLORS.amber}88`,
+          borderRadius: `0 ${cq(3)}px ${cq(3)}px 0`,
+          padding: `${cq(1.3)}px ${cq(2.4)}px`,
+          font: `700 ${cq(2.7)}px/1 ${FONTS.mono}`,
+          letterSpacing: '0.14em',
+          color: '#fff',
+          whiteSpace: 'nowrap',
+          marginLeft: `-${cq(0.3)}px`,
+        }}
+      >
+        <EraseIcon size={cq(2.8)} color={COLORS.amber} />
+        REMOVES A WRONG ANSWER
       </div>
     </div>
   );
@@ -1116,11 +1135,21 @@ function EraseChip({rl, text}) {
 
 // ------------------------------------------------------------ banner -------
 
+const KIND_TAGLINE = {
+  colordna: 'IDENTIFY THE FOOD FROM ITS COLOR SIGNATURE',
+  shadow:   'NAME THE FOOD FROM ITS SILHOUETTE',
+  texture:  'GUESS THE FOOD FROM AN EXTREME CLOSE-UP',
+  unpixel:  'IDENTIFY THE FOOD AS IT COMES INTO FOCUS',
+  recipe:   'GUESS THE DISH FROM ITS INGREDIENTS',
+};
+
 function BonusBanner({local, clockStart, round, n, total, theme}) {
   if (local >= clockStart + 0.45) return null;
   const out = clamp01((local - (clockStart - 0.35)) / 0.45);
   const col = kindColor(round.kind);
   const words = ['BONUS', 'ROUND'];
+  const tagline = KIND_TAGLINE[round.kind] || '';
+  const taglineP = gsapTween(local, 0.44, 0.48, backOut);
   return (
     <div
       style={{
@@ -1167,6 +1196,36 @@ function BonusBanner({local, clockStart, round, n, total, theme}) {
           );
         })}
       </h2>
+
+      {/* Kind-specific mechanic tagline — tells viewers exactly what to do */}
+      {tagline ? (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: cq(1.4),
+            background: `${col}22`,
+            border: `${cq(0.2)}px solid ${col}88`,
+            borderRadius: cq(2),
+            padding: `${cq(1.2)}px ${cq(3)}px`,
+            opacity: taglineP,
+            transform: `translateY(${(1 - taglineP) * cq(2)}px)`,
+          }}
+        >
+          <i style={{width: cq(1.4), height: cq(1.4), borderRadius: '50%', background: col, flex: 'none', boxShadow: `0 0 ${cq(1.2)}px ${col}`}} />
+          <span
+            style={{
+              font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`,
+              letterSpacing: '0.18em',
+              color: '#fff',
+              textTransform: 'uppercase',
+            }}
+          >
+            {tagline}
+          </span>
+        </div>
+      ) : null}
+
       <div
         style={{
           display: 'flex',
@@ -1263,7 +1322,7 @@ export function BonusScene({local, duration, round, bonusIndex, settings, questi
             <BonusRevealFX local={rl} />
             <RevealBridge kind={round.kind} rl={rl} round={round} qItem={qItem} data={palette} />
           </AnswerCard>
-          <EraseChip rl={rl} text={B.eraseChip || 'NAIL IT? ERASE 1 WRONG'} />
+          <EraseChip rl={rl} />
         </>
       ) : (
         <>
