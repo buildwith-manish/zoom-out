@@ -70,35 +70,35 @@ intro.wav
 
 === EASY  (Q1-Q10) ===
 
-qq01.wav   "Let's start easy. What food is this?"
-q01.wav    "Pizza!"
+qq01.wav   "Warm-up time. Name this food."
+q01.wav    "Pizza! Easy start."
 
-qq02.wav   "What food is this?"
-q02.wav    "Hamburger!"
+qq02.wav   "The zoom is moving. Can you name this food?"
+q02.wav    "Hamburger! A true classic."
 
-qq03.wav   "Next one. What food is this?"
-q03.wav    "French fries!"
+qq03.wav   "Quick, before it zooms out. Name this food."
+q03.wav    "French fries! Crispy and golden."
 
-qq04.wav   "What food is this?"
-q04.wav    "Hot dog!"
+qq04.wav   "Don't blink. What food is this?"
+q04.wav    "Hot dog! Ballpark favorite."
 
-qq05.wav   "What dessert is this?"
-q05.wav    "Donut!"
+qq05.wav   "Sweet tooth ready? Name this dessert."
+q05.wav    "Donut! Round and sweet."
 
-qq06.wav   "What fruit is this?"
-q06.wav    "Strawberry!"
+qq06.wav   "Fruit time. Take your best guess."
+q06.wav    "Strawberry! Seeds on the outside."
 
-qq07.wav   "Okay, what fruit is this?"
-q07.wav    "Watermelon!"
+qq07.wav   "Think you know this fruit? Prove it."
+q07.wav    "Watermelon! Summer's finest."
 
-qq08.wav   "What fruit is this?"
-q08.wav    "Banana!"
+qq08.wav   "Easy fruit. Don't overthink it."
+q08.wav    "Banana! Peel and eat."
 
-qq09.wav   "What fruit is this?"
-q09.wav    "Pineapple!"
+qq09.wav   "Another fruit. Look closely."
+q09.wav    "Pineapple! Tropical and tangy."
 
-qq10.wav   "What snack is this?"
-q10.wav    "Popcorn! Ten down, forty to go."
+qq10.wav   "Snack break. What's this one?"
+q10.wav    "Popcorn! Ten down."
 
 
 === BONUS 1 - COLOR DNA  (plays after Q10) ===
@@ -112,35 +112,35 @@ bonus1.wav
 
 === EASY continued (Q11-Q20) ===
 
-qq11.wav   "What dessert is this?"
-q11.wav    "Chocolate chip cookie!"
+qq11.wav   "Back for dessert. Name it fast."
+q11.wav    "Chocolate chip cookie! Warm and gooey."
 
-qq12.wav   "What dessert is this?"
-q12.wav    "Ice cream cone!"
+qq12.wav   "Another dessert. Beat the timer."
+q12.wav    "Ice cream cone! Scoop it up."
 
-qq13.wav   "What breakfast is this?"
-q13.wav    "Pancakes!"
+qq13.wav   "Rise and shine. What breakfast is this?"
+q13.wav    "Pancakes! Stack them high."
 
-qq14.wav   "What vegetable is this?"
-q14.wav    "Corn on the cob!"
+qq14.wav   "Veggie time. Name this vegetable."
+q14.wav    "Corn on the cob! Butter, please."
 
-qq15.wav   "What vegetable is this?"
-q15.wav    "Broccoli!"
+qq15.wav   "Another vegetable. Look closer."
+q15.wav    "Broccoli! Tiny trees."
 
-qq16.wav   "What vegetable is this?"
-q16.wav    "Carrot!"
+qq16.wav   "One more vegetable. Don't miss it."
+q16.wav    "Carrot! Crunch time."
 
-qq17.wav   "What fruit is this?"
-q17.wav    "Apple!"
+qq17.wav   "Fruit again. Think fast."
+q17.wav    "Apple! One a day."
 
-qq18.wav   "What food is this?"
-q18.wav    "Taco!"
+qq18.wav   "Let's switch it up. Name this food."
+q18.wav    "Taco! Tuesday vibes."
 
-qq19.wav   "What dessert is this?"
-q19.wav    "Cupcake!"
+qq19.wav   "Dessert alert. Name it before the zoom ends."
+q19.wav    "Cupcake! Tiny and sweet."
 
-qq20.wav   "Last easy one. What food is this?"
-q20.wav    "Bacon! That's the end of easy."
+qq20.wav   "Last easy one. Make it count."
+q20.wav    "Bacon! Easy is done."
 
 
 === BONUS 2 - SHADOW REVEAL  (plays after Q20) ===
@@ -154,34 +154,34 @@ bonus2.wav
 
 === MEDIUM  (Q21-Q35) ===
 
-qq21.wav   "Medium level. Now it gets tricky. What fruit is this?"
-q21.wav    "Avocado!"
+qq21.wav   "Medium level. Now it gets tricky. Name this fruit."
+q21.wav    "Avocado! Green and creamy."
 
-qq22.wav   "What fruit is this?"
-q22.wav    "Kiwi!"
+qq22.wav   "Fruit, but trickier. Look carefully."
+q22.wav    "Kiwi! Fuzzy little fruit."
 
-qq23.wav   "What fruit is this?"
-q23.wav    "Pomegranate!"
+qq23.wav   "Careful now. What fruit is this?"
+q23.wav    "Pomegranate! Packed with seeds."
 
-qq24.wav   "What fruit is this?"
-q24.wav    "Cantaloupe!"
+qq24.wav   "Fruit again. Can you keep the streak going?"
+q24.wav    "Cantaloupe! Sweet summer melon."
 
-qq25.wav   "What vegetable is this?"
-q25.wav    "Cauliflower!"
+qq25.wav   "Vegetable time. Take your time."
+q25.wav    "Cauliflower! Not broccoli."
 
-qq26.wav   "What vegetable is this?"
-q26.wav    "Eggplant!"
+qq26.wav   "Name this vegetable. No peeking."
+q26.wav    "Eggplant! Totally not egg."
 
-qq27.wav   "What vegetable is this?"
-q27.wav    "Brussels sprouts!"
+qq27.wav   "Tricky vegetable. Trust your gut."
+q27.wav    "Brussels sprouts! Tiny cabbages."
 
-qq28.wav   "What breakfast is this?"
-q28.wav    "Waffle!"
+qq28.wav   "Breakfast is served. Name it."
+q28.wav    "Waffle! Grid of goodness."
 
-qq29.wav   "What snack is this?"
-q29.wav    "Pretzel!"
+qq29.wav   "Snack attack. What's this one?"
+q29.wav    "Pretzel! Salty and twisted."
 
-qq30.wav   "What food is this?"
+qq30.wav   "Something different. Name this food."
 q30.wav    "Sushi! Thirty down."
 
 
@@ -196,38 +196,38 @@ bonus3.wav
 
 === MEDIUM continued (Q31-Q35) ===
 
-qq31.wav   "What treat is this?"
-q31.wav    "Cotton candy!"
+qq31.wav   "Sweet treat incoming. Name it."
+q31.wav    "Cotton candy! Pure sugar."
 
-qq32.wav   "What snack is this?"
-q32.wav    "Nachos!"
+qq32.wav   "Snack time again. Eyes sharp."
+q32.wav    "Nachos! Chips and cheese."
 
-qq33.wav   "What pastry is this?"
-q33.wav    "Croissant!"
+qq33.wav   "Pastry time. Can you name it?"
+q33.wav    "Croissant! Flaky and buttery."
 
-qq34.wav   "What dessert is this?"
-q34.wav    "Macaron!"
+qq34.wav   "Dessert, but tricky. Name it."
+q34.wav    "Macaron! Not macaroon."
 
-qq35.wav   "Last medium one. What food is this?"
-q35.wav    "Lasagna! Medium is done. Hard is next."
+qq35.wav   "Final medium round. Name this food."
+q35.wav    "Lasagna! Layers on layers."
 
 
 === HARD  (Q36-Q50) ===
 
-qq36.wav   "Hard level. Sharp eyes only. What fruit is this?"
-q36.wav    "Dragon fruit!"
+qq36.wav   "Hard level. Sharp eyes only. Name this fruit."
+q36.wav    "Dragon fruit! Exotic indeed."
 
-qq37.wav   "What vegetable is this?"
-q37.wav    "Artichoke!"
+qq37.wav   "Strange vegetable. Look closely."
+q37.wav    "Artichoke! Edible flower bud."
 
-qq38.wav   "What fruit is this?"
-q38.wav    "Star fruit!"
+qq38.wav   "Exotic fruit. Can you name it?"
+q38.wav    "Star fruit! Shaped like stars."
 
-qq39.wav   "What fruit is this?"
-q39.wav    "Passion fruit!"
+qq39.wav   "Another exotic fruit. No pressure."
+q39.wav    "Passion fruit! Tart and tropical."
 
-qq40.wav   "What fruit is this?"
-q40.wav    "Fig! Forty down, ten to go."
+qq40.wav   "Fruit again. Trust your eyes."
+q40.wav    "Fig! Forty down."
 
 
 === BONUS 4 - PIXEL FOCUS  (plays after Q40) ===
@@ -241,35 +241,35 @@ bonus4.wav
 
 === HARD continued (Q41-Q50) ===
 
-qq41.wav   "What vegetable is this?"
-q41.wav    "Romanesco!"
+qq41.wav   "Vegetable, but weird. Name it."
+q41.wav    "Romanesco! Nature's fractal."
 
-qq42.wav   "What vegetable is this?"
-q42.wav    "Okra!"
+qq42.wav   "Veggie time. This one's sneaky."
+q42.wav    "Okra! Southern staple."
 
-qq43.wav   "What food is this?"
-q43.wav    "Honeycomb!"
+qq43.wav   "Name this food. It's a tough one."
+q43.wav    "Honeycomb! Made by bees."
 
-qq44.wav   "What seafood is this?"
-q44.wav    "Oyster!"
+qq44.wav   "Seafood time. Name this one."
+q44.wav    "Oyster! From the sea."
 
-qq45.wav   "What dessert is this?"
-q45.wav    "Baklava!"
+qq45.wav   "Dessert, hard mode. Name it."
+q45.wav    "Baklava! Flaky and sweet."
 
-qq46.wav   "What nut is this?"
-q46.wav    "Pistachio!"
+qq46.wav   "Name this nut. Good luck."
+q46.wav    "Pistachio! Crack it open."
 
-qq47.wav   "What fruit is this?"
-q47.wav    "Coconut!"
+qq47.wav   "Fruit again. Don't overthink it."
+q47.wav    "Coconut! Tropical classic."
 
-qq48.wav   "What fruit is this?"
-q48.wav    "Raspberry!"
+qq48.wav   "Almost there. Name this fruit."
+q48.wav    "Raspberry! Tiny and tart."
 
-qq49.wav   "What nut is this?"
-q49.wav    "Walnut!"
+qq49.wav   "Nut time. Stay sharp."
+q49.wav    "Walnut! Brain-shaped nut."
 
-qq50.wav   "Last one. Make it count. What seafood is this?"
-q50.wav    "Lobster! One more bonus to go."
+qq50.wav   "Last one. Make it count. Name this seafood."
+q50.wav    "Lobster! One bonus left."
 
 
 === BONUS 5 - RECIPE REVERSE  (plays after Q50) ===
@@ -297,18 +297,20 @@ sting.wav
 RECORDING NOTES
 
 Tone
-  - qq##   curious and a little teasing. Leave the silence after the line
-           alone, the zoom does the talking.
-  - q##    one punchy beat, like a buzzer. Say the answer first, always.
+  - qq##   every line is different on purpose. Keep it curious and a little
+           teasing, never flat. Leave the silence after the line alone, the
+           zoom does the talking.
+  - q##    answer first, punchy like a buzzer, then a 2-3 word tag on the
+           end. Pause one beat between the answer and the tag.
   - bonusq a notch more excited. This is the special round. The comment
            request is the whole point, so say it clearly.
   - bonus# answer plus one short reaction, then stop.
   - intro  hook in the first two seconds.
   - outro  talk to one person, not a crowd.
 
-Keep the on-screen words and the spoken words matching. Every qq## line says
-the same category the screen says (food, fruit, dessert, snack, breakfast,
-vegetable, treat, pastry, nut, seafood).
+Question lines name the same category the screen shows (food, fruit, dessert,
+snack, breakfast, vegetable, treat, pastry, nut, seafood), but they are not all
+questions, and no line gives the answer away.
 
 Don't say anything during the 8-second bonus clock. The tick sounds carry it.
 No clips for the hint (it appears at 40% of the zoom). It stays visual.
