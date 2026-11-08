@@ -1,4 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext, createContext} from 'react';
+// Per-series theme context — provides dark, darkMid, darkDeep, hint colours
+const ThemeCtx = createContext(null);
 import {
   AbsoluteFill,
   Img,
@@ -413,6 +415,54 @@ function MotionBlurZoomLayer({item, local, zoomDelay, zoomDur, z0, blur, fps, sa
   return <>{layers}</>;
 }
 
+/** Lens vignette overlay — tinted to match the current series dark colour */
+function LensOverlay({cam, lensFade}) {
+  const theme = useContext(ThemeCtx);
+  const darkMid = theme ? theme.darkMid : 'rgba(6,4,44,.62)';
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 2,
+        pointerEvents: 'none',
+        opacity: lensFade,
+        background: `radial-gradient(circle at ${(cam.focusX * 100).toFixed(2)}% ${(cam.focusY * 100).toFixed(2)}%, transparent 18%, ${darkMid} 100%)`,
+      }}
+    />
+  );
+}
+
+/** ZOOM ×N badge in the photo card bottom-left — tinted to series */
+function ZoomBadge({scale}) {
+  const theme = useContext(ThemeCtx);
+  const dark = theme ? theme.dark : 'rgba(10,14,80,.62)';
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: cq(3),
+        bottom: cq(3.2),
+        zIndex: 3,
+        display: 'flex',
+        gap: cq(1.4),
+        alignItems: 'center',
+        background: dark,
+        border: `${cq(0.2)}px solid ${COLORS.glassline}`,
+        borderRadius: cq(1.2),
+        padding: `${cq(1.1)}px ${cq(1.8)}px`,
+        font: `700 ${cq(2.2)}px/1 ${FONTS.mono}`,
+        letterSpacing: '0.14em',
+      }}
+    >
+      ZOOM{' '}
+      <b style={{color: COLORS.amber, fontVariantNumeric: 'tabular-nums', minWidth: '5.6ch'}}>
+        ×{scale.toFixed(1)}
+      </b>
+    </div>
+  );
+}
+
 function PhotoCard({
   item,
   local,
@@ -493,40 +543,10 @@ function PhotoCard({
     >
       {layer}
       {showLens ? (
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 2,
-            pointerEvents: 'none',
-            opacity: lensFade,
-            background: `radial-gradient(circle at ${(cam.focusX * 100).toFixed(2)}% ${(cam.focusY * 100).toFixed(2)}%, transparent 18%, rgba(6,4,44,.62) 100%)`,
-          }}
-        />
+        <LensOverlay cam={cam} lensFade={lensFade} />
       ) : null}
       <CornerBrackets locked={locked} />
-      <div
-        style={{
-          position: 'absolute',
-          left: cq(3),
-          bottom: cq(3.2),
-          zIndex: 3,
-          display: 'flex',
-          gap: cq(1.4),
-          alignItems: 'center',
-          background: 'rgba(10,14,80,.62)',
-          border: `${cq(0.2)}px solid ${COLORS.glassline}`,
-          borderRadius: cq(1.2),
-          padding: `${cq(1.1)}px ${cq(1.8)}px`,
-          font: `700 ${cq(2.2)}px/1 ${FONTS.mono}`,
-          letterSpacing: '0.14em',
-        }}
-      >
-        ZOOM{' '}
-        <b style={{color: COLORS.amber, fontVariantNumeric: 'tabular-nums', minWidth: '5.6ch'}}>
-          ×{scale.toFixed(1)}
-        </b>
-      </div>
+      <ZoomBadge scale={scale} />
       <div
         style={{
           position: 'absolute',
@@ -543,6 +563,7 @@ function PhotoCard({
 }
 
 function Timeline({local, settings, hint, zd, zoomStart}) {
+  const theme = useContext(ThemeCtx);
   const ZS = zoomStart != null ? zoomStart : settings.zoomStart;
   const ZD = zd != null ? zd : settings.zoomDuration;
   const enter = gsapTween(local, 0.9, 0.5, power3Out);
@@ -672,7 +693,7 @@ function Timeline({local, settings, hint, zd, zoomStart}) {
             height: cq(4.8),
             borderRadius: '50%',
             transform: `translate(-50%, -50%) scale(${lerp(1, 1.3, hintOn)})`,
-            background: hon ? COLORS.amber : '#2a1d6e',
+            background: hon ? COLORS.amber : (theme ? theme.hint : '#2a1d6e'),
             border: `${cq(0.35)}px solid rgba(255,255,255,.85)`,
             display: 'grid',
             placeItems: 'center',
@@ -933,6 +954,7 @@ function RevealFX({local}) {
 }
 
 function Watermark({t, settings}) {
+  const theme = useContext(ThemeCtx);
   const enter = gsapTween(t, 0.2, 0.7, backOut);
   const glintCycle = Math.max(0, t - 1.6);
   const glintLocal = glintCycle % 8;
@@ -969,7 +991,7 @@ function Watermark({t, settings}) {
           gap: cq(1.6),
           padding: `${cq(1)}px ${cq(2.4)}px ${cq(1)}px ${cq(1.4)}px`,
           borderRadius: cq(3),
-          background: 'rgba(14,8,60,.42)',
+          background: theme ? theme.darkLight : 'rgba(14,8,60,.42)',
           border: `${cq(0.2)}px solid rgba(255,255,255,.4)`,
           backdropFilter: 'blur(3px)',
         }}
@@ -1017,6 +1039,7 @@ function Stage({t, series, children}) {
   const sweepT = easeInOut((t % 11.3) / 11.3);
   const sweepX = -80 + sweepT * 300;
   return (
+    <ThemeCtx.Provider value={colors}>
     <AbsoluteFill
       style={{
         background: `radial-gradient(120% 90% at 8% 0%, ${colors.b1} 0%, ${colors.b2} 48%, ${colors.b3} 100%)`,
@@ -1053,10 +1076,12 @@ function Stage({t, series, children}) {
       />
       {children}
     </AbsoluteFill>
+    </ThemeCtx.Provider>
   );
 }
 
 function Wordmark({local, settings}) {
+  const theme = useContext(ThemeCtx);
   const inP = gsapTween(local, 0.15, 0.45, backOut);
   const move = easeInOut(clamp01((local - 1.0) / 0.55));
   const dim = 1 - clamp01((local - 0.95) / 0.5);
@@ -1064,7 +1089,7 @@ function Wordmark({local, settings}) {
   const s = lerp(1, 0.2, move);
   return (
     <div style={{position: 'absolute', inset: 0, zIndex: 9, pointerEvents: 'none'}}>
-      <div style={{position: 'absolute', inset: 0, background: 'rgba(6,4,44,.72)', opacity: dim}} />
+      <div style={{position: 'absolute', inset: 0, background: theme ? theme.darkOverlay : 'rgba(6,4,44,.72)', opacity: dim}} />
       <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <div
           style={{
@@ -1075,7 +1100,7 @@ function Wordmark({local, settings}) {
             display: 'flex',
             alignItems: 'center',
             gap: cq(3),
-            textShadow: `0 ${cq(0.8)}px 0 rgba(20,8,90,.9), 0 0 ${cq(5)}px rgba(255,193,58,.4)`,
+            textShadow: `0 ${cq(0.8)}px 0 ${theme ? theme.darkDeep : 'rgba(20,8,90,.9)'}, 0 0 ${cq(5)}px rgba(255,193,58,.4)`,
             opacity: inP,
             transform: `translateY(${y}px) scale(${lerp(0.6, 1, inP) * s})`,
           }}

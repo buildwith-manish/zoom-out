@@ -20,10 +20,14 @@ export const COLORS = {
 };
 
 export const SERIES = {
-  main: {b1: '#8e55e0', b2: '#55229f', b3: '#34207f', vig: 'rgba(20,6,60,.5)'},
-  food: {b1: '#35d696', b2: '#0b8d5a', b3: '#0a5f7c', vig: 'rgba(2,40,34,.5)'},
-  animals: {b1: '#5668ff', b2: '#2433dc', b3: '#0b64d8', vig: 'rgba(5,8,60,.45)'},
-  science: {b1: '#22cfe0', b2: '#0a86bb', b3: '#0a4a96', vig: 'rgba(2,26,70,.5)'},
+  // dark      = opaque panel backgrounds (zoom badge, watermark pill, wordmark overlay)
+  // darkMid   = semi-transparent lens / vignette overlays
+  // darkDeep  = deep text-shadow / strong overlay tint
+  // hint      = hint-dot inactive fill
+  main:    {b1: '#8e55e0', b2: '#55229f', b3: '#34207f', vig: 'rgba(20,6,60,.5)',    dark: 'rgba(10,14,80,.62)',  darkLight: 'rgba(10,14,80,.42)',  darkMid: 'rgba(6,4,44,.62)',   darkDeep: 'rgba(20,8,90,.9)',   darkOverlay: 'rgba(6,4,44,.72)',  hint: '#2a1d6e'},
+  food:    {b1: '#35d696', b2: '#0b8d5a', b3: '#0a5f7c', vig: 'rgba(2,40,34,.5)',   dark: 'rgba(4,36,28,.72)',   darkLight: 'rgba(4,36,28,.42)',   darkMid: 'rgba(2,28,22,.62)',  darkDeep: 'rgba(2,30,22,.9)',   darkOverlay: 'rgba(2,28,22,.72)', hint: '#0a3d2e'},
+  animals: {b1: '#5668ff', b2: '#2433dc', b3: '#0b64d8', vig: 'rgba(5,8,60,.45)',   dark: 'rgba(6,10,70,.65)',   darkLight: 'rgba(6,10,70,.42)',   darkMid: 'rgba(4,6,54,.62)',   darkDeep: 'rgba(4,8,64,.9)',    darkOverlay: 'rgba(4,6,54,.72)',  hint: '#0d1660'},
+  science: {b1: '#22cfe0', b2: '#0a86bb', b3: '#0a4a96', vig: 'rgba(2,26,70,.5)',   dark: 'rgba(4,24,60,.65)',   darkLight: 'rgba(4,24,60,.42)',   darkMid: 'rgba(2,20,52,.62)',  darkDeep: 'rgba(2,22,58,.9)',   darkOverlay: 'rgba(2,20,52,.72)', hint: '#061840'},
 };
 
 export const FONTS = {
