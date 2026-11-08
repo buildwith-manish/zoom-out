@@ -170,6 +170,7 @@ function LetterSlam({text, local, size}) {
 }
 
 function LevelBadge({level}) {
+  const theme = useContext(ThemeCtx);
   const L = LEVELS[level];
   if (!L) return <div />;
   return (
@@ -179,20 +180,22 @@ function LevelBadge({level}) {
         display: 'flex',
         alignItems: 'center',
         gap: cq(1.2),
-        background: COLORS.glass,
-        border: `${cq(0.2)}px solid ${L.color}`,
+        background: theme ? theme.panelBg : COLORS.glass,
+        border: `${cq(0.25)}px solid ${L.color}`,
         borderRadius: cq(2),
         padding: `${cq(1.1)}px ${cq(2.4)}px`,
-        backdropFilter: 'blur(2px)',
+        backdropFilter: 'blur(4px)',
+        boxShadow: `0 0 ${cq(1.6)}px ${L.color}55, 0 ${cq(0.4)}px ${cq(2)}px rgba(0,0,0,.35)`,
       }}
     >
-      <i style={{width: cq(1.7), height: cq(1.7), borderRadius: '50%', background: L.color, boxShadow: `0 0 ${cq(1.4)}px ${L.color}`}} />
-      <b style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, letterSpacing: '0.18em', color: L.color}}>{L.label}</b>
+      <i style={{width: cq(1.7), height: cq(1.7), borderRadius: '50%', background: L.color, boxShadow: `0 0 ${cq(1.6)}px ${L.color}`}} />
+      <b style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, letterSpacing: '0.18em', color: L.color, textShadow: `0 0 ${cq(1.2)}px ${L.color}88`}}>{L.label}</b>
     </div>
   );
 }
 
 function LevelCard({local, duration, questions, level}) {
+  const theme = useContext(ThemeCtx);
   const ir = iris(local, 'intro', duration);
   const L = LEVELS[level] || LEVELS.easy;
   const info = levelInfo(questions, level);
@@ -251,10 +254,12 @@ function LevelCard({local, duration, questions, level}) {
           display: 'flex',
           alignItems: 'center',
           gap: cq(2.4),
-          background: COLORS.glass,
-          border: `${cq(0.2)}px solid ${COLORS.glassline}`,
+          background: theme ? theme.panelBg : COLORS.glass,
+          border: `${cq(0.2)}px solid ${theme ? theme.panelBorder : COLORS.glassline}`,
           borderRadius: cq(3),
           padding: `${cq(1.4)}px ${cq(3.2)}px`,
+          backdropFilter: 'blur(4px)',
+          boxShadow: `0 ${cq(0.4)}px ${cq(2.5)}px rgba(0,0,0,.4)`,
           opacity: chip,
           transform: `scale(${lerp(0.8, 1, chip)})`,
         }}
@@ -293,6 +298,7 @@ function LensMark({size}) {
 }
 
 function TopBar({index, total, local, level}) {
+  const theme = useContext(ThemeCtx);
   const fade = gsapTween(local, 0, 0.5, power3Out);
   return (
     <div
@@ -317,16 +323,17 @@ function TopBar({index, total, local, level}) {
           display: 'flex',
           alignItems: 'baseline',
           gap: cq(0.8),
-          background: COLORS.glass,
-          border: `${cq(0.2)}px solid ${COLORS.glassline}`,
+          background: theme ? theme.panelBg : COLORS.glass,
+          border: `${cq(0.2)}px solid ${theme ? theme.panelBorder : COLORS.glassline}`,
           borderRadius: cq(2),
           padding: `${cq(1)}px ${cq(2.2)}px`,
-          backdropFilter: 'blur(2px)',
+          backdropFilter: 'blur(4px)',
+          boxShadow: `0 ${cq(0.4)}px ${cq(2)}px rgba(0,0,0,.35)`,
         }}
       >
-        <small style={{font: `700 ${cq(2)}px/1 ${FONTS.mono}`, opacity: 0.8}}>Q</small>
+        <small style={{font: `700 ${cq(2)}px/1 ${FONTS.mono}`, opacity: 0.85}}>Q</small>
         <b style={{font: `400 ${cq(5.2)}px/1 ${FONTS.display}`}}>{index + 1}</b>
-        <span style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, opacity: 0.8}}>/{total}</span>
+        <span style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, opacity: 0.85}}>/{total}</span>
       </div>
         <LevelBadge level={level} />
       </div>
@@ -436,7 +443,6 @@ function LensOverlay({cam, lensFade}) {
 /** ZOOM ×N badge in the photo card bottom-left — tinted to series */
 function ZoomBadge({scale}) {
   const theme = useContext(ThemeCtx);
-  const dark = theme ? theme.dark : 'rgba(10,14,80,.62)';
   return (
     <div
       style={{
@@ -447,12 +453,14 @@ function ZoomBadge({scale}) {
         display: 'flex',
         gap: cq(1.4),
         alignItems: 'center',
-        background: dark,
-        border: `${cq(0.2)}px solid ${COLORS.glassline}`,
+        background: theme ? theme.panelBg : 'rgba(10,14,80,.82)',
+        border: `${cq(0.2)}px solid ${theme ? theme.panelBorder : COLORS.glassline}`,
         borderRadius: cq(1.2),
         padding: `${cq(1.1)}px ${cq(1.8)}px`,
         font: `700 ${cq(2.2)}px/1 ${FONTS.mono}`,
         letterSpacing: '0.14em',
+        backdropFilter: 'blur(4px)',
+        boxShadow: `0 ${cq(0.3)}px ${cq(1.8)}px rgba(0,0,0,.4)`,
       }}
     >
       ZOOM{' '}
@@ -716,10 +724,10 @@ function Timeline({local, settings, hint, zd, zoomStart}) {
             letterSpacing: '0.14em',
             padding: `${cq(1)}px ${cq(2.2)}px`,
             borderRadius: cq(3),
-            border: `${cq(0.2)}px solid ${hon ? COLORS.amber : COLORS.glassline}`,
-            background: hon ? COLORS.amber : COLORS.glass,
-            color: hon ? '#111436' : 'rgba(255,255,255,.75)',
-            boxShadow: hon ? `0 0 ${cq(2.6)}px rgba(255,193,58,.7)` : 'none',
+            border: `${cq(0.2)}px solid ${hon ? COLORS.amber : (theme ? theme.panelBorder : COLORS.glassline)}`,
+            background: hon ? COLORS.amber : (theme ? theme.panelBg : COLORS.glass),
+            color: hon ? '#111436' : '#fff',
+            boxShadow: hon ? `0 0 ${cq(2.6)}px rgba(255,193,58,.7)` : `0 ${cq(0.3)}px ${cq(1.5)}px rgba(0,0,0,.35)`,
             zIndex: 1,
           }}
         >
@@ -973,7 +981,7 @@ function Watermark({t, settings}) {
         alignItems: 'center',
         gap: cq(1.4),
         color: '#fff',
-        opacity: (settings.watermarkOpacity ?? 0.7) * enter,
+        opacity: Math.max(settings.watermarkOpacity ?? 0.7, 0.75) * enter,
         pointerEvents: 'none',
         font: `700 ${cq(2.3)}px/1 ${FONTS.mono}`,
         letterSpacing: '0.2em',
@@ -991,9 +999,10 @@ function Watermark({t, settings}) {
           gap: cq(1.6),
           padding: `${cq(1)}px ${cq(2.4)}px ${cq(1)}px ${cq(1.4)}px`,
           borderRadius: cq(3),
-          background: theme ? theme.darkLight : 'rgba(14,8,60,.42)',
-          border: `${cq(0.2)}px solid rgba(255,255,255,.4)`,
-          backdropFilter: 'blur(3px)',
+          background: theme ? theme.dark : 'rgba(14,8,60,.75)',
+          border: `${cq(0.2)}px solid ${theme ? theme.panelBorder : 'rgba(255,255,255,.5)'}`,
+          backdropFilter: 'blur(6px)',
+          boxShadow: `0 ${cq(0.4)}px ${cq(2.5)}px rgba(0,0,0,.45)`
         }}
       >
         <div
@@ -1089,7 +1098,7 @@ function Wordmark({local, settings}) {
   const s = lerp(1, 0.2, move);
   return (
     <div style={{position: 'absolute', inset: 0, zIndex: 9, pointerEvents: 'none'}}>
-      <div style={{position: 'absolute', inset: 0, background: theme ? theme.darkOverlay : 'rgba(6,4,44,.72)', opacity: dim}} />
+      <div style={{position: 'absolute', inset: 0, background: 'rgba(0,0,0,.55)', opacity: dim}} />
       <div style={{position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <div
           style={{
