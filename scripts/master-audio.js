@@ -62,13 +62,61 @@ const pre = path.join(tmp, 'premaster.wav');
 console.log(`Video length ${dur.toFixed(3)}s`);
 
 // ---- 1. voice chain + ducked music/sfx -> premaster ---------------------------
+// ---- voice KEY (per-clip voiceover) ----------------------------------------------
+// The per-clip voiceover is played by QuizVoiceover on top of the master, so it is NOT mixed
+// into the master. But the music/sfx still need to dip under it, so we lay the clips out on a
+// timeline exactly as QuizVoiceover does and use that track ONLY as the sidechain key.
+function buildVoiceKey(outWav) {
+  const plan = require(path.join(root, 'src', 'plan.cjs'));
+  const settings = JSON.parse(fs.readFileSync(path.join(root, 'settings.json'), 'utf8'));
+  const questions = JSON.parse(fs.readFileSync(path.join(root, 'questions.json'), 'utf8'));
+  const vo = settings.voiceover || {};
+  const man = plan.voManifest;
+  if (!vo.enabled || !man) return false;
+  const dir = path.join(root, 'public', vo.dir || 'voiceover');
+  const {scenes} = plan.buildScenes(settings, questions);
+  const fps = settings.fps || 60;
+  const clips = [];
+  const add = (e, startSec) => {
+    if (e && e.file && fs.existsSync(path.join(dir, e.file))) clips.push({file: path.join(dir, e.file), ms: Math.round((Math.round(startSec * fps) / fps) * 1000)});
+  };
+  scenes.forEach((sc) => {
+    if (sc.type === 'intro') add(man.intro, sc.start);
+    if (sc.type === 'outro') add(man.outro, sc.start);
+    if (sc.type === 'sting') add(man.sting, sc.start);
+    if (sc.type === 'q') add(man.qq && man.qq[String(sc.i + 1)], sc.start);
+    if (sc.type === 'r') add(man.q && man.q[String(sc.i + 1)], sc.start);
+    if (sc.type === 'bonus') {
+      const n = String(sc.bonusIndex + 1);
+      add(man.bonusq && man.bonusq[n], sc.start);
+      const B = settings.bonus || {};
+      const clock = B.clock != null ? B.clock : 8;
+      const cs = sc.clockStart != null ? sc.clockStart : 1.6;
+      add(man.bonus && man.bonus[n], sc.start + cs + clock);
+    }
+  });
+  if (!clips.length) return false;
+  const ins = clips.flatMap((c) => ['-i', c.file]);
+  const chains = clips.map((c, i) => `[${i}:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay=${c.ms}|${c.ms}[c${i}]`);
+  const mixIn = clips.map((_, i) => `[c${i}]`).join('');
+  const fc = chains.join(';') + `;${mixIn}amix=inputs=${clips.length}:normalize=0:duration=longest,apad,atrim=0:${dur}[k]`;
+  const fcFile = outWav + '.txt';
+  fs.writeFileSync(fcFile, fc);
+  ffmpeg([...ins, '-filter_complex_script', fcFile, '-map', '[k]', '-c:a', 'pcm_f32le', '-ar', '48000', outWav]);
+  console.log(`   voice key built from ${clips.length} clips (sidechain only, not in the master)`);
+  return true;
+}
+
 const duck = (d) => `threshold=${d.threshold}:ratio=${d.ratio}:attack=${d.attack}:release=${d.release}:makeup=1:knee=3`;
+const keyWav = path.join(tmp, 'voicekey.wav');
+const KEY_ONLY = !HAS_BAKED_VOICE && buildVoiceKey(keyWav);
 const filter = [
   // voice: clean low end, even out dynamics, add presence
   `[0:a]aformat=sample_rates=48000:channel_layouts=stereo,highpass=f=70,` +
     `acompressor=threshold=-21dB:ratio=3:attack=6:release=90:makeup=3,` +
-    `equalizer=f=3200:t=q:w=0.9:g=2.5,apad,atrim=0:${dur},asplit=2[voice][vkey1]`,
-  `[vkey1]asplit=2[vkeyM][vkeyS]`,
+    `equalizer=f=3200:t=q:w=0.9:g=2.5,apad,atrim=0:${dur},` +
+    (KEY_ONLY ? `asplit=2[vkeyM][vkeyS]` : `asplit=2[voice][vkey1]`),
+  ...(KEY_ONLY ? [] : [`[vkey1]asplit=2[vkeyM][vkeyS]`]),
   // music: pad/trim to video length, carve the speech range, then duck under voice
   `[1:a]aformat=sample_rates=48000:channel_layouts=stereo,apad,atrim=0:${dur},` +
     `volume=${MUSIC_GAIN_DB}dB,equalizer=f=2200:t=q:w=0.7:g=-3[music]`,
@@ -76,15 +124,17 @@ const filter = [
   // sfx: pad/trim, light duck so cues are never masked by the voice
   `[2:a]aformat=sample_rates=48000:channel_layouts=stereo,apad,atrim=0:${dur},volume=${SFX_GAIN_DB}dB[sfx]`,
   `[sfx][vkeyS]sidechaincompress=${duck(SFX_DUCK)}[sfxD]`,
-  `[voice][musicD][sfxD]amix=inputs=3:normalize=0:duration=longest[mix]`,
+  KEY_ONLY ? `[musicD][sfxD]amix=inputs=2:normalize=0:duration=longest[mix]` : `[voice][musicD][sfxD]amix=inputs=3:normalize=0:duration=longest[mix]`,
 ].join(';');
 
 console.log('1/3 mixing + ducking ...');
 // No voiceover yet? Mix music + sfx against silence so the video still has a clean master.
-const voiceInput = fs.existsSync(snd('voiceover.wav'))
+const voiceInput = HAS_BAKED_VOICE
   ? ['-i', snd('voiceover.wav')]
+  : KEY_ONLY
+  ? ['-i', keyWav]
   : ['-f', 'lavfi', '-t', String(dur), '-i', 'anullsrc=r=48000:cl=stereo'];
-if (voiceInput[0] !== '-i') console.log('   (no voiceover.wav found - mastering music + sfx only)');
+if (!HAS_BAKED_VOICE && !KEY_ONLY) console.log('   (no voice found - mastering music + sfx only)');
 ffmpeg([
   ...voiceInput, '-i', snd('background.mp3'), '-i', snd('sfx.mp3'),
   '-filter_complex', filter, '-map', '[mix]', '-c:a', 'pcm_f32le', '-ar', '48000', pre,
