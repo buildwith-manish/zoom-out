@@ -366,6 +366,51 @@ function TopBar({index, total, local, level}) {
 // to use the plain DOM zoom.
 const MOTION_BLUR = {enabled: true, samples: 3, shutterAngle: 360};
 
+// GPU motion blur (ZoomCanvas): used for every raster photo; the DOM path above is only
+// the fallback if WebGL2 is unavailable. The sample count is ADAPTIVE: we measure how far
+// the picture travels (in px, worst corner) while the shutter is open and add one sample
+// per `pxPerSample` of travel, so sub-frame copies are never more than ~1.5px apart and
+// the blur is a smooth streak instead of ghost copies. Slow or still moments use 1 sample
+// (free). 180deg is the standard film shutter: natural blur without smearing the picture.
+const GPU_BLUR = {enabled: true, maxSamples: 24, shutterAngle: 180, pxPerSample: 1.5};
+
+/**
+ * Sub-frame cameras for the GPU motion blur: flat [scale, tx, ty, ...], one triple per
+ * sample, spread across the shutter and centred on the current frame.
+ */
+function subframeCams({local, zoomDelay, zoomDur, z0, fx, fy, ar, fps, cardPx, zooming}) {
+  const shutterFrames = GPU_BLUR.shutterAngle / 360;
+  const camAt = (off) => {
+    const l = local + off / fps;
+    const zp = zoomDur > 0 ? clamp01((l - zoomDelay) / zoomDur) : 1;
+    const sc = l >= 0 ? zoomScale(zp, z0, zoomDur) : z0;
+    return zoomCamera(sc, fx, fy, ar);
+  };
+  let n = 1;
+  if (zooming) {
+    // How far does the picture move between shutter open and close? Check the four
+    // frame corners (the screen position of photo point P is t + s*P, in card units).
+    const a = camAt(-shutterFrames / 2);
+    const b = camAt(shutterFrames / 2);
+    let worst = 0;
+    for (const px of [0, 1]) {
+      for (const py of [0, 1]) {
+        const dx = (a.tx + a.s * px - (b.tx + b.s * px)) * cardPx;
+        const dy = (a.ty + a.s * py - (b.ty + b.s * py)) * cardPx * (9 / 16);
+        worst = Math.max(worst, Math.hypot(dx, dy));
+      }
+    }
+    n = Math.max(1, Math.min(GPU_BLUR.maxSamples, Math.ceil(worst / GPU_BLUR.pxPerSample)));
+  }
+  const cams = [];
+  for (let i = 0; i < n; i++) {
+    const off = n === 1 ? 0 : ((i + 0.5) / n - 0.5) * shutterFrames;
+    const c = camAt(off);
+    cams.push(c.s, c.tx, c.ty);
+  }
+  return cams;
+}
+
 /** Plain DOM zoom (no motion blur). Fallback when WebGL2 or a raster photo isn't available.
  * filter + transform stay on the SAME element on purpose: the defocus radius is
  * magnified by the zoom, which is the look the blur was tuned for. */
@@ -484,7 +529,8 @@ function PhotoCard({
   forceScale,
   children,
 }) {
-  const {fps} = useVideoConfig();
+  const {fps, width: videoW} = useVideoConfig();
+  const [glFailed, setGlFailed] = useState(false);
   const enter = gsapTween(local, cardDelay, 0.5, backOut);
   const flashT = gsapTween(local, flashDelay, 0.35, power3Out);
   const zoomProg = zoomDur > 0 ? clamp01((local - zoomDelay) / zoomDur) : 1;
@@ -497,7 +543,34 @@ function PhotoCard({
   const zooming = forceScale == null && zoomDur > 0 && local >= zoomDelay - 0.05 && local <= zoomDelay + zoomDur + 0.05;
   const mbSamples = zooming ? MOTION_BLUR.samples : 1;
   let layer;
-  if (mbSamples > 1) {
+  const useGL = GPU_BLUR.enabled && !glFailed && rasterImage(file);
+  if (useGL) {
+    // GPU path: float-precision multi-sample motion blur + dither, trilinear mipmaps.
+    // sigma = defocus radius on screen. The DOM path blurs the photo in its own space and
+    // then magnifies it, so the on-screen radius is blur * scale; match that exactly.
+    const ar = Number(item.ar) || 16 / 9;
+    const cams = subframeCams({
+      local,
+      zoomDelay,
+      zoomDur,
+      z0,
+      fx: focusFrac(item.fx),
+      fy: focusFrac(item.fy),
+      ar,
+      fps,
+      cardPx: videoW * 0.85, // approx card width in px; only used to size the sample count
+      zooming,
+    });
+    layer = (
+      <ZoomCanvas
+        src={staticFile(`images/${file}`)}
+        cams={cams}
+        ext={coverExtents(ar)}
+        sigma={blur * scale}
+        onFail={() => setGlFailed(true)}
+      />
+    );
+  } else if (mbSamples > 1) {
     // DOM-based motion blur: N sub-frame layers at 1/N opacity (plus-lighter blend).
     // Works in any headless Chrome without WebGL2 (the WebGL ZoomCanvas path silently
     // fails in render and produces no motion blur, making the zoom look steppy).
