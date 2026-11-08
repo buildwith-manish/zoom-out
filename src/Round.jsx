@@ -10,6 +10,7 @@ import {
 } from 'remotion';
 import {backOut, expoOut, elasticOut, power3Out, gsapTween, clamp01} from './gsap-helpers';
 import {COLORS, FONTS, LEVELS, cq, seriesColors} from './style';
+import settingsJson from '../settings.json';
 import {buildScenes, sceneAt, levelInfo} from './timing';
 import {clamp, lerp, zoomScale, zoomBlur, zoomCamera, coverExtents, focusFrac, easeInOut, rasterImage} from './util';
 import {ZoomCanvas} from './ZoomCanvas';
@@ -253,7 +254,7 @@ function LevelCard({local, duration, questions, level}) {
         }}
       >
         <span style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, letterSpacing: '0.12em'}}>
-          {info.count} ANIMALS · Q{info.first}–{info.last}
+          {info.count} {settingsJson.itemLabel || 'ITEMS'} · Q{info.first}–{info.last}
         </span>
         <span style={{display: 'flex', gap: cq(1)}}>
           {info.order.map((lv, k) => (

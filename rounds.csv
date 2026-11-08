@@ -1,51 +1,51 @@
 id,question,highlight,answer,image,art,pic,fx,fy,z0,hint,level,ar
-1,What mammal is this?,1,Lion,easy_01_lion.jpg,lion,#0b0b2a,50%,45%,7,4 LETTERS · STARTS WITH L,easy,1.7497
-2,What mammal is this?,1,Elephant,easy_02_elephant.jpg,elephant,#0b0b2a,50%,45%,7,8 LETTERS · STARTS WITH E,easy,1.7497
-3,What mammal is this?,1,Giraffe,easy_03_giraffe.jpg,giraffe,#0b0b2a,19%,22%,7,7 LETTERS · STARTS WITH G,easy,1.7497
-4,What mammal is this?,1,Zebra,easy_04_zebra.jpg,zebra,#0b0b2a,21%,25%,7,5 LETTERS · STARTS WITH Z,easy,1.7497
-5,What mammal is this?,1,Tiger,easy_05_tiger.jpg,tiger,#0b0b2a,65%,45%,7,5 LETTERS · STARTS WITH T,easy,1.7497
-6,What mammal is this?,1,Panda,easy_06_panda.jpg,panda,#0b0b2a,52%,40%,7,5 LETTERS · STARTS WITH P,easy,1.7497
-7,What bird is this?,1,Penguin,easy_07_penguin.jpg,penguin,#0b0b2a,47%,9%,7,7 LETTERS · STARTS WITH P,easy,1.7497
-8,What mammal is this?,1,Monkey,easy_08_monkey.jpg,monkey,#0b0b2a,50%,25%,7,6 LETTERS · STARTS WITH M,easy,1.7497
-9,What mammal is this?,1,Cow,easy_09_cow.jpg,cow,#0b0b2a,28%,25%,7,3 LETTERS · STARTS WITH C,easy,1.7497
-10,What mammal is this?,1,Dog,easy_10_dog.jpg,dog,#0b0b2a,64%,27%,7,3 LETTERS · STARTS WITH D,easy,1.7497
-11,What mammal is this?,1,Cat,easy_11_cat.jpg,cat,#0b0b2a,55%,68%,8,3 LETTERS · STARTS WITH C,easy,1.7497
-12,What mammal is this?,1,Horse,easy_12_horse.jpg,horse,#0b0b2a,43%,18%,7,5 LETTERS · STARTS WITH H,easy,1.7497
-13,What mammal is this?,1,Pig,easy_13_pig.jpg,pig,#0b0b2a,49%,49%,9,3 LETTERS · STARTS WITH P,easy,1.75
-14,What mammal is this?,1,Rabbit,easy_14_rabbit.jpg,rabbit,#0b0b2a,50%,55%,8,6 LETTERS · STARTS WITH R,easy,1.75
-15,What mammal is this?,1,Kangaroo,easy_15_kangaroo.jpg,kangaroo,#0b0b2a,37%,44%,8,8 LETTERS · STARTS WITH K,easy,1.75
-16,What mammal is this?,1,Dolphin,easy_16_dolphin.jpg,dolphin,#0b0b2a,86%,52%,7,7 LETTERS · STARTS WITH D,easy,1.75
-17,What mammal is this?,1,Polar Bear,easy_17_polar-bear.jpg,polar-bear,#0b0b2a,22%,48%,7,2 WORDS · 9 LETTERS · STARTS WITH P,easy,1.75
-18,What bird is this?,1,Flamingo,easy_18_flamingo.jpg,flamingo,#0b0b2a,30%,28%,9,8 LETTERS · STARTS WITH F,easy,1.75
-19,What bird is this?,1,Owl,easy_19_owl.jpg,owl,#0b0b2a,50%,27%,7,3 LETTERS · STARTS WITH O,easy,1.75
-20,What bird is this?,1,Bald Eagle,easy_20_bald-eagle.jpg,bald-eagle,#0b0b2a,63%,33%,6,2 WORDS · 9 LETTERS · STARTS WITH B,easy,1.75
-21,What mammal is this?,1,Koala,medium_01_koala.jpg,koala,#0b0b2a,46%,52%,6,5 LETTERS · STARTS WITH K,medium,1.75
-22,What mammal is this?,1,Hippopotamus,medium_02_hippopotamus.jpg,hippopotamus,#0b0b2a,40%,25%,7,12 LETTERS · STARTS WITH H,medium,1.75
-23,What mammal is this?,1,Rhinoceros,medium_03_rhinoceros.jpg,rhinoceros,#0b0b2a,76%,45%,7,10 LETTERS · STARTS WITH R,medium,1.75
-24,What mammal is this?,1,Camel,medium_04_camel.jpg,camel,#0b0b2a,54%,28%,7,5 LETTERS · STARTS WITH C,medium,1.75
-25,What mammal is this?,1,Cheetah,medium_05_cheetah.jpg,cheetah,#0b0b2a,50%,30%,8,7 LETTERS · STARTS WITH C,medium,1.75
-26,What reptile is this?,1,Crocodile,medium_06_crocodile.jpg,crocodile,#0b0b2a,66%,31%,7,9 LETTERS · STARTS WITH C,medium,1.75
-27,What mollusk is this?,1,Octopus,medium_07_octopus.jpg,octopus,#0b0b2a,56%,22%,7,7 LETTERS · STARTS WITH O,medium,1.75
-28,What mammal is this?,1,Sloth,medium_08_sloth.jpg,sloth,#0b0b2a,60%,60%,12,5 LETTERS · STARTS WITH S,medium,1.75
-29,What bird is this?,1,Toucan,medium_09_toucan.jpg,toucan,#0b0b2a,58%,15%,7,6 LETTERS · STARTS WITH T,medium,1.75
-30,What mammal is this?,1,Walrus,medium_10_walrus.jpg,walrus,#0b0b2a,40%,50%,7,6 LETTERS · STARTS WITH W,medium,1.75
-31,What mammal is this?,1,Raccoon,medium_11_raccoon.jpg,raccoon,#0b0b2a,55%,68%,6,7 LETTERS · STARTS WITH R,medium,1.75
-32,What mammal is this?,1,Bison,medium_12_bison.jpg,bison,#0b0b2a,53%,48%,7,5 LETTERS · STARTS WITH B,medium,1.75
-33,What mammal is this?,1,Moose,medium_13_moose.jpg,moose,#0b0b2a,49%,52%,7,5 LETTERS · STARTS WITH M,medium,1.75
-34,What mammal is this?,1,Skunk,medium_14_skunk.jpg,skunk,#0b0b2a,10%,47%,8,5 LETTERS · STARTS WITH S,medium,1.75
-35,What mammal is this?,1,Armadillo,medium_15_armadillo.jpg,armadillo,#0b0b2a,22%,55%,12,9 LETTERS · STARTS WITH A,medium,1.75
-36,What reptile is this?,1,Chameleon,hard_01_chameleon.jpg,chameleon,#0b0b2a,84%,37%,8,9 LETTERS · STARTS WITH C,hard,1.75
-37,What mammal is this?,1,Hedgehog,hard_02_hedgehog.jpg,hedgehog,#0b0b2a,38%,50%,6,8 LETTERS · STARTS WITH H,hard,1.75
-38,What fish is this?,1,Seahorse,hard_03_seahorse.jpg,seahorse,#0b0b2a,23%,40%,7,8 LETTERS · STARTS WITH S,hard,1.75
-39,What mammal is this?,1,Leopard,hard_04_leopard.jpg,leopard,#0b0b2a,58%,62%,5,7 LETTERS · STARTS WITH L,hard,1.75
-40,What mammal is this?,1,Platypus,hard_05_platypus.jpg,platypus,#0b0b2a,32%,60%,6,8 LETTERS · STARTS WITH P,hard,1.75
-41,What mammal is this?,1,Narwhal,hard_06_narwhal.jpg,narwhal,#0b0b2a,60%,52%,9,7 LETTERS · STARTS WITH N,hard,1.75
-42,What mammal is this?,1,Sea Otter,hard_07_sea-otter.jpg,sea-otter,#0b0b2a,60%,32%,7,2 WORDS · 8 LETTERS · STARTS WITH S,hard,1.75
-43,What mammal is this?,1,Meerkat,hard_08_meerkat.jpg,meerkat,#0b0b2a,57%,15%,8,7 LETTERS · STARTS WITH M,hard,1.75
-44,What mammal is this?,1,Lemur,hard_09_lemur.jpg,lemur,#0b0b2a,49%,27%,8,5 LETTERS · STARTS WITH L,hard,1.75
-45,What mammal is this?,1,Red Panda,hard_10_red-panda.jpg,red-panda,#0b0b2a,45%,30%,9,2 WORDS · 8 LETTERS · STARTS WITH R,hard,1.75
-46,What mammal is this?,1,Manatee,hard_11_manatee.jpg,manatee,#0b0b2a,68%,31%,7,7 LETTERS · STARTS WITH M,hard,1.75
-47,What amphibian is this?,1,Axolotl,hard_12_axolotl.jpg,axolotl,#0b0b2a,50%,62%,6,7 LETTERS · STARTS WITH A,hard,1.75
-48,What mammal is this?,1,Porcupine,hard_13_porcupine.jpg,porcupine,#0b0b2a,66%,55%,7,9 LETTERS · STARTS WITH P,hard,1.75
-49,What mammal is this?,1,Anteater,hard_14_anteater.jpg,anteater,#0b0b2a,14%,47%,7,8 LETTERS · STARTS WITH A,hard,1.75
-50,What bird is this?,1,Puffin,hard_15_puffin.jpg,puffin,#0b0b2a,46%,20%,7,6 LETTERS · STARTS WITH P,hard,1.75
+1,What food is this?,1,Pizza,easy_01_pizza.jpg,pizza,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH P,easy,1.75
+2,What food is this?,1,Hamburger,easy_02_hamburger.jpg,hamburger,#0b0b2a,50%,50%,6,9 LETTERS · STARTS WITH H,easy,1.75
+3,What food is this?,1,French Fries,easy_03_french-fries.jpg,french-fries,#0b0b2a,50%,50%,6,2 WORDS · 11 LETTERS · STARTS WITH F,easy,1.75
+4,What food is this?,1,Hot Dog,easy_04_hot-dog.jpg,hot-dog,#0b0b2a,50%,50%,6,2 WORDS · 6 LETTERS · STARTS WITH H,easy,1.75
+5,What dessert is this?,1,Donut,easy_05_donut.jpg,donut,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH D,easy,1.75
+6,What fruit is this?,1,Strawberry,easy_06_strawberry.jpg,strawberry,#0b0b2a,50%,50%,6,10 LETTERS · STARTS WITH S,easy,1.75
+7,What fruit is this?,1,Watermelon,easy_07_watermelon.jpg,watermelon,#0b0b2a,50%,50%,6,10 LETTERS · STARTS WITH W,easy,1.75
+8,What fruit is this?,1,Banana,easy_08_banana.jpg,banana,#0b0b2a,50%,50%,6,6 LETTERS · STARTS WITH B,easy,1.75
+9,What fruit is this?,1,Pineapple,easy_09_pineapple.jpg,pineapple,#0b0b2a,50%,50%,6,9 LETTERS · STARTS WITH P,easy,1.75
+10,What snack is this?,1,Popcorn,easy_10_popcorn.jpg,popcorn,#0b0b2a,50%,50%,6,7 LETTERS · STARTS WITH P,easy,1.75
+11,What dessert is this?,1,Chocolate Chip Cookie,easy_11_chocolate-chip-cookie.jpg,chocolate-chip-cookie,#0b0b2a,50%,50%,6,3 WORDS · 19 LETTERS · STARTS WITH C,easy,1.75
+12,What dessert is this?,1,Ice Cream Cone,easy_12_ice-cream-cone.jpg,ice-cream-cone,#0b0b2a,50%,50%,6,3 WORDS · 12 LETTERS · STARTS WITH I,easy,1.75
+13,What breakfast is this?,1,Pancakes,easy_13_pancakes.jpg,pancakes,#0b0b2a,50%,50%,6,8 LETTERS · STARTS WITH P,easy,1.75
+14,What vegetable is this?,1,Corn on the Cob,easy_14_corn-on-the-cob.jpg,corn-on-the-cob,#0b0b2a,50%,50%,6,4 WORDS · 12 LETTERS · STARTS WITH C,easy,1.75
+15,What vegetable is this?,1,Broccoli,easy_15_broccoli.jpg,broccoli,#0b0b2a,50%,50%,6,8 LETTERS · STARTS WITH B,easy,1.75
+16,What vegetable is this?,1,Carrot,easy_16_carrot.jpg,carrot,#0b0b2a,50%,50%,6,6 LETTERS · STARTS WITH C,easy,1.75
+17,What fruit is this?,1,Apple,easy_17_apple.jpg,apple,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH A,easy,1.75
+18,What food is this?,1,Taco,easy_18_taco.jpg,taco,#0b0b2a,50%,50%,6,4 LETTERS · STARTS WITH T,easy,1.75
+19,What dessert is this?,1,Cupcake,easy_19_cupcake.jpg,cupcake,#0b0b2a,50%,50%,6,7 LETTERS · STARTS WITH C,easy,1.75
+20,What food is this?,1,Bacon,easy_20_bacon.jpg,bacon,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH B,easy,1.75
+21,What fruit is this?,1,Avocado,medium_01_avocado.jpg,avocado,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH A,medium,1.75
+22,What fruit is this?,1,Kiwi,medium_02_kiwi.jpg,kiwi,#0b0b2a,50%,50%,7,4 LETTERS · STARTS WITH K,medium,1.75
+23,What fruit is this?,1,Pomegranate,medium_03_pomegranate.jpg,pomegranate,#0b0b2a,50%,50%,7,11 LETTERS · STARTS WITH P,medium,1.75
+24,What fruit is this?,1,Cantaloupe,medium_04_cantaloupe.jpg,cantaloupe,#0b0b2a,50%,50%,7,10 LETTERS · STARTS WITH C,medium,1.75
+25,What vegetable is this?,1,Cauliflower,medium_05_cauliflower.jpg,cauliflower,#0b0b2a,50%,50%,7,11 LETTERS · STARTS WITH C,medium,1.75
+26,What vegetable is this?,1,Eggplant,medium_06_eggplant.jpg,eggplant,#0b0b2a,50%,50%,7,8 LETTERS · STARTS WITH E,medium,1.75
+27,What vegetable is this?,1,Brussels Sprouts,medium_07_brussels-sprouts.jpg,brussels-sprouts,#0b0b2a,50%,50%,7,2 WORDS · 15 LETTERS · STARTS WITH B,medium,1.75
+28,What breakfast is this?,1,Waffle,medium_08_waffle.jpg,waffle,#0b0b2a,50%,50%,7,6 LETTERS · STARTS WITH W,medium,1.75
+29,What snack is this?,1,Pretzel,medium_09_pretzel.jpg,pretzel,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH P,medium,1.75
+30,What food is this?,1,Sushi,medium_10_sushi.jpg,sushi,#0b0b2a,50%,50%,7,5 LETTERS · STARTS WITH S,medium,1.75
+31,What treat is this?,1,Cotton Candy,medium_11_cotton-candy.jpg,cotton-candy,#0b0b2a,50%,50%,7,2 WORDS · 11 LETTERS · STARTS WITH C,medium,1.75
+32,What snack is this?,1,Nachos,medium_12_nachos.jpg,nachos,#0b0b2a,50%,50%,7,6 LETTERS · STARTS WITH N,medium,1.75
+33,What pastry is this?,1,Croissant,medium_13_croissant.jpg,croissant,#0b0b2a,50%,50%,7,9 LETTERS · STARTS WITH C,medium,1.75
+34,What dessert is this?,1,Macaron,medium_14_macaron.jpg,macaron,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH M,medium,1.75
+35,What food is this?,1,Lasagna,medium_15_lasagna.jpg,lasagna,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH L,medium,1.75
+36,What fruit is this?,1,Dragon Fruit,hard_01_dragon-fruit.jpg,dragon-fruit,#0b0b2a,50%,50%,8,2 WORDS · 11 LETTERS · STARTS WITH D,hard,1.75
+37,What vegetable is this?,1,Artichoke,hard_02_artichoke.jpg,artichoke,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH A,hard,1.75
+38,What fruit is this?,1,Star Fruit,hard_03_star-fruit.jpg,star-fruit,#0b0b2a,50%,50%,8,2 WORDS · 9 LETTERS · STARTS WITH S,hard,1.75
+39,What fruit is this?,1,Passion Fruit,hard_04_passion-fruit.jpg,passion-fruit,#0b0b2a,50%,50%,8,2 WORDS · 12 LETTERS · STARTS WITH P,hard,1.75
+40,What fruit is this?,1,Fig,hard_05_fig.jpg,fig,#0b0b2a,50%,50%,8,3 LETTERS · STARTS WITH F,hard,1.75
+41,What vegetable is this?,1,Romanesco,hard_06_romanesco.jpg,romanesco,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH R,hard,1.75
+42,What vegetable is this?,1,Okra,hard_07_okra.jpg,okra,#0b0b2a,50%,50%,8,4 LETTERS · STARTS WITH O,hard,1.75
+43,What food is this?,1,Honeycomb,hard_08_honeycomb.jpg,honeycomb,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH H,hard,1.75
+44,What seafood is this?,1,Oyster,hard_09_oyster.jpg,oyster,#0b0b2a,50%,50%,8,6 LETTERS · STARTS WITH O,hard,1.75
+45,What dessert is this?,1,Baklava,hard_10_baklava.jpg,baklava,#0b0b2a,50%,50%,8,7 LETTERS · STARTS WITH B,hard,1.75
+46,What nut is this?,1,Pistachio,hard_11_pistachio.jpg,pistachio,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH P,hard,1.75
+47,What fruit is this?,1,Coconut,hard_12_coconut.jpg,coconut,#0b0b2a,50%,50%,8,7 LETTERS · STARTS WITH C,hard,1.75
+48,What fruit is this?,1,Raspberry,hard_13_raspberry.jpg,raspberry,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH R,hard,1.75
+49,What nut is this?,1,Walnut,hard_14_walnut.jpg,walnut,#0b0b2a,50%,50%,8,6 LETTERS · STARTS WITH W,hard,1.75
+50,What seafood is this?,1,Lobster,hard_15_lobster.jpg,lobster,#0b0b2a,50%,50%,8,7 LETTERS · STARTS WITH L,hard,1.75

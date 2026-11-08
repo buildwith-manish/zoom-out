@@ -2,7 +2,8 @@
   "fps": 60,
   "width": 2560,
   "height": 1440,
-  "series": "animals",
+  "series": "food",
+  "itemLabel": "FOODS",
   "watermark": "QUIZ MATRIX",
   "watermarkPosition": "tr",
   "watermarkOpacity": 0.47,
@@ -18,10 +19,10 @@
   "hintAt": 0.4,
   "introZoomDuration": 4.2,
   "introZoomDelay": 1.4,
-  "introArt": "tiger",
-  "introImage": "easy_05_tiger.jpg",
+  "introArt": "pizza",
+  "introImage": "easy_01_pizza.jpg",
   "introPic": "#0b0b2a",
-  "introFx": "65%",
+  "introFx": "50%",
   "introFy": "45%",
   "introZ0": 8,
   "introAr": 1.7497,
@@ -55,7 +56,7 @@
   "revealDurationOverrides": {
     "35": 2.5
   },
-  "introSub": "50 ANIMALS · 3 LEVELS · ZOOM OUT AND NAME THEM",
+  "introSub": "50 FOODS · 3 LEVELS · ZOOM OUT AND NAME THEM",
   "introHookDelay": 1.6,
   "retention": {
     "zoomByLevel": {

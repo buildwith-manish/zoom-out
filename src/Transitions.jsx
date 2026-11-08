@@ -1,5 +1,6 @@
 import React from 'react';
 import {COLORS, cq, seriesColors} from './style';
+import settingsJson from '../settings.json';
 import {clamp01, expoOut} from './gsap-helpers';
 
 /**
@@ -31,7 +32,7 @@ function Curtain({side, x}) {
   // x = percentage (0-100) of the curtain boundary from the left edge
   // side='right' -> curtain covers [x%, 100%] (open wipe: right side hidden)
   // side='left'  -> curtain covers [0%, x%]  (close wipe: left side hidden)
-  const series = seriesColors('animals');
+  const series = seriesColors(settingsJson.series);
   return (
     <div
       style={{
