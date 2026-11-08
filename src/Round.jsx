@@ -14,7 +14,7 @@ import settingsJson from '../settings.json';
 import {buildScenes, sceneAt, levelInfo} from './timing';
 import {clamp, lerp, zoomScale, zoomBlur, zoomCamera, coverExtents, focusFrac, easeInOut, rasterImage} from './util';
 import {ZoomCanvas} from './ZoomCanvas';
-import {QuizAudio} from './audio';
+import {QuizAudio, QuizVoiceover} from './audio';
 import {transFor, openFx, closeFx} from './Transitions';
 
 function Fonts() {
@@ -538,8 +538,8 @@ function PhotoCard({
   );
 }
 
-function Timeline({local, settings, hint, zd}) {
-  const ZS = settings.zoomStart;
+function Timeline({local, settings, hint, zd, zoomStart}) {
+  const ZS = zoomStart != null ? zoomStart : settings.zoomStart;
   const ZD = zd != null ? zd : settings.zoomDuration;
   const enter = gsapTween(local, 0.9, 0.5, power3Out);
   const prog = clamp01((local - ZS) / ZD);
@@ -1144,12 +1144,13 @@ function Intro({local, duration, settings}) {
   );
 }
 
-function Question({local, q, index, total, settings, zd}) {
+function Question({local, q, index, total, settings, zd, zoomStart}) {
   const kind = transFor(settings, q.level);
   const fx = kind === 'iris' ? null : openFx(kind, local);
   const ir = iris(local, 'q', 14);
   const ZD = zd != null ? zd : settings.zoomDuration;
-  const full = local >= settings.zoomStart + ZD - 0.02;
+  const ZS = zoomStart != null ? zoomStart : settings.zoomStart;
+  const full = local >= ZS + ZD - 0.02;
   return (
     <div
       style={{
@@ -1170,14 +1171,14 @@ function Question({local, q, index, total, settings, zd}) {
       <PhotoCard
         item={q}
         local={local}
-        zoomDelay={settings.zoomStart}
+        zoomDelay={ZS}
         zoomDur={ZD}
         cardDelay={0.35}
         flashDelay={0.35}
         showLens
         locked={full}
       />
-      <Timeline local={local} settings={settings} hint={q.hint} zd={ZD} />
+      <Timeline local={local} settings={settings} hint={q.hint} zd={ZD} zoomStart={ZS} />
       {fx ? fx.node : <IrisRing local={local} />}
     </div>
   );
@@ -1432,7 +1433,7 @@ export const Round = ({questions, settings}) => {
   let scene = null;
   if (s.type === 'intro') scene = <Intro local={local} duration={s.d} settings={settings} />;
   else if (s.type === 'level') scene = <LevelCard local={local} duration={s.d} questions={questions} level={s.level} />;
-  else if (s.type === 'q') scene = <Question local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} zd={s.zd} />;
+  else if (s.type === 'q') scene = <Question local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} zd={s.zd} zoomStart={s.zoomStart} />;
   else if (s.type === 'r') scene = <Reveal local={local} q={questions[s.i]} index={s.i} total={n} settings={settings} duration={s.d} />;
   else if (s.type === 'outro') scene = <Outro local={local} duration={s.d} settings={settings} total={n} />;
   else scene = <Sting local={local} settings={settings} />;
@@ -1441,6 +1442,7 @@ export const Round = ({questions, settings}) => {
     <AbsoluteFill>
       <Fonts />
       <QuizAudio />
+      <QuizVoiceover settings={settings} questions={questions} />
       <Stage t={t} series={settings.series}>
         {scene}
         <Watermark t={t} settings={settings} />

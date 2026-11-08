@@ -9,3 +9,4 @@ dist
 public/sounds/background.wav
 public/sounds/sfx.wav
 public/sounds/soundtrack.wav
+src/voiceover-manifest.json

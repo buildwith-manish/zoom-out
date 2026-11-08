@@ -1,6 +1,6 @@
 import React from 'react';
 import {Audio, Sequence, staticFile, useVideoConfig} from 'remotion';
-import {buildScenes} from './timing';
+import {buildScenes, voManifest} from './timing';
 
 const FILE = {
   swish: 'sounds/swish.wav',
@@ -35,14 +35,16 @@ export function buildSoundEvents(settings, questions) {
     }
     if (s.type === 'q') {
       const ZD = s.zd;
+      // Use the scene's effective zoomStart (delayed if a qq clip is playing)
+      const zStart = s.zoomStart || ZS;
       EV.push({t: s.start + 0.12, name: 'words'});
       EV.push({t: s.start + 0.35, name: 'shutter'});
-      EV.push({t: s.start + ZS, name: 'zoomOut'});
+      EV.push({t: s.start + zStart, name: 'zoomOut'});
       for (let k = 1; k < ZD; k++) {
-        EV.push({t: s.start + ZS + k, name: k >= ZD - 3 ? 'tickHi' : 'tick'});
+        EV.push({t: s.start + zStart + k, name: k >= ZD - 3 ? 'tickHi' : 'tick'});
       }
-      EV.push({t: s.start + ZS + ZD * HINT_AT, name: 'sparkle'});
-      EV.push({t: s.start + ZS + ZD, name: 'focus'});
+      EV.push({t: s.start + zStart + ZD * HINT_AT, name: 'sparkle'});
+      EV.push({t: s.start + zStart + ZD, name: 'focus'});
     }
     if (s.type === 'r') {
       EV.push({t: s.start + 0.05, name: 'expand'});
@@ -97,6 +99,59 @@ export function QuizAudioLayered({settings, questions}) {
           </Sequence>
         );
       })}
+    </>
+  );
+}
+
+/**
+ * Per-clip voiceover (ported from Guess the Word).
+ *
+ * Reads src/voiceover-manifest.json (written by scripts/voiceover-scan.js) and
+ * mounts each clip as a <Sequence><Audio/></Sequence> at its scene's start frame:
+ *   - qq## : plays at the START of question scene i (before the zoom/timer)
+ *   - q##  : plays at the START of reveal scene i (at the reveal moment)
+ *   - intro/outro/sting : plays at the start of those scenes
+ *
+ * plan.cjs already stretched every scene to fit its clip, so each clip has room
+ * to finish before the next scene begins. Missing clips are simply skipped.
+ */
+export function QuizVoiceover({settings, questions}) {
+  const {fps} = useVideoConfig();
+  const {scenes} = buildScenes(settings, questions);
+  const VO_DIR = (settings.voiceover && settings.voiceover.dir) || 'voiceover';
+  const VO_ENABLED = settings.voiceover ? settings.voiceover.enabled : false;
+  if (!VO_ENABLED || !voManifest) return null;
+
+  const clips = [];
+
+  scenes.forEach((s) => {
+    const startFrame = Math.round(s.start * fps);
+    if (s.type === 'intro' && voManifest.intro) {
+      clips.push({file: voManifest.intro.file, from: startFrame});
+    }
+    if (s.type === 'outro' && voManifest.outro) {
+      clips.push({file: voManifest.outro.file, from: startFrame});
+    }
+    if (s.type === 'sting' && voManifest.sting) {
+      clips.push({file: voManifest.sting.file, from: startFrame});
+    }
+    if (s.type === 'q') {
+      const qq = voManifest.qq && voManifest.qq[String(s.i + 1)];
+      if (qq) clips.push({file: qq.file, from: startFrame});
+    }
+    if (s.type === 'r') {
+      const q = voManifest.q && voManifest.q[String(s.i + 1)];
+      if (q) clips.push({file: q.file, from: startFrame});
+    }
+  });
+
+  return (
+    <>
+      {clips.map((c, i) => (
+        <Sequence key={`vo-${i}-${c.from}`} from={c.from} layout="none">
+          <Audio src={staticFile(`${VO_DIR}/${c.file}`)} />
+        </Sequence>
+      ))}
     </>
   );
 }

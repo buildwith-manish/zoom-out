@@ -15,6 +15,8 @@
     "refetch-broken": "node scripts/refetch-broken.js",
     "render-batches": "node scripts/render-batches.js",
     "synth-audio": "node scripts/synth-audio.js",
+    "voiceover": "node scripts/voiceover-scan.js",
+    "voiceover:script": "node scripts/voiceover-script.js",
     "duck": "python3 scripts/duck_music.py",
     "master": "node scripts/master-audio.js",
     "audio": "npm run music && npm run synth-audio && npm run duck && npm run master",

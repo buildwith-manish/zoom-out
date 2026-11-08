@@ -1,0 +1,123 @@
+VOICEOVER SCRIPT  (save each clip in public/voiceover/ with the file name shown)
+
+=== INTRO ===
+intro.wav   Only 1 in 20 can name all 50 50 FOODS · 3 LEVELS · ZOOM OUT AND NAME THEM
+
+=== QUESTIONS ===
+qq01.wav   What food is this?  [EASY]
+q01.wav    Pizza!
+qq02.wav   What food is this?  [EASY]
+q02.wav    Hamburger!
+qq03.wav   What food is this?  [EASY]
+q03.wav    French Fries!
+qq04.wav   What food is this?  [EASY]
+q04.wav    Hot Dog!
+qq05.wav   What dessert is this?  [EASY]
+q05.wav    Donut!
+qq06.wav   What fruit is this?  [EASY]
+q06.wav    Strawberry!
+qq07.wav   What fruit is this?  [EASY]
+q07.wav    Watermelon!
+qq08.wav   What fruit is this?  [EASY]
+q08.wav    Banana!
+qq09.wav   What fruit is this?  [EASY]
+q09.wav    Pineapple!
+qq10.wav   What snack is this?  [EASY]
+q10.wav    Popcorn!
+qq11.wav   What dessert is this?  [EASY]
+q11.wav    Chocolate Chip Cookie!
+qq12.wav   What dessert is this?  [EASY]
+q12.wav    Ice Cream Cone!
+qq13.wav   What breakfast is this?  [EASY]
+q13.wav    Pancakes!
+qq14.wav   What vegetable is this?  [EASY]
+q14.wav    Corn on the Cob!
+qq15.wav   What vegetable is this?  [EASY]
+q15.wav    Broccoli!
+qq16.wav   What vegetable is this?  [EASY]
+q16.wav    Carrot!
+qq17.wav   What fruit is this?  [EASY]
+q17.wav    Apple!
+qq18.wav   What food is this?  [EASY]
+q18.wav    Taco!
+qq19.wav   What dessert is this?  [EASY]
+q19.wav    Cupcake!
+qq20.wav   What food is this?  [EASY]
+q20.wav    Bacon!
+qq21.wav   What fruit is this?  [MEDIUM]
+q21.wav    Avocado!
+qq22.wav   What fruit is this?  [MEDIUM]
+q22.wav    Kiwi!
+qq23.wav   What fruit is this?  [MEDIUM]
+q23.wav    Pomegranate!
+qq24.wav   What fruit is this?  [MEDIUM]
+q24.wav    Cantaloupe!
+qq25.wav   What vegetable is this?  [MEDIUM]
+q25.wav    Cauliflower!
+qq26.wav   What vegetable is this?  [MEDIUM]
+q26.wav    Eggplant!
+qq27.wav   What vegetable is this?  [MEDIUM]
+q27.wav    Brussels Sprouts!
+qq28.wav   What breakfast is this?  [MEDIUM]
+q28.wav    Waffle!
+qq29.wav   What snack is this?  [MEDIUM]
+q29.wav    Pretzel!
+qq30.wav   What food is this?  [MEDIUM]
+q30.wav    Sushi!
+qq31.wav   What treat is this?  [MEDIUM]
+q31.wav    Cotton Candy!
+qq32.wav   What snack is this?  [MEDIUM]
+q32.wav    Nachos!
+qq33.wav   What pastry is this?  [MEDIUM]
+q33.wav    Croissant!
+qq34.wav   What dessert is this?  [MEDIUM]
+q34.wav    Macaron!
+qq35.wav   What food is this?  [MEDIUM]
+q35.wav    Lasagna!
+qq36.wav   What fruit is this?  [HARD]
+q36.wav    Dragon Fruit!
+qq37.wav   What vegetable is this?  [HARD]
+q37.wav    Artichoke!
+qq38.wav   What fruit is this?  [HARD]
+q38.wav    Star Fruit!
+qq39.wav   What fruit is this?  [HARD]
+q39.wav    Passion Fruit!
+qq40.wav   What fruit is this?  [HARD]
+q40.wav    Fig!
+qq41.wav   What vegetable is this?  [HARD]
+q41.wav    Romanesco!
+qq42.wav   What vegetable is this?  [HARD]
+q42.wav    Okra!
+qq43.wav   What food is this?  [HARD]
+q43.wav    Honeycomb!
+qq44.wav   What seafood is this?  [HARD]
+q44.wav    Oyster!
+qq45.wav   What dessert is this?  [HARD]
+q45.wav    Baklava!
+qq46.wav   What nut is this?  [HARD]
+q46.wav    Pistachio!
+qq47.wav   What fruit is this?  [HARD]
+q47.wav    Coconut!
+qq48.wav   What fruit is this?  [HARD]
+q48.wav    Raspberry!
+qq49.wav   What nut is this?  [HARD]
+q49.wav    Walnut!
+qq50.wav   What seafood is this?  [HARD]
+q50.wav    Lobster!
+
+=== OUTRO ===
+outro.wav   Drop your score below — most people get under 30
+
+=== STING ===
+sting.wav   QUIZ MATRIX
+
+---
+Naming convention:
+  qq01.wav ... qq50.wav  = question-phase clips (plays before the zoom/timer)
+  q01.wav  ... q50.wav   = reveal clips (plays at the reveal moment)
+  intro.wav, outro.wav, sting.wav = intro/outro/sting clips
+  (.mp3 .wav .m4a .aac .ogg .flac all work)
+
+After recording, run:
+  npm run voiceover    # scan clips + build src/voiceover-manifest.json
+  The video timeline auto-stretches to fit each clip.

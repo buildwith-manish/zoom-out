@@ -2,6 +2,13 @@
   "fps": 60,
   "width": 2560,
   "height": 1440,
+  "voiceover": {
+    "enabled": true,
+    "dir": "voiceover",
+    "offset": 0.15,
+    "tail": 0.3,
+    "duckFloor": 0.3
+  },
   "series": "food",
   "itemLabel": "FOODS",
   "watermark": "QUIZ MATRIX",
