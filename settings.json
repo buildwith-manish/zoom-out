@@ -136,7 +136,7 @@
     "zoomByLevel": {
       "easy": 5,
       "medium": 6,
-      "hard": 8
+      "hard": 7
     },
     "transitions": {
       "easy": "iris",
