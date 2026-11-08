@@ -1,7 +1,7 @@
 import React from 'react';
 import {Img, staticFile} from 'remotion';
 import {backOut, expoOut, power3Out, elasticOut, gsapTween, clamp01} from './gsap-helpers';
-import {COLORS, FONTS, cq} from './style';
+import {COLORS, FONTS, cq, seriesColors} from './style';
 import {clamp, lerp, focusFrac, zoomCamera, easeInOut} from './util';
 import assets from './bonus-assets.json';
 
@@ -106,7 +106,8 @@ function Brackets({color}) {
 }
 
 /** Small uppercase label chip pinned inside the puzzle card. */
-function CardChip({children, color = COLORS.amber, icon, style}) {
+function CardChip({children, color = COLORS.amber, icon, style, theme}) {
+  const bg = theme ? theme.darkMid : 'rgba(10,14,80,.62)';
   return (
     <div
       style={{
@@ -115,7 +116,7 @@ function CardChip({children, color = COLORS.amber, icon, style}) {
         display: 'flex',
         alignItems: 'center',
         gap: cq(1),
-        background: 'rgba(10,14,80,.62)',
+        background: bg,
         border: `${cq(0.2)}px solid ${COLORS.glassline}`,
         borderRadius: cq(1.2),
         padding: `${cq(1)}px ${cq(1.8)}px`,
@@ -131,8 +132,17 @@ function CardChip({children, color = COLORS.amber, icon, style}) {
   );
 }
 
-/** Word-by-word rise header (same rhythm as the question headlines). */
-function Headline({words, local, size, color, delay = 0.1, stagger = 0.09, dur = 0.55, slam = false, slamDelay = 0.15}) {
+/** Word-by-word rise header (same rhythm as the question headlines).
+ *  amberAt: index of the word to highlight in amber (defaults to -1 = none).
+ *  Passing amberAt="auto" picks the first noun after WHICH/WHAT/GUESS. */
+function Headline({words, local, size, color, delay = 0.1, stagger = 0.09, dur = 0.55, slam = false, slamDelay = 0.15, amberAt = -1}) {
+  // Resolve "auto": skip leading interrogative and pick the next word.
+  const INTERROGATIVES = new Set(['WHICH', 'WHAT', 'GUESS', 'NAME', 'SPOT']);
+  let resolvedAmberAt = typeof amberAt === 'number' ? amberAt : -1;
+  if (amberAt === 'auto') {
+    const idx = words.findIndex((w, i) => i > 0 && !INTERROGATIVES.has(w.replace(/[^A-Z]/g, '').toUpperCase()));
+    resolvedAmberAt = idx >= 0 ? idx : 1;
+  }
   return (
     <h2
       style={{
@@ -150,12 +160,14 @@ function Headline({words, local, size, color, delay = 0.1, stagger = 0.09, dur =
         const p = slam
           ? gsapTween(local, i * 0.45 * 0.09 + slamDelay, 0.6, backOut)
           : gsapTween(local, i * stagger + delay, dur, backOut);
+        const isAmber = i === resolvedAmberAt;
         return (
           <React.Fragment key={i}>
             <span
               style={{
                 display: 'inline-block',
                 opacity: p,
+                color: isAmber ? COLORS.amber : undefined,
                 transform: slam
                   ? `translateY(${(1 - p) * 100}%) scale(${lerp(1.25, 1, p)})`
                   : `translateY(${(1 - p) * 100}%)`,
@@ -278,9 +290,10 @@ function CloseRing({local, duration}) {
 
 // ---------------------------------------------------------- top bar --------
 
-function BonusTopBar({local, n, total, round}) {
+function BonusTopBar({local, n, total, round, theme}) {
   const fade = gsapTween(local, 0, 0.5, power3Out);
   const col = kindColor(round.kind);
+  const panelBg = theme ? theme.panelBg : COLORS.glass;
   return (
     <div
       style={{
@@ -303,7 +316,7 @@ function BonusTopBar({local, n, total, round}) {
             display: 'flex',
             alignItems: 'baseline',
             gap: cq(0.8),
-            background: COLORS.glass,
+            background: panelBg,
             border: `${cq(0.2)}px solid ${col}`,
             borderRadius: cq(2),
             padding: `${cq(1)}px ${cq(2.2)}px`,
@@ -319,7 +332,7 @@ function BonusTopBar({local, n, total, round}) {
             display: 'flex',
             alignItems: 'center',
             gap: cq(1.2),
-            background: COLORS.glass,
+            background: panelBg,
             border: `${cq(0.2)}px solid ${col}`,
             borderRadius: cq(2),
             padding: `${cq(1.1)}px ${cq(2.4)}px`,
@@ -358,8 +371,9 @@ function BonusTopBar({local, n, total, round}) {
 
 // ------------------------------------------------------ puzzle card --------
 
-function PuzzleCard({local, children, accent}) {
+function PuzzleCard({local, children, accent, theme}) {
   const enter = gsapTween(local, 0.35, 0.5, backOut);
+  const bg = theme ? theme.dark : '#0c0a22';
   return (
     <div
       style={{
@@ -369,7 +383,7 @@ function PuzzleCard({local, children, accent}) {
         overflow: 'hidden',
         borderRadius: cq(2.2),
         border: `${cq(0.25)}px solid ${COLORS.glassline}`,
-        background: '#0c0a22',
+        background: bg,
         boxShadow: `0 ${cq(3)}px ${cq(7)}px rgba(2,4,60,.5)`,
         alignSelf: 'center',
         width: 'auto',
@@ -388,7 +402,7 @@ function PuzzleCard({local, children, accent}) {
 
 // ── 1. COLOR DNA ────────────────────────────────────────────────────────────
 
-function ColorDnaPuzzle({local, palette, accent}) {
+function ColorDnaPuzzle({local, palette, accent, theme}) {
   const scanT = (local * 0.9) % 1; // sweep cycles
   return (
     <>
@@ -428,30 +442,7 @@ function ColorDnaPuzzle({local, palette, accent}) {
             );
           })}
         </div>
-        <div style={{flex: 'none', display: 'flex', padding: `0 ${cq(6)}px ${cq(4.6)}px`, gap: cq(0.7)}}>
-          {palette.map((c, i) => {
-            const p = gsapTween(local, 0.8 + i * 0.14, 0.5, power3Out);
-            return (
-              <div key={i} style={{flex: Math.max(0.14, c.weight), display: 'flex', justifyContent: 'center'}}>
-                <span
-                  style={{
-                    font: `700 ${cq(1.9)}px/1 ${FONTS.mono}`,
-                    letterSpacing: '0.1em',
-                    color: '#fff',
-                    opacity: p * 0.85,
-                    background: 'rgba(10,14,80,.5)',
-                    border: `${cq(0.16)}px solid ${COLORS.glassline}`,
-                    borderRadius: cq(0.7),
-                    padding: `${cq(0.7)}px ${cq(1)}px`,
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {c.hex.toUpperCase()}
-                </span>
-              </div>
-            );
-          })}
-        </div>
+        {/* Hex labels intentionally omitted — they add visual noise for viewers */}
       </div>
       {/* analysis sweep */}
       <div
@@ -464,14 +455,14 @@ function ColorDnaPuzzle({local, palette, accent}) {
           transform: `translateX(${lerp(-120, 120, scanT)}%)`,
         }}
       />
-      <CardChip style={{left: cq(3), top: cq(3)}} color={accent}>DOMINANT COLORS</CardChip>
+      <CardChip style={{left: cq(3), top: cq(3)}} color={accent} theme={theme}>DOMINANT COLORS</CardChip>
     </>
   );
 }
 
 // ── 2. SHADOW REVEAL ────────────────────────────────────────────────────────
 
-function ShadowPuzzle({local, src, accent}) {
+function ShadowPuzzle({local, src, accent, theme}) {
   const enter = gsapTween(local, 0.55, 0.7, expoOut);
   const breathe = 1 + 0.015 * Math.sin(local * 1.6 * Math.PI * 2 / 2);
   const glow = 0.55 + 0.45 * Math.sin((local / 1.9) * Math.PI * 2);
@@ -517,14 +508,14 @@ function ShadowPuzzle({local, src, accent}) {
           }}
         />
       </div>
-      <CardChip style={{left: cq(3), top: cq(3)}} color={accent}>SILHOUETTE ONLY</CardChip>
+      <CardChip style={{left: cq(3), top: cq(3)}} color={accent} theme={theme}>SILHOUETTE ONLY</CardChip>
     </>
   );
 }
 
 // ── 3. MACRO TEXTURE ────────────────────────────────────────────────────────
 
-function TexturePuzzle({local, src, zoom, accent}) {
+function TexturePuzzle({local, src, zoom, accent, theme}) {
   const enter = gsapTween(local, 0.45, 0.55, power3Out);
   const drift = easeInOut(clamp01((local - 0.6) / 12));
   const scale = lerp(1.05, 1.16, drift);
@@ -549,10 +540,10 @@ function TexturePuzzle({local, src, zoom, accent}) {
           inset: 0,
           zIndex: 2,
           pointerEvents: 'none',
-          background: 'radial-gradient(105% 105% at 50% 50%, transparent 55%, rgba(6,4,44,.55) 100%)',
+          background: `radial-gradient(105% 105% at 50% 50%, transparent 55%, ${theme ? theme.vig : 'rgba(6,4,44,.55)'} 100%)`,
         }}
       />
-      <CardChip style={{left: cq(3), bottom: cq(3)}} color={accent} icon={<FocusIcon size={cq(2.1)} color={accent} />}>
+      <CardChip style={{left: cq(3), bottom: cq(3)}} color={accent} icon={<FocusIcon size={cq(2.1)} color={accent} />} theme={theme}>
         MACRO ×{zoom.toFixed(1)}
       </CardChip>
     </>
@@ -561,7 +552,7 @@ function TexturePuzzle({local, src, zoom, accent}) {
 
 // ── 4. PIXEL FOCUS ──────────────────────────────────────────────────────────
 
-function UnpixelPuzzle({puzzleP, local, data, accent}) {
+function UnpixelPuzzle({puzzleP, local, data, accent, theme}) {
   if (!data) return null;
   const {levels, files} = data;
   // active level index by clock progress
@@ -613,7 +604,7 @@ function UnpixelPuzzle({puzzleP, local, data, accent}) {
           }}
         />
       ) : null}
-      <CardChip style={{left: cq(3), bottom: cq(3)}} color={accent} icon={<DiceIcon size={cq(2.1)} color={accent} />}>
+      <CardChip style={{left: cq(3), bottom: cq(3)}} color={accent} icon={<DiceIcon size={cq(2.1)} color={accent} />} theme={theme}>
         {grid}PX GRID
       </CardChip>
     </>
@@ -624,7 +615,7 @@ function UnpixelPuzzle({puzzleP, local, data, accent}) {
 
 const EMOJI_FONT = '"Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Noto Emoji", sans-serif';
 
-function RecipeCard({local, i, emoji, label, accent}) {
+function RecipeCard({local, i, emoji, label, accent, theme}) {
   const flip = gsapTween(local, 0.6 + i * 0.38, 0.6, backOut);
   const bob = Math.sin((local / 1.6) * Math.PI * 2 + i * 1.9) * cq(0.55);
   return (
@@ -660,7 +651,7 @@ function RecipeCard({local, i, emoji, label, accent}) {
             font: `700 ${cq(2.2)}px/1 ${FONTS.mono}`,
             letterSpacing: '0.18em',
             color: '#fff',
-            background: 'rgba(10,14,80,.55)',
+            background: theme ? theme.darkLight : 'rgba(10,14,80,.55)',
             border: `${cq(0.18)}px solid ${COLORS.glassline}`,
             borderRadius: cq(0.8),
             padding: `${cq(0.8)}px ${cq(1.4)}px`,
@@ -673,7 +664,7 @@ function RecipeCard({local, i, emoji, label, accent}) {
   );
 }
 
-function RecipePuzzle({local, ingredients, accent}) {
+function RecipePuzzle({local, ingredients, accent, theme}) {
   const qPulse = 0.5 + 0.5 * Math.sin((local / 1.1) * Math.PI * 2);
   return (
     <div
@@ -699,7 +690,7 @@ function RecipePuzzle({local, ingredients, accent}) {
               +
             </span>
           ) : null}
-          <RecipeCard local={local} i={i} emoji={emoji} label={label} accent={accent} />
+          <RecipeCard local={local} i={i} emoji={emoji} label={label} accent={accent} theme={theme} />
         </React.Fragment>
       ))}
       <span
@@ -734,7 +725,7 @@ function RecipePuzzle({local, ingredients, accent}) {
 
 // ------------------------------------------------------------ clock --------
 
-function BonusClock({local, clockStart, clock, accent, chipText}) {
+function BonusClock({local, clockStart, clock, accent, chipText, theme}) {
   const p = clamp01((local - clockStart) / clock);
   const raw = Math.max(0, clock * (1 - p));
   const pts = Math.max(0, Math.ceil(raw - 1e-6));
@@ -793,13 +784,13 @@ function BonusClock({local, clockStart, clock, accent, chipText}) {
           </b>
         </div>
       </div>
-      <CommentChip local={local} clockStart={clockStart} text={chipText} />
+      <CommentChip local={local} clockStart={clockStart} text={chipText} theme={theme} />
     </div>
   );
 }
 
-function CommentChip({local, clockStart, text}) {
-  const p = gsapTween(local, clockStart + 2.2, 0.5, backOut);
+function CommentChip({local, clockStart, text, theme}) {
+  const p = gsapTween(local, clockStart + 0.3, 0.5, backOut);
   if (p <= 0) return null;
   return (
     <div
@@ -807,7 +798,7 @@ function CommentChip({local, clockStart, text}) {
         display: 'flex',
         alignItems: 'center',
         gap: cq(1.4),
-        background: COLORS.glass,
+        background: theme ? theme.panelBg : COLORS.glass,
         border: `${cq(0.25)}px solid ${COLORS.amber}`,
         borderRadius: cq(3),
         padding: `${cq(1.3)}px ${cq(2.6)}px`,
@@ -1030,7 +1021,7 @@ function BonusRevealFX({local}) {
 }
 
 /** The answer photo card. `zoomFrom` (texture round) animates a pull-back. */
-function AnswerCard({rl, round, qItem, kind, children}) {
+function AnswerCard({rl, round, qItem, kind, children, theme}) {
   const punchP = clamp01(rl / 0.8);
   const punchScale = punchP < 0.28 ? lerp(1, 1.045, punchP / 0.28) : lerp(1.045, 1, (punchP - 0.28) / 0.72);
   // texture bridge: pull back from the macro focus
@@ -1040,6 +1031,7 @@ function AnswerCard({rl, round, qItem, kind, children}) {
   const cam = kind === 'texture'
     ? zoomCamera(scale, focusFrac(qItem && qItem.fx), focusFrac(qItem && qItem.fy), ar)
     : {transform: 'none'};
+  const bg = theme ? theme.dark : '#0c0a22';
   return (
     <div
       style={{
@@ -1049,7 +1041,7 @@ function AnswerCard({rl, round, qItem, kind, children}) {
         overflow: 'hidden',
         borderRadius: cq(2.2),
         border: `${cq(0.25)}px solid ${COLORS.glassline}`,
-        background: '#0c0a22',
+        background: bg,
         boxShadow: `0 0 ${cq(6)}px rgba(255,193,58,.55), 0 ${cq(3)}px ${cq(7)}px rgba(2,4,60,.5)`,
         alignSelf: 'center',
         width: 'auto',
@@ -1124,7 +1116,7 @@ function EraseChip({rl, text}) {
 
 // ------------------------------------------------------------ banner -------
 
-function BonusBanner({local, clockStart, round, n, total}) {
+function BonusBanner({local, clockStart, round, n, total, theme}) {
   if (local >= clockStart + 0.45) return null;
   const out = clamp01((local - (clockStart - 0.35)) / 0.45);
   const col = kindColor(round.kind);
@@ -1140,7 +1132,7 @@ function BonusBanner({local, clockStart, round, n, total}) {
         alignItems: 'center',
         justifyContent: 'center',
         gap: cq(2.4),
-        background: 'rgba(6,4,44,.84)',
+        background: theme.darkOverlay,
         backdropFilter: 'blur(3px)',
         opacity: 1 - out,
       }}
@@ -1211,20 +1203,23 @@ export function BonusScene({local, duration, round, bonusIndex, settings, questi
   const unpixData = (assets.unpixel && assets.unpixel[round.asset]) || null;
   const ir = irisOpen(local);
 
+  // Derive theme from the series so all bonus elements match the background.
+  const theme = seriesColors(settings.series);
+
   const puzzle = (() => {
     switch (round.kind) {
       case 'colordna':
-        return <ColorDnaPuzzle local={local} palette={palette} accent={accent} />;
+        return <ColorDnaPuzzle local={local} palette={palette} accent={accent} theme={theme} />;
       case 'shadow': {
         const src = (assets.shadow && assets.shadow[round.asset]) || '';
-        return <ShadowPuzzle local={local} src={src} accent={accent} />;
+        return <ShadowPuzzle local={local} src={src} accent={accent} theme={theme} />;
       }
       case 'texture':
-        return <TexturePuzzle local={local} src={texData ? texData.file : ''} zoom={texData ? texData.zoom : 6.25} accent={accent} />;
+        return <TexturePuzzle local={local} src={texData ? texData.file : ''} zoom={texData ? texData.zoom : 6.25} accent={accent} theme={theme} />;
       case 'unpixel':
-        return <UnpixelPuzzle puzzleP={puzzleP} local={local} data={unpixData} accent={accent} />;
+        return <UnpixelPuzzle puzzleP={puzzleP} local={local} data={unpixData} accent={accent} theme={theme} />;
       case 'recipe':
-        return <RecipePuzzle local={local} ingredients={round.ingredients || []} accent={accent} />;
+        return <RecipePuzzle local={local} ingredients={round.ingredients || []} accent={accent} theme={theme} />;
       default:
         return null;
     }
@@ -1244,7 +1239,7 @@ export function BonusScene({local, duration, round, bonusIndex, settings, questi
         transform: ir.transform,
       }}
     >
-      <BonusTopBar local={local} n={bonusIndex + 1} total={totalRounds} round={round} />
+      <BonusTopBar local={local} n={bonusIndex + 1} total={totalRounds} round={round} theme={theme} />
       {reveal ? (
         <>
           <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0}}>
@@ -1264,7 +1259,7 @@ export function BonusScene({local, duration, round, bonusIndex, settings, questi
             </div>
             <AnswerSlam text={round.answer} local={rl} size={cq(7.4)} />
           </div>
-          <AnswerCard rl={rl} round={round} qItem={qItem} kind={round.kind}>
+          <AnswerCard rl={rl} round={round} qItem={qItem} kind={round.kind} theme={theme}>
             <BonusRevealFX local={rl} />
             <RevealBridge kind={round.kind} rl={rl} round={round} qItem={qItem} data={palette} />
           </AnswerCard>
@@ -1273,15 +1268,15 @@ export function BonusScene({local, duration, round, bonusIndex, settings, questi
       ) : (
         <>
           <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: cq(0.8)}}>
-            <Headline words={String(round.question || '').split(' ')} local={local} size={cq(7.4)} amberAt={1} />
+            <Headline words={String(round.question || '').split(' ')} local={local} size={cq(7.4)} amberAt="auto" />
           </div>
-          <PuzzleCard local={local} accent={accent}>{puzzle}</PuzzleCard>
-          <BonusClock local={local} clockStart={clockStart} clock={clock} accent={accent} chipText={B.commentChip || 'DROP YOUR ANSWER BELOW'} />
+          <PuzzleCard local={local} accent={accent} theme={theme}>{puzzle}</PuzzleCard>
+          <BonusClock local={local} clockStart={clockStart} clock={clock} accent={accent} chipText={B.commentChip || 'DROP YOUR ANSWER BELOW'} theme={theme} />
         </>
       )}
       <OpenRing local={local} />
       <CloseRing local={local} duration={duration} />
-      <BonusBanner local={local} clockStart={clockStart} round={round} n={bonusIndex + 1} total={totalRounds} />
+      <BonusBanner local={local} clockStart={clockStart} round={round} n={bonusIndex + 1} total={totalRounds} theme={theme} />
     </div>
   );
 }
