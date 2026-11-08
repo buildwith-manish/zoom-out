@@ -73,6 +73,28 @@ export function coverExtents(ar, frameAr = 16 / 9) {
   return {X0: 0, X1: 1, Y0: 0.5 - h / 2, Y1: 0.5 + h / 2};
 }
 
+// Camera pan with a SOFT edge instead of a hard clamp.
+//
+// The wrapper must always cover the frame, so its translation has to stay inside
+// [1 - s, 0]. The old code did that with clamp(), which is only C0: the instant the
+// ideal "keep the subject centred" pan hit a limit, the pan velocity snapped from
+// "tracking" to "pinned" in a single frame. That is the jolt you saw as the picture
+// approached its final position. Here the ideal pan is expressed as u in [-1, 1] across
+// the legal range (|u| > 1 would be out of range) and passed through a function that is
+// the identity for |u| <= PAN_LINEAR and then eases (C2-smoothly, via tanh) toward the
+// limit without ever touching it. Velocity and acceleration are therefore continuous, the
+// picture still always covers the frame, and framing while zoomed in is unchanged.
+const PAN_LINEAR = 0.6;
+function softPan(s, F) {
+  const h = (s - 1) / 2; // half-width of the legal translation range [1 - s, 0]
+  if (h < 1e-9) return 0;
+  const mid = (1 - s) / 2;
+  const u = (0.5 - s * F - mid) / h; // ideal centred pan, as a fraction of the legal half-range
+  const m = Math.abs(u);
+  const r = m <= PAN_LINEAR ? m : PAN_LINEAR + (1 - PAN_LINEAR) * Math.tanh((m - PAN_LINEAR) / (1 - PAN_LINEAR));
+  return mid + h * Math.sign(u) * r;
+}
+
 /**
  * Zoom camera, image-aware. The focus point (fx, fy) is given in IMAGE space (a
  * fraction across the source photo). It is mapped through the object-fit:cover
@@ -98,8 +120,8 @@ export function zoomCamera(scale, fx, fy, ar = 16 / 9, frameAr = 16 / 9) {
   // covers [tx, tx+s] x [ty, ty+s]. Clamp to [1-s, 0] so it always fully covers the
   // frame — no empty edges, no black lines. (Using the cover extents here would allow
   // the wrapper to shift beyond [1-s, 0] and reveal the card background as a gap.)
-  const tx = clamp(0.5 - s * Fx, 1 - s, 0);
-  const ty = clamp(0.5 - s * Fy, 1 - s, 0);
+  const tx = softPan(s, Fx);
+  const ty = softPan(s, Fy);
   return {
     transform: `translate(${tx * 100}%, ${ty * 100}%) scale(${s})`,
     focusX: tx + s * Fx,
