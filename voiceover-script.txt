@@ -1,43 +1,82 @@
-VOICEOVER SCRIPT — Zoom Out: Food Edition
-==========================================
-US English · upbeat, warm, game-show host energy
-Pace: confident and clear, slight pause between lines
+VOICEOVER SCRIPT - Zoom Out: Food Edition (full video, start to finish)
+=======================================================================
+Voice: upbeat, warm, game-show host. Natural, conversational, everyday phrasing.
+Save each clip under the filename shown, in public/voiceover/
+Formats: .wav .mp3 .m4a .aac .ogg .flac      Then run: npm run voiceover
 
-Save each clip as the filename shown, in public/voiceover/
-Supported formats: .wav .mp3 .m4a .aac .ogg .flac
-Run  npm run voiceover  after recording to register clips.
-
-──────────────────────────────────────────────────────────────
-  NAMING KEY
-  qq##.wav   = question phase  (plays before zoom/timer starts)
-  q##.wav    = reveal moment   (plays when answer slams in)
-  bonusq#.wav = bonus question (plays at start of bonus scene)
-  bonus#.wav  = bonus reveal   (plays when bonus answer hits)
-  intro.wav  · outro.wav · sting.wav = named scenes
-──────────────────────────────────────────────────────────────
+Total clips: 112  =  intro 1 + qq 50 + q 50 + bonusq 5 + bonus 5 + outro 1 + sting 1
 
 
-=== INTRO ===
+PLAYBACK ORDER (so you can record in sequence)
+----------------------------------------------
+intro > [Easy card] Q1-Q10 > Bonus 1 > Q11-Q20 > Bonus 2 > [Medium card] Q21-Q30
+> Bonus 3 > Q31-Q35 > [Hard card] Q36-Q40 > Bonus 4 > Q41-Q50 > Bonus 5
+> outro > sting
+
+Level cards (Easy / Medium / Hard) have no clip slot. Their feel is carried by
+the first question line of each level (qq01, qq21, qq36).
+
+
+TIMING TARGETS (read from src/plan.cjs and settings.json)
+---------------------------------------------------------
+Clip       Plays                              Stays un-stretched at     Aim for
+intro      first frame of the intro           up to ~6.0 s              5.5-6.0 s
+qq##       before the zoom/timer starts       zoom starts 1.0 s after   1.0-1.8 s
+                                              scene start; longer clips
+                                              delay the zoom a little
+q##        the moment the answer slams in    up to ~4.0 s              1.0-2.5 s
+bonusq#    over the bonus banner              banner stretches to fit   4-5 s
+                                              (8 s clock starts after)
+bonus#     the moment the bonus answer lands  up to ~2.9 s              1.5-2.5 s
+outro      "Your score?" screen               up to ~3.5 s              3.0-3.5 s
+sting      Quiz Matrix logo                   up to ~3.5 s              2.5-3.0 s
+
+A clip that runs long never gets cut off. The scene stretches to fit. After
+adding clips, re-run:  npm run audio
+
+
+PRONUNCIATION KEY
+------------------------------------
+Croissant ..... kwah-SAHN     (or kruh-SAHNT, either is fine, stay consistent)
+Macaron ....... mack-uh-ROHN
+Lasagna ....... luh-ZAHN-yuh
+Pistachio ..... pih-STASH-ee-oh
+Baklava ....... BAH-kluh-vah
+Romanesco ..... roh-muh-NESS-koh
+Pomegranate ... POM-uh-gran-it
+Avocado ....... ah-vuh-KAH-doh
+Kiwi .......... KEE-wee
+Cantaloupe .... KAN-tuh-lohp
+Cauliflower ... KAW-lih-flow-er
+Artichoke ..... AR-tih-choke
+Okra .......... OH-kruh
+Oyster ........ OY-ster
+Nachos ........ NAH-chohz
+Brussels ...... BRUSS-uhlz   (Brussels sprouts)
+Say "twenty" and "fifty" with a clear T. Say "ten" through "fifty" as numbers.
+
+
+=== INTRO ===  (6.5 s scene; headline slams at ~1.6 s; photo finishes zooming
+                 out and the answer is revealed at ~5.6 s)
 
 intro.wav
-  "Only one in twenty can name all fifty. Fifty foods, three levels —
-   zoom out and name them. Let's see what you've got."
+  "Only one in twenty can name all fifty foods.
+   A close-up zooms out... you name it before the reveal. Ready?"
+
+  Delivery: first sentence punchy and confident, it lands as the headline
+  slams in. Short beat after "fifty foods". Then pick up speed through the
+  zoom. Land "Ready?" just as the full picture reveals.
 
 
-=== LEVEL CARDS ===
-  (no voiceover hook — these are visual-only transitions)
-  Tip: the level card is on screen for ~3.5 s; no clip needed.
+=== EASY  (Q1-Q10) ===
 
-
-=== EASY — Questions 1–20 ===
-
-qq01.wav   "Starting easy — what food is this?"
+qq01.wav   "Let's start easy. What food is this?"
 q01.wav    "Pizza!"
 
 qq02.wav   "What food is this?"
 q02.wav    "Hamburger!"
 
-qq03.wav   "Name this classic side dish."
+qq03.wav   "Next one. What food is this?"
 q03.wav    "French fries!"
 
 qq04.wav   "What food is this?"
@@ -49,7 +88,7 @@ q05.wav    "Donut!"
 qq06.wav   "What fruit is this?"
 q06.wav    "Strawberry!"
 
-qq07.wav   "What fruit is this?"
+qq07.wav   "Okay, what fruit is this?"
 q07.wav    "Watermelon!"
 
 qq08.wav   "What fruit is this?"
@@ -59,20 +98,19 @@ qq09.wav   "What fruit is this?"
 q09.wav    "Pineapple!"
 
 qq10.wav   "What snack is this?"
-q10.wav    "Popcorn!"
+q10.wav    "Popcorn! Ten down, forty to go."
 
 
-=== BONUS 1 — COLOR DNA (after Q10) ===
+=== BONUS 1 - COLOR DNA  (plays after Q10) ===
 
 bonusq1.wav
-  "Bonus round! Look at the color signature — which food has these colors?
-   Drop your answer in the comments right now."
+  "Bonus round! Which food has these colors? Type your answer in the comments."
 
 bonus1.wav
-  "Watermelon! Those greens and reds are a dead giveaway."
+  "Watermelon! Those reds and greens gave it away."
 
 
-=== EASY continued — Questions 11–20 ===
+=== EASY continued (Q11-Q20) ===
 
 qq11.wav   "What dessert is this?"
 q11.wav    "Chocolate chip cookie!"
@@ -80,7 +118,7 @@ q11.wav    "Chocolate chip cookie!"
 qq12.wav   "What dessert is this?"
 q12.wav    "Ice cream cone!"
 
-qq13.wav   "What breakfast food is this?"
+qq13.wav   "What breakfast is this?"
 q13.wav    "Pancakes!"
 
 qq14.wav   "What vegetable is this?"
@@ -101,23 +139,22 @@ q18.wav    "Taco!"
 qq19.wav   "What dessert is this?"
 q19.wav    "Cupcake!"
 
-qq20.wav   "Last easy one — what food is this?"
-q20.wav    "Bacon!"
+qq20.wav   "Last easy one. What food is this?"
+q20.wav    "Bacon! That's the end of easy."
 
 
-=== BONUS 2 — SHADOW REVEAL (after Q20) ===
+=== BONUS 2 - SHADOW REVEAL  (plays after Q20) ===
 
 bonusq2.wav
-  "Bonus round! Nothing but a silhouette — can you name the food?
-   Put your guess in the comments before the clock hits zero."
+  "Bonus round! Name the food from its shadow. Comment your guess before time runs out."
 
 bonus2.wav
-  "Banana! That curve is unmistakable."
+  "Banana! That curve gives it away."
 
 
-=== MEDIUM — Questions 21–35 ===
+=== MEDIUM  (Q21-Q35) ===
 
-qq21.wav   "Medium level now — what fruit is this?"
+qq21.wav   "Medium level. Now it gets tricky. What fruit is this?"
 q21.wav    "Avocado!"
 
 qq22.wav   "What fruit is this?"
@@ -138,27 +175,26 @@ q26.wav    "Eggplant!"
 qq27.wav   "What vegetable is this?"
 q27.wav    "Brussels sprouts!"
 
-qq28.wav   "What breakfast food is this?"
+qq28.wav   "What breakfast is this?"
 q28.wav    "Waffle!"
 
 qq29.wav   "What snack is this?"
 q29.wav    "Pretzel!"
 
 qq30.wav   "What food is this?"
-q30.wav    "Sushi!"
+q30.wav    "Sushi! Thirty down."
 
 
-=== BONUS 3 — MACRO TEXTURE (after Q30) ===
+=== BONUS 3 - MACRO TEXTURE  (plays after Q30) ===
 
 bonusq3.wav
-  "Bonus round! That is an extreme close-up — what food has this texture?
-   Comment your guess right now."
+  "Bonus round! That's an extreme close-up. What food has this texture? Comment below."
 
 bonus3.wav
-  "Strawberry! Those little seeds are the tell."
+  "Strawberry! Those tiny seeds gave it away."
 
 
-=== MEDIUM continued — Questions 31–35 ===
+=== MEDIUM continued (Q31-Q35) ===
 
 qq31.wav   "What treat is this?"
 q31.wav    "Cotton candy!"
@@ -172,23 +208,13 @@ q33.wav    "Croissant!"
 qq34.wav   "What dessert is this?"
 q34.wav    "Macaron!"
 
-qq35.wav   "Last medium one — what food is this?"
-q35.wav    "Lasagna!"
+qq35.wav   "Last medium one. What food is this?"
+q35.wav    "Lasagna! Medium is done. Hard is next."
 
 
-=== BONUS 4 — PIXEL FOCUS (after Q40) ===
+=== HARD  (Q36-Q50) ===
 
-bonusq4.wav
-  "Bonus round! It starts as a blur — identify the food before it
-   comes into focus. Drop your answer below!"
-
-bonus4.wav
-  "Pizza! Even pixelated, that's a classic."
-
-
-=== HARD — Questions 36–50 ===
-
-qq36.wav   "Hard level — things get exotic. What fruit is this?"
+qq36.wav   "Hard level. Sharp eyes only. What fruit is this?"
 q36.wav    "Dragon fruit!"
 
 qq37.wav   "What vegetable is this?"
@@ -201,7 +227,19 @@ qq39.wav   "What fruit is this?"
 q39.wav    "Passion fruit!"
 
 qq40.wav   "What fruit is this?"
-q40.wav    "Fig!"
+q40.wav    "Fig! Forty down, ten to go."
+
+
+=== BONUS 4 - PIXEL FOCUS  (plays after Q40) ===
+
+bonusq4.wav
+  "Bonus round! It starts blurry. Name the food as it sharpens. Comment your guess!"
+
+bonus4.wav
+  "Pizza! Pretty hard to hide."
+
+
+=== HARD continued (Q41-Q50) ===
 
 qq41.wav   "What vegetable is this?"
 q41.wav    "Romanesco!"
@@ -230,57 +268,50 @@ q48.wav    "Raspberry!"
 qq49.wav   "What nut is this?"
 q49.wav    "Walnut!"
 
-qq50.wav   "Last one — make it count. What seafood is this?"
-q50.wav    "Lobster!"
+qq50.wav   "Last one. Make it count. What seafood is this?"
+q50.wav    "Lobster! One more bonus to go."
 
 
-=== BONUS 5 — RECIPE REVERSE (after Q50) ===
+=== BONUS 5 - RECIPE REVERSE  (plays after Q50) ===
 
 bonusq5.wav
-  "Final bonus! Flour, egg, milk — what food do these ingredients make?
-   Leave your answer in the comments!"
+  "Final bonus! Flour, egg, and milk. What do you make? Drop your answer below."
 
 bonus5.wav
-  "Pancakes! Breakfast of champions."
+  "Pancakes! Flour, egg, and milk."
 
 
 === OUTRO ===
 
 outro.wav
-  "That's all fifty. Drop your score in the comments —
-   most people get under thirty. How did you do?"
+  "Your score? Drop it below. Most people get under thirty."
 
 
 === STING ===
 
 sting.wav
-  "Quiz Matrix."
+  "Subscribe for more quizzes. Quiz Matrix."
 
 
-──────────────────────────────────────────────────────────────
-  RECORDING NOTES
+=======================================================================
+RECORDING NOTES
 
-  Tone:
-  · Warm, upbeat game-show host — think Food Network meets trivia night.
-  · Question clips (qq##): curious, slightly teasing — let the silence
-    after the line work. Don't rush.
-  · Reveal clips (q##): punchy, one beat, land it like a buzzer hit.
-  · Bonus question clips (bonusq#): a notch more excited — this is the
-    special round.
-  · Bonus reveal clips (bonus#): answer + one short reaction line, done.
-  · Intro: hook the viewer in the first two seconds.
-  · Outro: conversational, like you're talking directly to one person.
+Tone
+  - qq##   curious and a little teasing. Leave the silence after the line
+           alone, the zoom does the talking.
+  - q##    one punchy beat, like a buzzer. Say the answer first, always.
+  - bonusq a notch more excited. This is the special round. The comment
+           request is the whole point, so say it clearly.
+  - bonus# answer plus one short reaction, then stop.
+  - intro  hook in the first two seconds.
+  - outro  talk to one person, not a crowd.
 
-  Pacing:
-  · qq## clips: aim for 2.5–4 seconds total. The zoom starts after the
-    clip ends, so if you go long the scene stretches to fit — don't worry.
-  · q## clips: 1–2 seconds. Short and sharp.
-  · bonusq# clips: 4–6 seconds. Viewers need a moment to process.
-  · bonus# clips: 2–4 seconds.
-  · intro.wav: 6–9 seconds.
-  · outro.wav: 5–8 seconds.
+Keep the on-screen words and the spoken words matching. Every qq## line says
+the same category the screen says (food, fruit, dessert, snack, breakfast,
+vegetable, treat, pastry, nut, seafood).
 
-  After recording all clips, run:
-    npm run voiceover
-  to register them and get a coverage report.
-──────────────────────────────────────────────────────────────
+Don't say anything during the 8-second bonus clock. The tick sounds carry it.
+No clips for the hint (it appears at 40% of the zoom). It stays visual.
+
+Heads up: `npm run voiceover:script` regenerates this file from
+questions.json and will overwrite it.
