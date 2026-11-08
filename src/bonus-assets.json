@@ -2,88 +2,76 @@
   "colors": {
     "easy_07_watermelon": [
       {
-        "hex": "#ee2b1c",
-        "weight": 0.3056
+        "hex": "#a42522",
+        "weight": 0.3762
       },
       {
-        "hex": "#f86245",
-        "weight": 0.2663
+        "hex": "#233540",
+        "weight": 0.376
       },
       {
-        "hex": "#ebe9dc",
-        "weight": 0.2403
-      },
-      {
-        "hex": "#f7b99b",
-        "weight": 0.1878
+        "hex": "#a29358",
+        "weight": 0.2478
       }
     ],
     "easy_08_banana": [
       {
-        "hex": "#d29b20",
-        "weight": 0.7393
+        "hex": "#14212a",
+        "weight": 0.3682
       },
       {
-        "hex": "#f6e7a9",
-        "weight": 0.2607
+        "hex": "#906219",
+        "weight": 0.2416
+      },
+      {
+        "hex": "#f9d364",
+        "weight": 0.2219
+      },
+      {
+        "hex": "#d09c29",
+        "weight": 0.1684
       }
     ],
     "easy_15_broccoli": [
       {
-        "hex": "#282016",
-        "weight": 0.2027
+        "hex": "#11202b",
+        "weight": 0.6444
       },
       {
-        "hex": "#e0e2b7",
-        "weight": 0.1804
-      },
-      {
-        "hex": "#b4b777",
-        "weight": 0.1762
-      },
-      {
-        "hex": "#996a32",
-        "weight": 0.1614
-      },
-      {
-        "hex": "#4d502a",
-        "weight": 0.1538
-      },
-      {
-        "hex": "#81924e",
-        "weight": 0.1256
+        "hex": "#507957",
+        "weight": 0.3556
       }
     ],
     "easy_06_strawberry": [
       {
-        "hex": "#ed5858",
-        "weight": 0.3003
+        "hex": "#202e39",
+        "weight": 0.5078
       },
       {
-        "hex": "#d1221e",
-        "weight": 0.2487
+        "hex": "#760a0f",
+        "weight": 0.3242
       },
       {
-        "hex": "#3e0f0d",
-        "weight": 0.1972
-      },
-      {
-        "hex": "#d4a390",
-        "weight": 0.1361
-      },
-      {
-        "hex": "#8d3830",
-        "weight": 0.1176
+        "hex": "#715c49",
+        "weight": 0.168
       }
     ],
     "medium_11_cotton-candy": [
       {
-        "hex": "#f9b6b0",
-        "weight": 0.5425
+        "hex": "#1d2f3f",
+        "weight": 0.405
       },
       {
-        "hex": "#f37e6c",
-        "weight": 0.4575
+        "hex": "#a95162",
+        "weight": 0.2375
+      },
+      {
+        "hex": "#edb8c5",
+        "weight": 0.1815
+      },
+      {
+        "hex": "#cc8191",
+        "weight": 0.1761
       }
     ]
   },

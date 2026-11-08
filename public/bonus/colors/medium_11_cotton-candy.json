@@ -1,10 +1,18 @@
 [
   {
-    "hex": "#f9b6b0",
-    "weight": 0.5425
+    "hex": "#1d2f3f",
+    "weight": 0.405
   },
   {
-    "hex": "#f37e6c",
-    "weight": 0.4575
+    "hex": "#a95162",
+    "weight": 0.2375
+  },
+  {
+    "hex": "#edb8c5",
+    "weight": 0.1815
+  },
+  {
+    "hex": "#cc8191",
+    "weight": 0.1761
   }
 ]
