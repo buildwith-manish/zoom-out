@@ -1,51 +1,51 @@
 id,question,highlight,answer,image,art,pic,fx,fy,z0,hint,level,ar
 1,What food is this?,1,Pizza,easy_01_pizza.jpg,pizza,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH P,easy,1.75
-2,What food is this?,1,Hamburger,easy_02_hamburger.jpg,hamburger,#0b0b2a,50%,50%,6,9 LETTERS · STARTS WITH H,easy,1.75
-3,What food is this?,1,French Fries,easy_03_french-fries.jpg,french-fries,#0b0b2a,50%,50%,6,2 WORDS · 11 LETTERS · STARTS WITH F,easy,1.75
-4,What food is this?,1,Hot Dog,easy_04_hot-dog.jpg,hot-dog,#0b0b2a,50%,50%,6,2 WORDS · 6 LETTERS · STARTS WITH H,easy,1.75
-5,What dessert is this?,1,Donut,easy_05_donut.jpg,donut,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH D,easy,1.75
-6,What fruit is this?,1,Strawberry,easy_06_strawberry.jpg,strawberry,#0b0b2a,50%,50%,6,10 LETTERS · STARTS WITH S,easy,1.75
-7,What fruit is this?,1,Watermelon,easy_07_watermelon.jpg,watermelon,#0b0b2a,50%,50%,6,10 LETTERS · STARTS WITH W,easy,1.75
-8,What fruit is this?,1,Banana,easy_08_banana.jpg,banana,#0b0b2a,50%,50%,6,6 LETTERS · STARTS WITH B,easy,1.75
-9,What fruit is this?,1,Pineapple,easy_09_pineapple.jpg,pineapple,#0b0b2a,50%,50%,6,9 LETTERS · STARTS WITH P,easy,1.75
-10,What snack is this?,1,Popcorn,easy_10_popcorn.jpg,popcorn,#0b0b2a,50%,50%,6,7 LETTERS · STARTS WITH P,easy,1.75
-11,What dessert is this?,1,Chocolate Chip Cookie,easy_11_chocolate-chip-cookie.jpg,chocolate-chip-cookie,#0b0b2a,50%,50%,6,3 WORDS · 19 LETTERS · STARTS WITH C,easy,1.75
-12,What dessert is this?,1,Ice Cream Cone,easy_12_ice-cream-cone.jpg,ice-cream-cone,#0b0b2a,50%,50%,6,3 WORDS · 12 LETTERS · STARTS WITH I,easy,1.75
-13,What breakfast is this?,1,Pancakes,easy_13_pancakes.jpg,pancakes,#0b0b2a,50%,50%,6,8 LETTERS · STARTS WITH P,easy,1.75
-14,What vegetable is this?,1,Corn on the Cob,easy_14_corn-on-the-cob.jpg,corn-on-the-cob,#0b0b2a,50%,50%,6,4 WORDS · 12 LETTERS · STARTS WITH C,easy,1.75
-15,What vegetable is this?,1,Broccoli,easy_15_broccoli.jpg,broccoli,#0b0b2a,50%,50%,6,8 LETTERS · STARTS WITH B,easy,1.75
-16,What vegetable is this?,1,Carrot,easy_16_carrot.jpg,carrot,#0b0b2a,50%,50%,6,6 LETTERS · STARTS WITH C,easy,1.75
+2,What food is this?,1,Hamburger,easy_02_hamburger.jpg,hamburger,#0b0b2a,49%,53%,6,9 LETTERS · STARTS WITH H,easy,1.75
+3,What food is this?,1,French Fries,easy_03_french-fries.jpg,french-fries,#0b0b2a,49%,64%,6,2 WORDS · 11 LETTERS · STARTS WITH F,easy,1.75
+4,What food is this?,1,Hot Dog,easy_04_hot-dog.jpg,hot-dog,#0b0b2a,51%,63%,6,2 WORDS · 6 LETTERS · STARTS WITH H,easy,1.75
+5,What dessert is this?,1,Donut,easy_05_donut.jpg,donut,#0b0b2a,50%,48%,6,5 LETTERS · STARTS WITH D,easy,1.75
+6,What fruit is this?,1,Strawberry,easy_06_strawberry.jpg,strawberry,#0b0b2a,64%,49%,6,10 LETTERS · STARTS WITH S,easy,1.75
+7,What fruit is this?,1,Watermelon,easy_07_watermelon.jpg,watermelon,#0b0b2a,50%,55%,6,10 LETTERS · STARTS WITH W,easy,1.75
+8,What fruit is this?,1,Banana,easy_08_banana.jpg,banana,#0b0b2a,53%,47%,6,6 LETTERS · STARTS WITH B,easy,1.75
+9,What fruit is this?,1,Pineapple,easy_09_pineapple.jpg,pineapple,#0b0b2a,50%,48%,6,9 LETTERS · STARTS WITH P,easy,1.75
+10,What snack is this?,1,Popcorn,easy_10_popcorn.jpg,popcorn,#0b0b2a,50%,57%,6,7 LETTERS · STARTS WITH P,easy,1.75
+11,What dessert is this?,1,Chocolate Chip Cookie,easy_11_chocolate-chip-cookie.jpg,chocolate-chip-cookie,#0b0b2a,50%,51%,6,3 WORDS · 19 LETTERS · STARTS WITH C,easy,1.75
+12,What dessert is this?,1,Ice Cream Cone,easy_12_ice-cream-cone.jpg,ice-cream-cone,#0b0b2a,50%,58%,6,3 WORDS · 12 LETTERS · STARTS WITH I,easy,1.75
+13,What breakfast is this?,1,Pancakes,easy_13_pancakes.jpg,pancakes,#0b0b2a,48%,60%,6,8 LETTERS · STARTS WITH P,easy,1.75
+14,What vegetable is this?,1,Corn on the Cob,easy_14_corn-on-the-cob.jpg,corn-on-the-cob,#0b0b2a,53%,54%,6,4 WORDS · 12 LETTERS · STARTS WITH C,easy,1.75
+15,What vegetable is this?,1,Broccoli,easy_15_broccoli.jpg,broccoli,#0b0b2a,50%,52%,6,8 LETTERS · STARTS WITH B,easy,1.75
+16,What vegetable is this?,1,Carrot,easy_16_carrot.jpg,carrot,#0b0b2a,52%,47%,6,6 LETTERS · STARTS WITH C,easy,1.75
 17,What fruit is this?,1,Apple,easy_17_apple.jpg,apple,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH A,easy,1.75
-18,What food is this?,1,Taco,easy_18_taco.jpg,taco,#0b0b2a,50%,50%,6,4 LETTERS · STARTS WITH T,easy,1.75
+18,What food is this?,1,Taco,easy_18_taco.jpg,taco,#0b0b2a,52%,57%,6,4 LETTERS · STARTS WITH T,easy,1.75
 19,What dessert is this?,1,Cupcake,easy_19_cupcake.jpg,cupcake,#0b0b2a,50%,50%,6,7 LETTERS · STARTS WITH C,easy,1.75
-20,What food is this?,1,Bacon,easy_20_bacon.jpg,bacon,#0b0b2a,50%,50%,6,5 LETTERS · STARTS WITH B,easy,1.75
-21,What fruit is this?,1,Avocado,medium_01_avocado.jpg,avocado,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH A,medium,1.75
+20,What food is this?,1,Bacon,easy_20_bacon.jpg,bacon,#0b0b2a,46%,58%,6,5 LETTERS · STARTS WITH B,easy,1.75
+21,What fruit is this?,1,Avocado,medium_01_avocado.jpg,avocado,#0b0b2a,50%,49%,7,7 LETTERS · STARTS WITH A,medium,1.75
 22,What fruit is this?,1,Kiwi,medium_02_kiwi.jpg,kiwi,#0b0b2a,50%,50%,7,4 LETTERS · STARTS WITH K,medium,1.75
-23,What fruit is this?,1,Pomegranate,medium_03_pomegranate.jpg,pomegranate,#0b0b2a,50%,50%,7,11 LETTERS · STARTS WITH P,medium,1.75
-24,What fruit is this?,1,Cantaloupe,medium_04_cantaloupe.jpg,cantaloupe,#0b0b2a,50%,50%,7,10 LETTERS · STARTS WITH C,medium,1.75
-25,What vegetable is this?,1,Cauliflower,medium_05_cauliflower.jpg,cauliflower,#0b0b2a,50%,50%,7,11 LETTERS · STARTS WITH C,medium,1.75
+23,What fruit is this?,1,Pomegranate,medium_03_pomegranate.jpg,pomegranate,#0b0b2a,50%,49%,7,11 LETTERS · STARTS WITH P,medium,1.75
+24,What fruit is this?,1,Cantaloupe,medium_04_cantaloupe.jpg,cantaloupe,#0b0b2a,50%,52%,7,10 LETTERS · STARTS WITH C,medium,1.75
+25,What vegetable is this?,1,Cauliflower,medium_05_cauliflower.jpg,cauliflower,#0b0b2a,51%,54%,7,11 LETTERS · STARTS WITH C,medium,1.75
 26,What vegetable is this?,1,Eggplant,medium_06_eggplant.jpg,eggplant,#0b0b2a,50%,50%,7,8 LETTERS · STARTS WITH E,medium,1.75
-27,What vegetable is this?,1,Brussels Sprouts,medium_07_brussels-sprouts.jpg,brussels-sprouts,#0b0b2a,50%,50%,7,2 WORDS · 15 LETTERS · STARTS WITH B,medium,1.75
-28,What breakfast is this?,1,Waffle,medium_08_waffle.jpg,waffle,#0b0b2a,50%,50%,7,6 LETTERS · STARTS WITH W,medium,1.75
+27,What vegetable is this?,1,Brussels Sprouts,medium_07_brussels-sprouts.jpg,brussels-sprouts,#0b0b2a,49%,50%,7,2 WORDS · 15 LETTERS · STARTS WITH B,medium,1.75
+28,What breakfast is this?,1,Waffle,medium_08_waffle.jpg,waffle,#0b0b2a,50%,52%,7,6 LETTERS · STARTS WITH W,medium,1.75
 29,What snack is this?,1,Pretzel,medium_09_pretzel.jpg,pretzel,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH P,medium,1.75
-30,What food is this?,1,Sushi,medium_10_sushi.jpg,sushi,#0b0b2a,50%,50%,7,5 LETTERS · STARTS WITH S,medium,1.75
-31,What treat is this?,1,Cotton Candy,medium_11_cotton-candy.jpg,cotton-candy,#0b0b2a,50%,50%,7,2 WORDS · 11 LETTERS · STARTS WITH C,medium,1.75
-32,What snack is this?,1,Nachos,medium_12_nachos.jpg,nachos,#0b0b2a,50%,50%,7,6 LETTERS · STARTS WITH N,medium,1.75
+30,What food is this?,1,Sushi,medium_10_sushi.jpg,sushi,#0b0b2a,48%,60%,7,5 LETTERS · STARTS WITH S,medium,1.75
+31,What treat is this?,1,Cotton Candy,medium_11_cotton-candy.jpg,cotton-candy,#0b0b2a,49%,55%,7,2 WORDS · 11 LETTERS · STARTS WITH C,medium,1.75
+32,What snack is this?,1,Nachos,medium_12_nachos.jpg,nachos,#0b0b2a,47%,59%,7,6 LETTERS · STARTS WITH N,medium,1.75
 33,What pastry is this?,1,Croissant,medium_13_croissant.jpg,croissant,#0b0b2a,50%,50%,7,9 LETTERS · STARTS WITH C,medium,1.75
-34,What dessert is this?,1,Macaron,medium_14_macaron.jpg,macaron,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH M,medium,1.75
-35,What food is this?,1,Lasagna,medium_15_lasagna.jpg,lasagna,#0b0b2a,50%,50%,7,7 LETTERS · STARTS WITH L,medium,1.75
-36,What fruit is this?,1,Dragon Fruit,hard_01_dragon-fruit.jpg,dragon-fruit,#0b0b2a,50%,50%,8,2 WORDS · 11 LETTERS · STARTS WITH D,hard,1.75
-37,What vegetable is this?,1,Artichoke,hard_02_artichoke.jpg,artichoke,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH A,hard,1.75
+34,What dessert is this?,1,Macaron,medium_14_macaron.jpg,macaron,#0b0b2a,50%,54%,7,7 LETTERS · STARTS WITH M,medium,1.75
+35,What food is this?,1,Lasagna,medium_15_lasagna.jpg,lasagna,#0b0b2a,49%,55%,7,7 LETTERS · STARTS WITH L,medium,1.75
+36,What fruit is this?,1,Dragon Fruit,hard_01_dragon-fruit.jpg,dragon-fruit,#0b0b2a,50%,49%,8,2 WORDS · 11 LETTERS · STARTS WITH D,hard,1.75
+37,What vegetable is this?,1,Artichoke,hard_02_artichoke.jpg,artichoke,#0b0b2a,56%,50%,8,9 LETTERS · STARTS WITH A,hard,1.75
 38,What fruit is this?,1,Star Fruit,hard_03_star-fruit.jpg,star-fruit,#0b0b2a,50%,50%,8,2 WORDS · 9 LETTERS · STARTS WITH S,hard,1.75
 39,What fruit is this?,1,Passion Fruit,hard_04_passion-fruit.jpg,passion-fruit,#0b0b2a,50%,50%,8,2 WORDS · 12 LETTERS · STARTS WITH P,hard,1.75
-40,What fruit is this?,1,Fig,hard_05_fig.jpg,fig,#0b0b2a,50%,50%,8,3 LETTERS · STARTS WITH F,hard,1.75
-41,What vegetable is this?,1,Romanesco,hard_06_romanesco.jpg,romanesco,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH R,hard,1.75
-42,What vegetable is this?,1,Okra,hard_07_okra.jpg,okra,#0b0b2a,50%,50%,8,4 LETTERS · STARTS WITH O,hard,1.75
-43,What food is this?,1,Honeycomb,hard_08_honeycomb.jpg,honeycomb,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH H,hard,1.75
-44,What seafood is this?,1,Oyster,hard_09_oyster.jpg,oyster,#0b0b2a,50%,50%,8,6 LETTERS · STARTS WITH O,hard,1.75
-45,What dessert is this?,1,Baklava,hard_10_baklava.jpg,baklava,#0b0b2a,50%,50%,8,7 LETTERS · STARTS WITH B,hard,1.75
-46,What nut is this?,1,Pistachio,hard_11_pistachio.jpg,pistachio,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH P,hard,1.75
-47,What fruit is this?,1,Coconut,hard_12_coconut.jpg,coconut,#0b0b2a,50%,50%,8,7 LETTERS · STARTS WITH C,hard,1.75
-48,What fruit is this?,1,Raspberry,hard_13_raspberry.jpg,raspberry,#0b0b2a,50%,50%,8,9 LETTERS · STARTS WITH R,hard,1.75
-49,What nut is this?,1,Walnut,hard_14_walnut.jpg,walnut,#0b0b2a,50%,50%,8,6 LETTERS · STARTS WITH W,hard,1.75
-50,What seafood is this?,1,Lobster,hard_15_lobster.jpg,lobster,#0b0b2a,50%,50%,8,7 LETTERS · STARTS WITH L,hard,1.75
+40,What fruit is this?,1,Fig,hard_05_fig.jpg,fig,#0b0b2a,50%,52%,8,3 LETTERS · STARTS WITH F,hard,1.75
+41,What vegetable is this?,1,Romanesco,hard_06_romanesco.jpg,romanesco,#0b0b2a,49%,50%,8,9 LETTERS · STARTS WITH R,hard,1.75
+42,What vegetable is this?,1,Okra,hard_07_okra.jpg,okra,#0b0b2a,50%,52%,8,4 LETTERS · STARTS WITH O,hard,1.75
+43,What food is this?,1,Honeycomb,hard_08_honeycomb.jpg,honeycomb,#0b0b2a,54%,50%,8,9 LETTERS · STARTS WITH H,hard,1.75
+44,What seafood is this?,1,Oyster,hard_09_oyster.jpg,oyster,#0b0b2a,51%,48%,8,6 LETTERS · STARTS WITH O,hard,1.75
+45,What dessert is this?,1,Baklava,hard_10_baklava.jpg,baklava,#0b0b2a,51%,52%,8,7 LETTERS · STARTS WITH B,hard,1.75
+46,What nut is this?,1,Pistachio,hard_11_pistachio.jpg,pistachio,#0b0b2a,49%,57%,8,9 LETTERS · STARTS WITH P,hard,1.75
+47,What fruit is this?,1,Coconut,hard_12_coconut.jpg,coconut,#0b0b2a,50%,49%,8,7 LETTERS · STARTS WITH C,hard,1.75
+48,What fruit is this?,1,Raspberry,hard_13_raspberry.jpg,raspberry,#0b0b2a,49%,51%,8,9 LETTERS · STARTS WITH R,hard,1.75
+49,What nut is this?,1,Walnut,hard_14_walnut.jpg,walnut,#0b0b2a,49%,49%,8,6 LETTERS · STARTS WITH W,hard,1.75
+50,What seafood is this?,1,Lobster,hard_15_lobster.jpg,lobster,#0b0b2a,52%,57%,8,7 LETTERS · STARTS WITH L,hard,1.75

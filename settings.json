@@ -23,9 +23,9 @@
   "introImage": "easy_01_pizza.jpg",
   "introPic": "#0b0b2a",
   "introFx": "50%",
-  "introFy": "45%",
+  "introFy": "50%",
   "introZ0": 8,
-  "introAr": 1.7497,
+  "introAr": 1.75,
   "introHeadline": [
     "Only",
     "1",
