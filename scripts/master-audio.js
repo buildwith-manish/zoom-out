@@ -21,7 +21,12 @@ const root = path.join(__dirname, '..');
 const snd = (f) => path.join(root, 'public', 'sounds', f);
 
 // ---- mix constants -------------------------------------------------------
-const TARGET_LUFS = -14; // YouTube reference loudness
+// With a baked voiceover.wav the master is the whole mix and goes to the YouTube reference
+// level. With per-clip voiceover (QuizVoiceover plays the clips on top, ~-20 LUFS each) the
+// master is only the music + sfx bed, so it must sit well UNDER the voice: -28 LUFS keeps
+// the ticks/hits clear without drowning the speech.
+const HAS_BAKED_VOICE = require('fs').existsSync(require('path').join(__dirname, '..', 'public', 'sounds', 'voiceover.wav'));
+const TARGET_LUFS = HAS_BAKED_VOICE ? -14 : -28;
 const TARGET_TP = -1.5; // dBTP ceiling
 const TARGET_LRA = 11;
 const MUSIC_GAIN_DB = -3; // music bed level before ducking

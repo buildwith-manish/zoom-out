@@ -60,7 +60,7 @@ def plan_total():
 # available it always wins (needs +1s headroom for SFX tails).
 _real = plan_total()
 if _real:
-    TOTAL = max(TOTAL, _real + 1.0)
+    TOTAL = _real + 1.0  # the scene plan is the source of truth; never keep a stale, longer length
     print(f'scene plan total {_real:.2f}s -> music length {TOTAL:.2f}s')
 else:
     print(f'timing flags only -> music length {TOTAL:.2f}s')

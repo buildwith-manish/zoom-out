@@ -55,9 +55,11 @@ function buildEvents(scenes) {
     }
     if (s.type === 'q') {
       const zd = s.zd;
-      EV.push([s.start + 0.12, 'words'], [s.start + 0.35, 'shutter'], [s.start + ZS, 'zoomOut', zd]);
-      for (let k = 1; k < zd; k++) EV.push([s.start + ZS + k, k >= zd - 3 ? 'tickHi' : 'tick']);
-      EV.push([s.start + ZS + zd * HINT_AT, 'sparkle'], [s.start + ZS + zd, 'focus']);
+      // effective zoomStart: delayed when a qq voiceover clip plays first (see plan.cjs)
+      const zs = s.zoomStart != null ? s.zoomStart : ZS;
+      EV.push([s.start + 0.12, 'words'], [s.start + 0.35, 'shutter'], [s.start + zs, 'zoomOut', zd]);
+      for (let k = 1; k < zd; k++) EV.push([s.start + zs + k, k >= zd - 3 ? 'tickHi' : 'tick']);
+      EV.push([s.start + zs + zd * HINT_AT, 'sparkle'], [s.start + zs + zd, 'focus']);
     }
     if (s.type === 'r') EV.push([s.start + 0.05, 'expand'], [s.start + 0.1, 'hit'], [s.start + 0.45, 'sparkle']);
     if (s.type === 'bonus') {
