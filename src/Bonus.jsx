@@ -364,7 +364,30 @@ function BonusTopBar({local, n, total, round, theme}) {
           Zoom <i style={{fontStyle: 'normal', color: COLORS.amber}}>Out</i>
         </span>
       </div>
-      <div />
+      {/* Right: action cue — orients late viewers at a glance */}
+      <div style={{justifySelf: 'end', display: 'flex', alignItems: 'center', gap: cq(1.2)}}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: cq(1.4),
+            background: panelBg,
+            border: `${cq(0.2)}px solid ${col}`,
+            borderRadius: cq(2),
+            padding: `${cq(1.1)}px ${cq(2.4)}px`,
+            backdropFilter: 'blur(2px)',
+          }}
+        >
+          <b style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, letterSpacing: '0.18em', color: col}}>
+            {KIND_CUE[round.kind] || 'GUESS IT'}
+          </b>
+          <i style={{width: cq(0.25), height: cq(2.4), background: 'rgba(255,255,255,.3)', borderRadius: cq(1), flex: 'none'}} />
+          <span style={{font: `700 ${cq(2.6)}px/1 ${FONTS.mono}`, letterSpacing: '0.14em', color: 'rgba(255,255,255,.75)'}}>
+            DROP YOUR GUESS BELOW
+          </span>
+          <ArrowDownIcon size={cq(2.8)} color={COLORS.amber} />
+        </div>
+      </div>
     </div>
   );
 }
@@ -1134,6 +1157,14 @@ function EraseChip({rl}) {
 }
 
 // ------------------------------------------------------------ banner -------
+
+const KIND_CUE = {
+  colordna: 'IDENTIFY',
+  shadow:   'NAME IT',
+  texture:  'GUESS IT',
+  unpixel:  'IDENTIFY',
+  recipe:   'GUESS IT',
+};
 
 const KIND_TAGLINE = {
   colordna: 'IDENTIFY THE FOOD FROM ITS COLOR SIGNATURE',
