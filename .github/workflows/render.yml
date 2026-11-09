@@ -97,11 +97,24 @@ jobs:
           }
           const NUM_GROUPS = 40;
           const group = parseInt(process.env.GROUP, 10) - 1;
-          const myClips = clips.filter((_, idx) => idx % NUM_GROUPS === group);
+          // Greedy bin-packing: sort clips by duration desc, assign each to the
+          // group with the least total time so all jobs finish at about the same time.
+          const sortedClips = clips.map((c, idx) => ({...c, origIdx: idx})).sort((a, b) => b.dur - a.dur);
+          const groupTimes = new Array(NUM_GROUPS).fill(0);
+          const groupClips = Array.from({length: NUM_GROUPS}, () => []);
+          for (const clip of sortedClips) {
+            let minGroup = 0;
+            for (let g = 1; g < NUM_GROUPS; g++) {
+              if (groupTimes[g] < groupTimes[minGroup]) minGroup = g;
+            }
+            groupClips[minGroup].push(clip);
+            groupTimes[minGroup] += clip.dur;
+          }
+          const myClips = groupClips[group];
           fs.writeFileSync('my_clips.json', JSON.stringify(myClips));
           const fs2 = require('fs');
           fs2.appendFileSync(process.env.GITHUB_OUTPUT, 'count=' + myClips.length + '\n');
-          console.log('Group ' + (group + 1) + ': ' + myClips.map(c => c.name).join(', ') + ' (' + myClips.length + ' clips)');
+          console.log('Group ' + (group + 1) + ': ' + myClips.map(c => c.name).join(', ') + ' (' + myClips.length + ' clips, ' + groupTimes[group].toFixed(1) + 's total)');
           NODE
         env:
           GROUP: ${{ matrix.group }}
@@ -116,11 +129,24 @@ jobs:
           scale_flag = [] if quality == "1440p" else ["--scale=0.75"]
           t0 = time.time()
           ok = 0
+
+          # Bundle once per job (saves ~30s per clip — no re-bundling for each render)
+          print("Bundling Remotion project...")
+          bundle_dir = "out/bundle"
+          r = subprocess.run(["npx", "remotion", "bundle", "src/index.ts", bundle_dir, "--log=error"],
+                             capture_output=True, text=True, timeout=300)
+          if r.returncode != 0:
+            print(f"Bundle failed: {r.stderr[:300]}")
+            # Fallback: render without pre-bundling
+            bundle_dir = "src/index.ts"
+          else:
+            print(f"Bundle done in {time.time()-t0:.0f}s")
+
           for i, clip in enumerate(clips):
               p = f"out/clips/{clip['name']}.mp4"
               if os.path.exists(p) and os.path.getsize(p) > 100000:
                   print(f"  [{i+1}/{len(clips)}] {clip['name']}: skip"); ok += 1; continue
-              cmd = ["npx", "remotion", "render", "ZoomOut", p,
+              cmd = ["npx", "remotion", "render", bundle_dir, "ZoomOut", p,
                      f"--frames={clip['startFrame']}-{clip['endFrame']}",
                      "--codec=h264", "--crf=18", "--x264-preset=fast",
                      "--concurrency=4", "--log=error"] + scale_flag
