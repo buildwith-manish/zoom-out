@@ -307,7 +307,7 @@ jobs:
           print("Got token")
           meta = {"snippet":{"title":os.environ['TITLE'],"description":os.environ['DESC'],
                             "tags":os.environ['TAGS'].split(","),"categoryId":"24"},
-                  "status":{"privacyStatus":"unlisted","selfDeclaredMadeForKids":False}}
+                  "status":{"privacyStatus":"private","selfDeclaredMadeForKids":False}}
           r1 = subprocess.run(["curl", "-s", "-i", "-X", "POST",
               "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status",
               "-H", f"Authorization: Bearer {at}", "-H", "Content-Type: application/json",
