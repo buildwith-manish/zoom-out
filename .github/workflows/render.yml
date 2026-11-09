@@ -265,7 +265,7 @@ jobs:
           // Write the concat list and filter graph
           const OUT = 'out';
           const CLIPS_DIR = 'out/clips';
-          const clipFiles = clips.map(c => `${CLIPS_DIR}/${c.name}.mp4`);
+          const clipFiles = clips.map(c => `clips/${c.name}.mp4`);  // relative to out/ (where the list file lives)
           // verify all clips exist
           const missing = clips.filter(c => !fs.existsSync(`${CLIPS_DIR}/${c.name}.mp4`));
           if (missing.length) {
