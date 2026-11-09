@@ -1,0 +1,114 @@
+id,type,text
+intro,intro,Only one in twenty can name all fifty foods. Name each close-up before it zooms out. Ready?
+qq01,question,Let's start easy. Name this food.
+q01,reveal,Pizza! Easy start.
+qq02,question,Zoom's moving. Can you name this food?
+q02,reveal,Hamburger! Cookout classic.
+qq03,question,Quick! Name this food.
+q03,reveal,French fries! Crispy and golden.
+qq04,question,Don't blink. What food is this?
+q04,reveal,Hot dog! Ballpark favorite.
+qq05,question,Sweet tooth ready? Name this dessert.
+q05,reveal,Donut! Glazed and amazed.
+qq06,question,Fruit time. Take your best guess.
+q06,reveal,Strawberry! Seeds on the outside.
+qq07,question,Think you know this fruit? Prove it.
+q07,reveal,Watermelon! Summer's finest.
+qq08,question,Easy fruit. Don't overthink it.
+q08,reveal,Banana! Peel and eat.
+qq09,question,Another fruit. Look closely.
+q09,reveal,Pineapple! Tropical and tangy.
+qq10,question,Snack break. What's this one?
+q10,reveal,Popcorn! Ten down.
+bonusq01,bonusq,Bonus round! Which food has these colors? Type your answer in the comments.
+bonus01,bonus,"Watermelon! Red and green, every time."
+qq11,question,Back for dessert. Name it fast.
+q11,reveal,Chocolate chip cookie! Warm and gooey.
+qq12,question,Another dessert. Beat the timer.
+q12,reveal,Ice cream cone! Scoop it up.
+qq13,question,Rise and shine. What breakfast is this?
+q13,reveal,Pancakes! Stack them high.
+qq14,question,Veggie time. Name this vegetable.
+q14,reveal,"Corn on the cob! Butter, please."
+qq15,question,Another veggie. Look closer.
+q15,reveal,Broccoli! Tiny trees.
+qq16,question,One more veggie. Look sharp.
+q16,reveal,Carrot! Crunch time.
+qq17,question,Fruit again. Think fast.
+q17,reveal,Apple! One a day.
+qq18,question,Let's switch it up. Name this food.
+q18,reveal,Taco! Happy Taco Tuesday.
+qq19,question,Dessert alert. Beat the zoom.
+q19,reveal,Cupcake! Tiny and sweet.
+qq20,question,Last easy one. Make it count.
+q20,reveal,"Bacon! Easy level, cleared."
+bonusq02,bonusq,Bonus round! Name the food from its shadow. Comment your guess before times runs out.
+bonus02,bonus,Banana! That curve gives it away.
+qq21,question,Medium level. Tricky now. Name this fruit.
+q21,reveal,Avocado! Green and creamy.
+qq22,question,"Fruit, but trickier. Look close."
+q22,reveal,Kiwi! Fuzzy little fruit.
+qq23,question,Careful now. What fruit is this?
+q23,reveal,Pomegranate! Packed with seeds.
+qq24,question,Fruit again. Keep your streak alive.
+q24,reveal,Cantaloupe! Sweet summer melon.
+qq25,question,Vegetable next. Take your time.
+q25,reveal,Cauliflower! Not broccoli.
+qq26,question,Name this vegetable. No peeking.
+q26,reveal,Eggplant! Not an egg in sight.
+qq27,question,Tricky vegetable. Trust your gut.
+q27,reveal,Brussels sprouts! Tiny cabbages.
+qq28,question,Breakfast is served. Name it.
+q28,reveal,Waffle! Grid of goodness.
+qq29,question,Snack attack. What's this one?
+q29,reveal,Pretzel! Salty and twisted.
+qq30,question,Something different. Name this food.
+q30,reveal,Sushi! Thirty down.
+bonusq03,bonusq,Bonus round! That's an extreme close-up. What food has this texture? Comment below.
+bonus03,bonus,Strawberry! Those tiny seeds said it all.
+qq31,question,Sweet treat incoming. Name it.
+q31,reveal,Cotton candy! Pure sugar.
+qq32,question,Snack time again. Eyes sharp.
+q32,reveal,Nachos! Chips and cheese.
+qq33,question,Pastry time. Can you name it?
+q33,reveal,Croissant! Flaky and buttery.
+qq34,question,"Dessert, but tricky. Name it."
+q34,reveal,Macaron! Not macaroon.
+qq35,question,Final medium round. Name this food.
+q35,reveal,Lasagna! Layers on layers.
+qq36,question,Hard level. Sharp eyes only. Name this fruit.
+q36,reveal,Dragon fruit! Totally exotic.
+qq37,question,Strange vegetable. Look closely.
+q37,reveal,Artichoke! Edible flower bud.
+qq38,question,Exotic fruit. Can you name it?
+q38,reveal,Star fruit! Slice it for stars.
+qq39,question,More exotic fruit. No pressure.
+q39,reveal,Passion fruit! Tart and tropical.
+qq40,question,Fruit again. Trust your eyes.
+q40,reveal,Fig! Forty down.
+bonusq04,bonusq,Bonus round! It starts blurry. Name the food as it sharpens. Comment your guess!
+bonus04,bonus,Pizza! Pretty hard to hide.
+qq41,question,"Vegetable, but weird. Name it."
+q41,reveal,Romanesco! Nature's fractal.
+qq42,question,Veggie time. This one's sneaky.
+q42,reveal,Okra! Southern staple.
+qq43,question,Name this food. It's a tough one.
+q43,reveal,Honeycomb! Made by bees.
+qq44,question,Seafood time. Name this one.
+q44,reveal,Oyster! Raw bar favorite.
+qq45,question,"Dessert, hard mode. Name it."
+q45,reveal,Baklava! Sticky and sweet.
+qq46,question,Name this nut. Good luck.
+q46,reveal,Pistachio! Crack it open.
+qq47,question,Fruit again. Don't overthink it.
+q47,reveal,Coconut! Island classic.
+qq48,question,Almost there. Name this fruit.
+q48,reveal,Raspberry! Tiny and tart.
+qq49,question,Nut time. Stay sharp.
+q49,reveal,Walnut! Brain-shaped nut.
+qq50,question,Final question. Name this seafood.
+q50,reveal,Lobster! One bonus left.
+bonusq05,bonusq,"Final bonus! Flour, egg, and milk. What are you making? Drop your answer below."
+bonus05,bonus,Pancakes! Breakfast wins again.
+outro,outro,Your score? Drop it below. Most people get under thirty.
+sting,sting,Subscribe for more quizzes. Quiz Matrix.
