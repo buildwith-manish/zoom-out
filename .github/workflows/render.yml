@@ -226,14 +226,22 @@ jobs:
           path: all-clips
           pattern: clips-group-*
           merge-multiple: true
+        continue-on-error: true
 
       - name: Move clips to out/clips
         run: |
           mkdir -p out/clips
-          find all-clips -type f -name "*.mp4" -exec cp {} out/clips/ \;
+          # Check if all-clips directory exists and has files
+          if [ -d "all-clips" ]; then
+            find all-clips -type f -name "*.mp4" -exec cp {} out/clips/ \;
+          fi
           echo "=== clips in out/clips ==="
           ls out/clips/ | wc -l
           ls out/clips/ | head -10
+          if [ "$(ls out/clips/ | wc -l)" -eq 0 ]; then
+            echo "ERROR: No clips found! Artifact download may have failed."
+            exit 1
+          fi
 
       - name: Concatenate all clips
         run: |
