@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+# tag-video — commit, tag, and push a finished video.
+#
+# Usage:
+#   ./tag-video 01                                      # tags as video-01-final
+#   ./tag-video 1                                       # also works (zero-padded to 2 digits)
+#   ./tag-video 01 "My title"                           # custom title in the tag message
+#   ./tag-video 01 "My title" 5XbWatCr4Q4ezek0ZhfT      # include voice ID in the tag message
+#
+# What it does:
+#   1. git add -A
+#   2. git commit -m "Finish video NN: <title>" (skips if nothing to commit)
+#   3. git tag -a video-NN-final -m "Video NN final: <title> [Voice ID: ...]"
+#   4. git push origin <current-branch>
+#   5. git push origin video-NN-final
+#
+# After running this, add a row to VIDEO_LOG.md with the details.
+
+set -euo pipefail
+
+if [ $# -lt 1 ]; then
+  echo "Usage: ./tag-video <number> [title] [voice_id]"
+  echo "  e.g. ./tag-video 01"
+  echo '       ./tag-video 01 "Zoom Out — Name All 50 Foods"'
+  echo '       ./tag-video 01 "Zoom Out — Name All 50 Foods" 5XbWatCr4Q4ezek0ZhfT'
+  exit 1
+fi
+
+# Zero-pad the video number to 2 digits
+NUM=$(printf "%02d" "$1")
+TITLE="${2:-Video $NUM}"
+VOICE_ID="${3:-}"   # optional voice ID
+TAG="video-${NUM}-final"
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REMOTE=$(git remote | head -1)
+
+if [ -z "$REMOTE" ]; then
+  echo "Error: no git remote configured"
+  exit 1
+fi
+
+# Build the tag message (include voice ID if provided)
+if [ -n "$VOICE_ID" ]; then
+  TAG_MSG="Video $NUM final: $TITLE
+
+Voice ID: $VOICE_ID"
+else
+  TAG_MSG="Video $NUM final: $TITLE"
+fi
+
+echo "=== Tagging video $NUM as $TAG ==="
+echo "  branch:   $BRANCH"
+echo "  remote:   $REMOTE"
+echo "  title:    $TITLE"
+if [ -n "$VOICE_ID" ]; then
+  echo "  voice ID: $VOICE_ID"
+fi
+echo ""
+
+# 1. Stage everything
+echo "[1/5] git add -A"
+git add -A
+
+# 2. Commit (skip if nothing to commit)
+echo "[2/5] git commit"
+if git diff --cached --quiet; then
+  echo "  (nothing to commit — working tree clean)"
+else
+  git commit -m "Finish video $NUM: $TITLE"
+fi
+
+# 3. Create annotated tag (fail if it already exists)
+echo "[3/5] git tag -a $TAG"
+if git rev-parse "$TAG" >/dev/null 2>&1; then
+  echo "  Error: tag $TAG already exists"
+  echo "  To delete it: git tag -d $TAG"
+  exit 1
+fi
+git tag -a "$TAG" -m "$TAG_MSG"
+
+# 4. Push the branch
+echo "[4/5] git push $REMOTE $BRANCH"
+git push "$REMOTE" "$BRANCH"
+
+# 5. Push the tag
+echo "[5/5] git push $REMOTE $TAG"
+git push "$REMOTE" "$TAG"
+
+echo ""
+echo "Done. Tag $TAG pushed to $REMOTE."
+echo ""
+echo "Next: add a row to VIDEO_LOG.md with:"
+echo "  - video number: $NUM"
+echo "  - title: $TITLE"
+echo "  - date rendered: $(date +%Y-%m-%d)"
+echo "  - voice provider & plan: (fill in)"
+echo "  - voice name / ID: ${VOICE_ID:-(fill in)}"
+echo "  - model: (fill in)"
+echo "  - git tag: $TAG"
+echo "  - backup zip location: (fill in)"
+echo "  - monetization status: (fill in)"

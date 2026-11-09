@@ -162,3 +162,32 @@ The composition plays one file, `public/sounds/master.mp3`, built by `scripts/ma
 ## Zoom curve and motion blur
 
 The zoom is exponential, `scale = z0^(1 - g(p))`, a constant rate in log-scale (an even perceived speed) with a soft landing on the last 15% (`zoomScale` in `src/util.js`). Camera motion blur is done in a WebGL2 pass (`src/ZoomCanvas.jsx`): each pixel averages `samples` sub-frame renders across the shutter angle in 32-bit float and is dithered once at the end, so there is no banding (Remotion's `<CameraMotionBlur>` was tried first and bands visibly in this video's smooth gradients). Tune it with `MOTION_BLUR` in `src/Round.jsx`; set `enabled: false` to use the plain DOM zoom, which is also the automatic fallback if WebGL2 is unavailable. Note the photo's defocus blur is much wider than the per-frame motion at 60fps, so the physically accurate shutter (360°) is subtle by design.
+
+## Backups
+
+After each finished video:
+
+1. **Commit everything** — make sure all content changes (`questions.json`, `settings.json`, `rounds.csv`, `voiceover-script.txt`, `VIDEO_LOG.md`) are committed:
+   ```bash
+   git add -A
+   git commit -m "Finish video 01: <title>"
+   ```
+2. **Create an annotated git tag** named `video-NN-final` (zero-padded, e.g. `video-01-final`):
+   ```bash
+   git tag -a video-01-final -m "Video 01 final: Zoom Out — Name All 50 Foods"
+   ```
+   Or use the helper: `./tag-video 01 "Zoom Out — Name All 50 Foods"`
+3. **Push the branch and the tag**:
+   ```bash
+   git push origin main
+   git push origin video-01-final
+   ```
+4. **Add a row to `VIDEO_LOG.md`** with the video number, title, date rendered, voice provider and plan, voice name/ID, model, git tag name, backup zip location, and monetization status.
+
+The `tag-video` helper script automates steps 1–3:
+```bash
+./tag-video 01 "Zoom Out — Name All 50 Foods"    # commits, tags, pushes
+./tag-video 01 "Zoom Out — Name All 50 Foods" 5XbWatCr4Q4ezek0ZhfT  # with voice ID
+```
+
+Large generated files (rendered `.mp4`s, the `out/` folder, extracted voiceover clips in `public/voiceover/`) are gitignored — back them up separately (Google Drive, NAS, etc.) and record the location in `VIDEO_LOG.md`. The `clips_wav.7z` (voiceover source) is tracked in git as the source of truth.

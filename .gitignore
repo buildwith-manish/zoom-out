@@ -16,3 +16,8 @@ public/voiceover/*.m4a
 public/voiceover/*.aac
 public/voiceover/*.ogg
 public/voiceover/*.flac
+
+# Generated large files (regenerated from source by the build pipeline)
+# Rendered videos
+*.mp4
+out/

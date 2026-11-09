@@ -1,0 +1,208 @@
+id,type,text,start_seconds,max_seconds
+intro_1,intro,Only one in twenty can name all fifty animals.,1.2,3.5
+intro_2,intro,Can you? Let's find out.,4.9,1.4
+level_easy,level,Level one: Easy. Warm-up time.,6.6,2.5
+q01_question,question,Zoomed in on royalty. Who is this?,9.3,3.8
+q01_hint,hint,"Four letters, starting with L. Think king of the jungle!",13.3,4.6
+q01_nudge,nudge,Lock it in!,18.15,1.9
+q01_reveal,reveal,Lion! Hear that roar!,20.3,2.8
+q02_question,question,Which giant has the longest nose around?,23.3,3.8
+q02_hint,hint,"Eight letters, starting with E. Big ears, bigger memory!",27.3,4.6
+q02_nudge,nudge,Any guesses?,32.15,1.9
+q02_reveal,reveal,Elephant! Trunk!,34.3,2.8
+q03_question,question,"Look up, way up! Who's this tall one?",37.3,3.8
+q03_hint,hint,"Seven letters, starting with G. Neck for days!",41.3,4.6
+q03_nudge,nudge,Think you know?,46.15,1.9
+q03_reveal,reveal,Giraffe! Sky high!,48.3,2.8
+q04_question,question,"Black on white, or white on black? Who's this?",51.3,3.8
+q04_hint,hint,"Five letters, starting with Z. Stripes on stripes!",55.3,4.6
+q04_nudge,nudge,Shout it out!,60.15,1.9
+q04_reveal,reveal,Zebra! Striking!,62.3,2.8
+q05_question,question,"Orange coat, bold black stripes. Who's this hunter?",65.3,3.8
+q05_hint,hint,"Five letters, starting with T. Stripes, but not a zebra!",69.3,4.6
+q05_nudge,nudge,Got it?,74.15,1.9
+q05_reveal,reveal,Tiger! Fierce!,76.3,2.8
+q06_question,question,This black-and-white cutie loves a snack. Who?,79.3,3.8
+q06_hint,hint,"Five letters, starting with P. Bamboo is its snack!",83.3,4.6
+q06_nudge,nudge,Say it now!,88.15,1.9
+q06_reveal,reveal,Panda! So cute!,90.3,2.8
+q07_question,question,Which bird wears a tuxedo all day?,93.3,3.8
+q07_hint,hint,"Seven letters, starting with P. Think ice and tuxedos!",97.3,4.6
+q07_nudge,nudge,"Quick, guess!",102.15,1.9
+q07_reveal,reveal,Penguin! Waddle!,104.3,2.8
+q08_question,question,Someone's swinging by! Who is it?,107.3,3.8
+q08_hint,hint,"Six letters, starting with M. Banana lover!",111.3,4.6
+q08_nudge,nudge,Don't blink!,116.15,1.9
+q08_reveal,reveal,Monkey! Ooh ooh!,118.3,2.8
+q09_question,question,Moo-ve closer! Who's this farm friend?,121.3,3.8
+q09_hint,hint,"Three letters, starting with C. Milk comes from here!",125.3,4.6
+q09_nudge,nudge,Eyes on it!,130.15,1.9
+q09_reveal,reveal,Cow! Moo!,132.3,2.8
+q10_question,question,Who's this loyal best friend?,135.3,3.8
+q10_hint,hint,"Three letters, starting with D. Fetch is its favorite game!",139.3,4.6
+q10_nudge,nudge,Call it out!,144.15,1.9
+q10_reveal,reveal,Dog! Woof!,146.3,2.8
+q11_question,question,Purr-haps you know this whiskered pet?,149.3,3.8
+q11_hint,hint,"Three letters, starting with C. Always lands on its feet!",153.3,4.6
+q11_nudge,nudge,Who is it?,158.15,1.9
+q11_reveal,reveal,Cat! Meow!,160.3,2.8
+q12_question,question,Who's galloping through the frame?,163.3,3.8
+q12_hint,hint,"Five letters, starting with H. Giddy up!",167.3,4.6
+q12_nudge,nudge,Final answer?,172.15,1.9
+q12_reveal,reveal,Horse! Neigh!,174.3,2.8
+q13_question,question,Whose snout is this? Oink if you know!,177.3,3.8
+q13_hint,hint,"Three letters, starting with P. Mud bath, anyone?",181.3,4.6
+q13_nudge,nudge,Ready? Say it!,186.15,1.9
+q13_reveal,reveal,Pig! Oink oink!,188.3,2.8
+q14_question,question,"Long ears, twitchy nose. Who's hopping in?",191.3,3.8
+q14_hint,hint,"Six letters, starting with R. Magicians pull it from hats!",195.3,4.6
+q14_nudge,nudge,You know this!,200.15,1.9
+q14_reveal,reveal,Rabbit! Carrots!,202.3,2.8
+q15_question,question,Who's hopping all the way from Australia?,205.3,3.8
+q15_hint,hint,"Eight letters, starting with K. Baby rides in a pouch!",209.3,4.6
+q15_nudge,nudge,Time's ticking!,214.15,1.9
+q15_reveal,reveal,Kangaroo! Hop hop!,216.3,2.8
+q16_question,question,Which smart swimmer is smiling at you?,219.3,3.8
+q16_hint,hint,"Seven letters, starting with D. Clicks and whistles underwater!",223.3,4.6
+q16_nudge,nudge,Trust your gut!,228.15,1.9
+q16_reveal,reveal,Dolphin! Splash!,230.3,2.8
+q17_question,question,Who's this icy giant of the Arctic?,233.3,3.8
+q17_hint,hint,"Nine letters, two words, starting with P. Think snow and ice!",237.3,4.6
+q17_nudge,nudge,Name it now!,242.15,1.9
+q17_reveal,reveal,Polar Bear! Brrr!,244.3,2.8
+q18_question,question,Which bird stands tall on just one leg?,247.3,3.8
+q18_hint,hint,"Eight letters, starting with F. Pink and perfectly balanced!",251.3,4.6
+q18_nudge,nudge,Almost there!,256.15,1.9
+q18_reveal,reveal,Flamingo! Graceful!,258.3,2.8
+q19_question,question,Whooo's watching you with those big eyes?,261.3,3.8
+q19_hint,hint,"Three letters, starting with O. Night shift specialist!",265.3,4.6
+q19_nudge,nudge,Last chance!,270.15,1.9
+q19_reveal,reveal,Owl! Hoot hoot!,272.3,2.8
+q20_question,question,Which proud bird is the symbol of America?,275.3,3.8
+q20_hint,hint,"Nine letters, two words, starting with B. Soaring national symbol!",279.3,4.6
+q20_nudge,nudge,Say it loud!,284.15,1.9
+q20_reveal,reveal,Bald Eagle! Freedom!,286.3,2.6
+level_medium,level,Level two: Medium. Tricky now.,289.1,2.4
+q21_question,question,Who's this fuzzy Aussie napping in a tree?,291.8,3.8
+q21_hint,hint,"Five letters, starting with K. Eucalyptus is its snack!",295.8,4.6
+q21_nudge,nudge,Speak up!,300.65,1.9
+q21_reveal,reveal,Koala! Cuddly!,302.8,2.8
+q22_question,question,Which huge river giant is yawning here?,305.8,3.8
+q22_hint,hint,"Twelve letters, starting with H. Mud-loving mega mouth!",309.8,4.6
+q22_nudge,nudge,Hot take?,314.65,1.9
+q22_reveal,reveal,Hippopotamus! Huge!,316.8,2.8
+q23_question,question,Who's wearing a horn on their nose?,319.8,3.8
+q23_hint,hint,"Ten letters, starting with R. A tank on four legs!",323.8,4.6
+q23_nudge,nudge,Go for it!,328.65,1.9
+q23_reveal,reveal,Rhinoceros! Tough!,330.8,2.8
+q24_question,question,Which desert traveler is this?,333.8,3.8
+q24_hint,hint,"Five letters, starting with C. Sand, sun, and humps!",337.8,4.6
+q24_nudge,nudge,Anyone? Anyone?,342.65,1.9
+q24_reveal,reveal,Camel! Humps!,344.8,2.8
+q25_question,question,Spots and speed! Who is this sprinter?,347.8,3.8
+q25_hint,hint,"Seven letters, starting with C. Zero to sixty in seconds!",351.8,4.6
+q25_nudge,nudge,Show me!,356.65,1.9
+q25_reveal,reveal,Cheetah! Zoom!,358.8,2.8
+q26_question,question,Careful! Which toothy reptile is lurking here?,361.8,3.8
+q26_hint,hint,"Nine letters, starting with C. Snap! Not an alligator!",365.8,4.6
+q26_nudge,nudge,Comment it!,370.65,1.9
+q26_reveal,reveal,Crocodile! Snap!,372.8,2.8
+q27_question,question,Which clever sea creature squeezes through tiny gaps?,375.8,3.8
+q27_hint,hint,"Seven letters, starting with O. Eight arms, one answer!",379.8,4.6
+q27_nudge,nudge,Don't peek!,384.65,1.9
+q27_reveal,reveal,Octopus! Clever!,386.8,2.8
+q28_question,question,Who's this slowpoke? Take your time.,389.8,3.8
+q28_hint,hint,"Five letters, starting with S. Slow-mo champion!",393.8,4.6
+q28_nudge,nudge,"Easy, right?",398.65,1.9
+q28_reveal,reveal,Sloth! So slow!,400.8,2.8
+q29_question,question,Which colorful bird has this giant beak?,403.8,3.8
+q29_hint,hint,"Six letters, starting with T. Rainbow beak vibes!",407.8,4.6
+q29_nudge,nudge,Beak or bust!,412.65,1.9
+q29_reveal,reveal,Toucan! Two can!,414.8,2.8
+q30_question,question,Whose huge whiskers are these?,417.8,3.8
+q30_hint,hint,"Six letters, starting with W. Arctic blubber king!",421.8,4.6
+q30_nudge,nudge,Take a shot!,426.65,1.9
+q30_reveal,reveal,Walrus! Whiskers!,428.8,2.8
+q31_question,question,Who's raiding the trash cans tonight?,431.8,3.8
+q31_hint,hint,"Seven letters, starting with R. Masked midnight snacker!",435.8,4.6
+q31_nudge,nudge,Look closely!,440.65,1.9
+q31_reveal,reveal,Raccoon! Trash panda!,442.8,2.8
+q32_question,question,Which shaggy giant roams the prairie?,445.8,3.8
+q32_hint,hint,"Five letters, starting with B. Think wild west!",449.8,4.6
+q32_nudge,nudge,Make the call!,454.65,1.9
+q32_reveal,reveal,Bison! Wild!,456.8,2.8
+q33_question,question,Who's this antlered giant of the north?,459.8,3.8
+q33_hint,hint,"Five letters, starting with M. Canada's big antlered icon!",463.8,4.6
+q33_nudge,nudge,"Antlers up, guess!",468.65,1.9
+q33_reveal,reveal,Moose! Antlers!,470.8,2.8
+q34_question,question,Hold your nose! Who's this stripey one?,473.8,3.8
+q34_hint,hint,"Five letters, starting with S. Smelly spray alert!",477.8,4.6
+q34_nudge,nudge,Trust your nose!,482.65,1.9
+q34_reveal,reveal,Skunk! Phew!,484.8,2.8
+q35_question,question,Who rolls up in a suit of armor?,487.8,3.8
+q35_hint,hint,"Nine letters, starting with A. Rolls into a ball!",491.8,4.6
+q35_nudge,nudge,"Armor up, guess!",496.65,1.9
+q35_reveal,reveal,Armadillo! Wow!,498.8,2.6
+level_hard,level,Level three: Hard. Sharp eyes only.,501.6,2.4
+q36_question,question,Which reptile can change its colors?,504.3,3.8
+q36_hint,hint,"Nine letters, starting with C. Master of disguise!",508.3,4.6
+q36_nudge,nudge,Blend in? Guess!,513.15,1.9
+q36_reveal,reveal,Chameleon! Colorful!,515.3,2.8
+q37_question,question,Who's this spiky little fellow?,518.3,3.8
+q37_hint,hint,"Eight letters, starting with H. Don't give it a hug!",522.3,4.6
+q37_nudge,nudge,Don't be shy!,527.15,1.9
+q37_reveal,reveal,Hedgehog! Ouch!,529.3,2.8
+q38_question,question,Which tiny swimmer has a horse's head?,532.3,3.8
+q38_hint,hint,"Eight letters, starting with S. Half horse, half fish vibes!",536.3,4.6
+q38_nudge,nudge,Bet you know!,541.15,1.9
+q38_reveal,reveal,Seahorse! Tiny!,543.3,2.8
+q39_question,question,Who's this spotted climber?,546.3,3.8
+q39_hint,hint,"Seven letters, starting with L. Spots that never change!",550.3,4.6
+q39_nudge,nudge,Spot it yet?,555.15,1.9
+q39_reveal,reveal,Leopard! Sneaky!,557.3,2.8
+q40_question,question,"Weird one! Duck bill, beaver tail. Who?",560.3,3.8
+q40_hint,hint,"Eight letters, starting with P. Nature's mashup mystery!",564.3,4.6
+q40_nudge,nudge,"Odd one, right?",569.15,1.9
+q40_reveal,reveal,Platypus! Weird!,571.3,2.8
+q41_question,question,Which Arctic whale has a long spiral tusk?,574.3,3.8
+q41_hint,hint,"Seven letters, starting with N. The unicorn of the sea!",578.3,4.6
+q41_nudge,nudge,Guess away!,583.15,1.9
+q41_reveal,reveal,Narwhal! Unicorn!,585.3,2.8
+q42_question,question,"Who's floating on their back, cracking shells?",588.3,3.8
+q42_hint,hint,"Eight letters, two words, starting with S. Floating snack time!",592.3,4.6
+q42_nudge,nudge,Awww! Name it!,597.15,1.9
+q42_reveal,reveal,Sea Otter! Aww!,599.3,2.8
+q43_question,question,Who's standing tall on lookout duty?,602.3,3.8
+q43_hint,hint,"Seven letters, starting with M. Desert lookout squad!",606.3,4.6
+q43_nudge,nudge,On guard! Guess!,611.15,1.9
+q43_reveal,reveal,Meerkat! Sentry!,613.3,2.8
+q44_question,question,Whose big eyes are staring at you?,616.3,3.8
+q44_hint,hint,"Five letters, starting with L. Ring-tailed star!",620.3,4.6
+q44_nudge,nudge,Big eyes! Guess!,625.15,1.9
+q44_reveal,reveal,Lemur! Big eyes!,627.3,2.8
+q45_question,question,Who's this fiery-furred tree climber?,630.3,3.8
+q45_hint,hint,"Eight letters, two words, starting with R. Not a bear!",634.3,4.6
+q45_nudge,nudge,Fiery guess?,639.15,1.9
+q45_reveal,reveal,Red Panda! Fiery!,641.3,2.8
+q46_question,question,Which gentle giant grazes underwater?,644.3,3.8
+q46_hint,hint,"Seven letters, starting with M. Sea cow in disguise!",648.3,4.6
+q46_nudge,nudge,"Go slow, guess!",653.15,1.9
+q46_reveal,reveal,Manatee! Gentle!,655.3,2.8
+q47_question,question,Which smiling water creature is this?,658.3,3.8
+q47_hint,hint,"Seven letters, starting with A. Forever smiling, never frowning!",662.3,4.6
+q47_nudge,nudge,Say it right!,667.15,1.9
+q47_reveal,reveal,Axolotl! Smile!,669.3,2.8
+q48_question,question,Ouch! Who's covered in these quills?,672.3,3.8
+q48_hint,hint,"Nine letters, starting with P. Pointy, don't touch!",676.3,4.6
+q48_nudge,nudge,Pointed guess?,681.15,1.9
+q48_reveal,reveal,Porcupine! Prickly!,683.3,2.8
+q49_question,question,Who's slurping up ants with that long snout?,686.3,3.8
+q49_hint,hint,"Eight letters, starting with A. Ants beware!",690.3,4.6
+q49_nudge,nudge,Tongue-tied? Guess!,695.15,1.9
+q49_reveal,reveal,Anteater! Slurp!,697.3,2.8
+q50_question,question,Which colorful beaked bird is this? Last one!,700.3,3.8
+q50_hint,hint,"Six letters, starting with P. Clown of the sea cliffs!",704.3,4.6
+q50_nudge,nudge,Last one! Go!,709.15,1.9
+q50_reveal,reveal,Puffin! Cute!,711.3,2.8
+outro,outro,Round over! How many did you get? Comment below.,714.3,3.9
+sting,sting,Subscribe to Quiz Matrix for more.,718.4,3.4
